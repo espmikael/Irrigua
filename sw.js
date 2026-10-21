@@ -1,7 +1,7 @@
 /* Irrigua — service worker
    Páginas: busca na internet primeiro (assim uma versão nova aparece logo) e usa a cópia guardada sem internet.
    Fotos, fontes e arquivos fixos: usa a cópia guardada e atualiza quando der. */
-var CACHE = 'irrigua-v3';
+var CACHE = 'irrigua-v4';
 var SHELL = [
   './', 'index.html', 'especies.js', 'logo.html', 'icone.svg', 'manifest.webmanifest',
   'icon-192.png', 'icon-512.png',
@@ -24,7 +24,9 @@ self.addEventListener('fetch', function (e) {
   var url = new URL(req.url);
   var sameOrigin = url.origin === self.location.origin;
   var isFont = /fonts\.(googleapis|gstatic)\.com$/.test(url.hostname);
-  if (!sameOrigin && !isFont) return;
+  // fotos das espécies vindas do iNaturalist: guardadas para funcionar sem internet
+  var isPhoto = /(^|\.)inaturalist\.org$|inaturalist-open-data\.s3\.amazonaws\.com$/.test(url.hostname) && url.hostname !== 'api.inaturalist.org';
+  if (!sameOrigin && !isFont && !isPhoto) return;
 
   var isPage = req.mode === 'navigate' || (sameOrigin && /\.(html|js|webmanifest)$/.test(url.pathname)) || url.pathname.endsWith('/');
   if (isPage) {

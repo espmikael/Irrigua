@@ -6,7 +6,8 @@ Site/app pessoal para controlar a rega das plantas. Paleta oliva escuro com rosa
 
 - **Seu jardim de verdade:** adicionar, editar e remover plantas.
 - **Base de espécies** (`especies.js`, 27 plantas comuns no Brasil): ao escolher a espécie, a Irrigua sugere de quanto em quanto tempo regar, ajustando pela luz do lugar (pouca, indireta ou muita), e mostra a ficha de cuidados no botão "i".
-- **Fotos:** tire ou escolha uma foto sua. Se a espécie tiver foto padrão, você escolhe qual vai na capa. Sem foto sua, fica a da espécie.
+- **Fotos das espécies:** 6 vêm da pasta `fotos/`; as outras são buscadas no [iNaturalist](https://www.inaturalist.org) (foto principal de cada espécie, com autor e licença Creative Commons na ficha) e ficam guardadas no aparelho.
+- **Fotos suas:** tire ou escolha uma foto sua. Se a espécie tiver foto padrão, você escolhe qual vai na capa. Sem foto sua, fica a da espécie.
 - **Rega:** "Reguei" com desfazer, plantas atrasadas em destaque, semana do jardim (em lista no celular), busca.
 - **Dados salvos neste aparelho**, no próprio navegador. Use **Exportar backup** no rodapé de vez em quando e **Importar backup** para levar o jardim para outro aparelho.
 - **Instalável como app** e funciona sem internet: no celular, "Adicionar à tela inicial".

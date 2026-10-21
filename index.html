@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
+  color-scheme:dark;
   --oliva:#333A22; --oliva-esc:#2A2F1B; --oliva-med:#3E4528; --texto:#F5F1E3; --sutil:#D3D3B5;
   --rosa:#E5ABA4; --rosa-tinta:#3A1C22; --atraso:#F4A59B; --salvia:#A9B98A; --salvia-tinta:#24301A;
   --sup:rgba(255,255,255,.05); --sup2:rgba(255,255,255,.07); --fundo:rgba(0,0,0,.2);
@@ -179,6 +180,14 @@ h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spaci
 .covers button img{width:52px;height:52px;border-radius:12px;object-fit:cover;background:var(--texto)}
 .covers button[aria-pressed=true]{border:2px solid var(--rosa);padding:7px;background:rgba(229,171,164,.08)}
 .err{color:var(--atraso);font-size:13px;font-weight:600}
+.credit{font-size:12px;color:var(--sutil);line-height:1.4}
+.credit a{color:var(--sutil);text-decoration:underline;text-underline-offset:2px}
+.credit a:hover{color:var(--texto)}
+.pick,.sheet{scrollbar-width:thin;scrollbar-color:rgba(245,241,227,.28) transparent}
+.pick::-webkit-scrollbar,.sheet::-webkit-scrollbar{width:8px}
+.pick::-webkit-scrollbar-track,.sheet::-webkit-scrollbar-track{background:transparent}
+.pick::-webkit-scrollbar-thumb,.sheet::-webkit-scrollbar-thumb{background:rgba(245,241,227,.28);border-radius:8px}
+header{color-scheme:light}
 .fact-note{font-size:13px;color:var(--sutil);background:var(--sup);border-radius:16px;padding:12px 14px}
 /* aviso */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,160%);z-index:60;display:flex;align-items:center;gap:14px;padding:10px 10px 10px 18px;min-height:56px;border-radius:999px;background:var(--texto);color:var(--oliva-esc);box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .25s ease;max-width:calc(100vw - 32px)}
@@ -229,7 +238,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   <section class="hero">
     <div style="display:flex;flex-direction:column;gap:8px">
       <span class="lbl" style="color:var(--rosa)" id="hoje-data"></span>
-      <h1 id="hero-title">Bom dia. <em id="due-text"></em></h1>
+      <h1 id="hero-title"><span id="saudacao">Olá.</span> <em id="due-text"></em></h1>
       <p class="muted" style="margin:0" id="plant-count"></p>
     </div>
     <form class="search" role="search" onsubmit="return false">
@@ -315,6 +324,62 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   var ESPECIES = window.IRRIGUA_ESPECIES || [];
   function sp(id){ for (var i = 0; i < ESPECIES.length; i++) if (ESPECIES[i].id === id) return ESPECIES[i]; return null; }
 
+  // ---------- fotos das espécies: iNaturalist (busca uma vez e guarda no aparelho) ----------
+  var PKEY = 'irrigua.fotos.v1';
+  var photos = {};
+  try { photos = JSON.parse(localStorage.getItem(PKEY) || '{}') || {}; } catch (e) { photos = {}; }
+  function savePhotos(){ try { localStorage.setItem(PKEY, JSON.stringify(photos)); } catch (e) {} }
+  var inflight = {}, queue = [], running = 0, refreshTimer = null;
+  function spPhoto(s){
+    if (!s) return null;
+    if (s.photo) return s.photo;
+    var c = photos[s.id];
+    if (c && c.url) return c.url;
+    if (!c || Date.now() - (c.miss || 0) > 864e5) ensurePhoto(s);
+    return null;
+  }
+  function spCredit(s){
+    if (!s) return '';
+    if (s.photo) return 'Foto: projeto aberto deilen (Kaggle/Unsplash)';
+    var c = photos[s.id];
+    if (c && c.url) return 'Foto: ' + esc(c.attr || 'iNaturalist') + ' · <a href="https://www.inaturalist.org/taxa/' + encodeURIComponent(c.taxon) + '" target="_blank" rel="noopener">iNaturalist</a>';
+    return '';
+  }
+  function ensurePhoto(s){
+    if (inflight[s.id] || !window.fetch || !navigator.onLine) return;
+    inflight[s.id] = true; queue.push(s); pump();
+  }
+  function pump(){
+    while (running < 3 && queue.length) (function(s){
+      running++;
+      var q = s.inat || s.sci.replace(/ spp\.?$/, '');
+      fetch('https://api.inaturalist.org/v1/taxa?per_page=10&q=' + encodeURIComponent(q))
+        .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function(d){
+          var list = (d && d.results) || [];
+          var want = norm(q);
+          var hit = list.filter(function(t){ return t.default_photo && norm(t.name) === want; })[0] ||
+                    list.filter(function(t){ return t.default_photo; })[0];
+          if (!hit) throw new Error('sem foto');
+          var ph = hit.default_photo;
+          photos[s.id] = { url: ph.medium_url || ph.url, attr: ph.attribution || '', lic: ph.license_code || '', taxon: hit.id };
+        })
+        .catch(function(){ photos[s.id] = { miss: Date.now() }; })
+        .then(function(){ running--; delete inflight[s.id]; savePhotos(); scheduleRefresh(); pump(); });
+    })(queue.shift());
+  }
+  function scheduleRefresh(){
+    clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(function(){
+      var a = document.activeElement, id = a && a.id, st = a && a.selectionStart, en = a && a.selectionEnd;
+      if (sheet.mode === 'form') syncForm();
+      render();
+      if (sheet.mode === 'pick') { var pk = document.getElementById('pick'); if (pk) { var top = pk.scrollTop; pk.innerHTML = pickList(); pk.scrollTop = top; } }
+      else if (sheet.mode === 'form') renderForm();
+      if (id) { var el = document.getElementById(id); if (el && el !== document.activeElement) { el.focus(); try { el.setSelectionRange(st, en); } catch (e) {} } }
+    }, 120);
+  }
+
   var LIGHT = {
     pouca:    { label:'Pouca luz', hint:'longe da janela', factor:1.3 },
     indireta: { label:'Luz indireta', hint:'claro, sem sol direto', factor:1 },
@@ -338,7 +403,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   function coverOf(p){
     var s = sp(p.sp);
     if (p.cover === 'own' && p.photo) return p.photo;
-    if (s && s.photo) return s.photo;
+    var sph = spPhoto(s); if (sph) return sph;
     return p.photo || null;
   }
   var LEAF = '<svg viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="currentColor"/><path d="M60 104 C60 84 60 56 60 30" stroke="#3E4528" stroke-width="5" stroke-linecap="round"/><path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#3E4528" stroke-width="4" stroke-linecap="round"/></svg>';
@@ -426,6 +491,8 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     var empty = !all.length;
 
     document.getElementById('hoje-data').textContent = DOWL[TODAY.getDay()] + ', ' + TODAY.getDate() + ' de ' + MESL[TODAY.getMonth()];
+    var hr = new Date().getHours();
+    document.getElementById('saudacao').textContent = hr >= 5 && hr < 12 ? 'Bom dia.' : (hr >= 12 && hr < 18 ? 'Boa tarde.' : 'Boa noite.');
     document.getElementById('due-text').textContent = empty ? 'Vamos começar?' : (pending === 0 ? 'Tudo em dia.' : (pending === 1 ? '1 planta com sede.' : pending + ' plantas com sede.'));
     document.getElementById('plant-count').textContent = empty ? 'Seu jardim ainda está vazio' : (all.length + (all.length === 1 ? ' planta' : ' plantas') + ' no seu jardim');
     document.getElementById('today-count').textContent = today.length ? done + ' de ' + today.length + ' feitas' : '';
@@ -551,13 +618,14 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       '<h2 style="font-weight:600;font-size:34px;line-height:1.05;overflow-wrap:anywhere">' + esc(c.name) + '</h2>' +
       (s ? '<p class="sci" style="font-size:15px;margin-top:4px">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== s.name ? s.name + ' · ' + s.sci : s.sci) + '</p>' : '') + '</div>' +
       '<button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' + light + facts +
+      (s && c.cover && c.cover === spPhoto(s) && spCredit(s) ? '<p class="credit" style="margin:0">' + spCredit(s) + '</p>' : '') +
       '<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--linha);padding-top:16px">' +
       '<span class="muted" style="font-size:13px">A cada ' + p.interval + ' dias · ' + (c.late ? lateText(c.lateDays).toLowerCase() : 'próxima ' + fmt(c.next)) + '</span>' +
       '<span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-edit="' + p.id + '">Editar</button>' + btnFor(c, false) + '</span></div></div>';
   }
 
   function speciesRow(s){
-    return '<button class="prow" type="button" data-pick="' + s.id + '">' + pic(s.photo, 'thumb', '') +
+    return '<button class="prow" type="button" data-pick="' + s.id + '">' + pic(spPhoto(s), 'thumb', '') +
       '<span class="t"><span class="n" style="display:block">' + esc(s.name) + '</span><span class="s" style="display:block">' + esc(s.sci) + ' · rega a cada ' + s.interval + ' dias</span></span></button>';
   }
   function pickList(){
@@ -600,7 +668,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     sheetEl.className = 'sheet form';
     sheetEl.setAttribute('aria-label', f.edit ? 'Editar planta' : 'Adicionar planta');
     var title = f.edit ? 'Editar planta' : (s ? s.name : 'Nova planta');
-    var ownSrc = f.photo, spSrc = s && s.photo ? s.photo : null;
+    var ownSrc = f.photo, spSrc = spPhoto(s);
     var preview = (f.cover === 'own' && ownSrc) ? ownSrc : (spSrc || ownSrc);
     var lights = Object.keys(LIGHT).map(function(k){
       return '<button type="button" data-light="' + k + '" aria-pressed="' + (f.light === k) + '">' + LIGHT[k].label + '<small>' + LIGHT[k].hint + '</small></button>';
@@ -610,7 +678,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       '<div class="fhead">' + (!f.edit ? '<button class="back" type="button" data-back aria-label="Trocar espécie">' + I_BACK + '</button>' : '') +
       '<h2>' + esc(title) + '</h2><button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>';
 
-    if (s) html += '<div class="prow" style="cursor:default">' + pic(s.photo, 'thumb', '') + '<span class="t"><span class="n" style="display:block">' + esc(s.name) +
+    if (s) html += '<div class="prow" style="cursor:default">' + pic(spSrc, 'thumb', '') + '<span class="t"><span class="n" style="display:block">' + esc(s.name) +
       '</span><span class="s" style="display:block">' + esc(s.sci) + ' · ' + esc(s.light) + '</span></span>' +
       (f.edit ? '<button class="mini" type="button" data-change-sp>Trocar</button>' : '') + '</div>';
     else if (f.edit) html += '<button class="btn plan" type="button" data-change-sp>Escolher a espécie</button>';
@@ -658,7 +726,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     else if (!(interval >= 1 && interval <= 90)) f.error = 'O intervalo de rega precisa ser entre 1 e 90 dias.';
     else if (!last || last > TODAY) f.error = 'Escolha uma data de última rega até hoje.';
     if (f.error) return renderForm();
-    var data = { sp:f.sp, name:name, interval:interval, light:f.light, last:iso(last), photo:f.photo || null, cover:(f.photo && f.cover === 'own') || (f.photo && !(s && s.photo)) ? 'own' : 'species' };
+    var data = { sp:f.sp, name:name, interval:interval, light:f.light, last:iso(last), photo:f.photo || null, cover:(f.photo && f.cover === 'own') || (f.photo && !spPhoto(s)) ? 'own' : 'species' };
     var backup = JSON.stringify(db);
     var shownName;
     if (f.edit) {
@@ -788,10 +856,11 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   document.getElementById('desfazer').addEventListener('click', function(){ var u = undo; hideToast(); if (u) u(); });
   document.getElementById('exportar').addEventListener('click', exportBackup);
 
-  // virou o dia com a página aberta? atualiza
+  // voltou para a página (ou virou o dia)? atualiza data e saudação
   document.addEventListener('visibilitychange', function(){
-    if (document.visibilityState === 'visible' && diff(new Date(), TODAY) !== 0) { TODAY = startOf(new Date()); render(); }
+    if (document.visibilityState === 'visible') { TODAY = startOf(new Date()); render(); }
   });
+  setInterval(function(){ if (document.visibilityState === 'visible' && !sheet.mode) { TODAY = startOf(new Date()); render(); } }, 10 * 60 * 1000);
 
   render();
 
