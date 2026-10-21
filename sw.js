@@ -1,9 +1,9 @@
 /* Irrigua — service worker
    Páginas: busca na internet primeiro (assim uma versão nova aparece logo) e usa a cópia guardada sem internet.
    Fotos, fontes e arquivos fixos: usa a cópia guardada e atualiza quando der. */
-var CACHE = 'irrigua-v4';
+var CACHE = 'irrigua-v5';
 var SHELL = [
-  './', 'index.html', 'especies.js', 'logo.html', 'icone.svg', 'manifest.webmanifest',
+  './', 'index.html', 'especies.js', 'conceito.html', 'icone.svg', 'manifest.webmanifest',
   'icon-192.png', 'icon-512.png',
   'fotos/aglaonema.jpg', 'fotos/palmeira.jpg', 'fotos/lirio.jpg', 'fotos/comigo.jpg', 'fotos/bambu.jpg', 'fotos/dracena.jpg'
 ];

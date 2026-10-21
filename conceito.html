@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Irrigua — Conceito</title>
+<meta name="description" content="A ideia por trás da Irrigua: o nome, o símbolo, as cores e como ela cuida da rega das suas plantas.">
+<meta name="theme-color" content="#F5F1E3">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --oliva:#333A22; --oliva-esc:#2A2F1B; --oliva-med:#3E4528; --folha:#5E6B3A; --texto:#F5F1E3; --sutil:#D3D3B5;
+  --rosa:#E5ABA4; --rosa-forte:#C9837B; --rosa-tinta:#3A1C22; --salvia:#A9B98A; --tinta:#26331F;
+  --serif:'Fraunces',Georgia,serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--oliva);color:var(--texto);font-family:var(--sans);font-size:17px;line-height:1.6}
+a{color:inherit}
+img{display:block}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+.lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.serif{font-family:var(--serif)}
+/* marca: o "i" com gota */
+.wm{font-family:var(--serif);font-weight:600;letter-spacing:-.015em;line-height:1;white-space:nowrap}
+.wm .i{position:relative;display:inline-block}
+.wm .i svg{position:absolute;left:50%;top:.14em;width:.2em;height:.27em;transform:translateX(-50%)}
+/* topo */
+header{background:var(--texto);color:var(--tinta);border-bottom:1px solid #E2DAD0;padding-top:env(safe-area-inset-top);position:sticky;top:0;z-index:10}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--tinta)}
+.brand .wm{font-size:28px}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+nav a{padding:10px 16px;border-radius:999px;font-weight:500;font-size:15px;text-decoration:none;color:var(--tinta)}
+nav a:hover{background:rgba(38,51,31,.08)}
+nav a.on{background:var(--oliva);color:var(--texto);font-weight:600}
+header :focus-visible{outline:2px solid var(--oliva);outline-offset:2px}
+/* seções */
+section{padding:96px 0}
+.hero{padding-top:88px;padding-bottom:96px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px}
+.hero .wm{font-size:clamp(64px,11vw,128px)}
+.hero .lead{max-width:620px;margin:0 auto;font-size:19px;color:var(--sutil)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none;border:none}
+.btn.rosa{background:var(--rosa);color:var(--rosa-tinta)}
+.btn.rosa:hover{background:#EDBDB7}
+.btn.linha{border:1px solid rgba(255,255,255,.2);color:var(--texto)}
+.btn.linha:hover{background:rgba(255,255,255,.06)}
+.row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+h2{margin:0;font-family:var(--serif);font-weight:500;font-size:clamp(36px,5vw,56px);line-height:1.05;letter-spacing:-.02em}
+h2 em{font-weight:400;color:var(--rosa)}
+h3{margin:0;font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.15;letter-spacing:-.01em}
+p{margin:0}
+.muted{color:var(--sutil)}
+.split{display:flex;flex-wrap:wrap;gap:56px;align-items:center}
+.split>*{flex:1 1 380px;min-width:0}
+.stack{display:flex;flex-direction:column;gap:20px}
+/* creme */
+.creme{background:var(--texto);color:var(--tinta)}
+.creme .muted{color:#55593F}
+.creme h2 em{color:var(--rosa-forte)}
+.creme .lbl{color:var(--folha)}
+/* nome */
+.word{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(72px,12vw,150px);line-height:.95;letter-spacing:-.03em;color:var(--folha)}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gloss div{background:rgba(94,107,58,.1);border-radius:18px;padding:18px 20px}
+.gloss b{display:block;font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:4px}
+/* símbolo com anotações */
+.anatomy{position:relative;max-width:520px;margin:0 auto;aspect-ratio:1/1}
+.anatomy svg.sym{position:absolute;top:12%;left:34%;width:32%;height:78%}
+.note{position:absolute;display:flex;flex-direction:column;gap:4px;max-width:29%;font-size:14px;color:var(--sutil)}
+.note b{font-family:var(--serif);font-size:19px;color:var(--texto);font-weight:600}
+.note::before{content:"";position:absolute;width:18%;min-width:20px;height:1px;background:rgba(229,171,164,.7);top:13px}
+.n1{left:0;top:8%}.n1::before{left:calc(100% + 8px)}
+.n2{right:0;top:44%;text-align:right;align-items:flex-end}.n2::before{right:calc(100% + 8px)}
+.n3{left:0;bottom:10%}.n3::before{left:calc(100% + 8px)}
+/* passos */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:passo}
+.step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.step .ic{width:60px;height:60px;border-radius:18px;background:var(--oliva-med);display:flex;align-items:center;justify-content:center;color:var(--salvia)}
+.step .num{font-family:var(--serif);font-style:italic;color:var(--rosa);font-size:20px}
+/* paleta */
+.swatches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.sw{border-radius:24px;overflow:hidden;border:1px solid rgba(38,51,31,.12);background:#fff}
+.sw .c{height:150px}
+.sw .t{padding:14px 16px;display:flex;flex-direction:column;gap:2px;background:var(--texto)}
+.sw .t b{font-family:var(--serif);font-size:20px}
+.sw .t span{font-size:13px;color:#55593F}
+.sw .t code{font-size:12px;color:#55593F;font-family:ui-monospace,monospace}
+/* tipografia */
+.types{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.type{border-radius:28px;padding:32px;background:rgba(94,107,58,.1);display:flex;flex-direction:column;gap:12px}
+.type .aa{font-size:110px;line-height:1}
+/* frase */
+.quote{text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px}
+.quote p.big{font-family:var(--serif);font-size:clamp(32px,5vw,54px);line-height:1.12;letter-spacing:-.02em;max-width:860px}
+.quote p.big em{color:var(--rosa)}
+footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 calc(32px + env(safe-area-inset-bottom));font-size:14px;color:var(--sutil)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+@media (max-width:800px){
+  section{padding:72px 0}
+  .steps{grid-template-columns:1fr}
+  .swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .swatches .sw:last-child{grid-column:1/-1}
+  .types{grid-template-columns:1fr}
+  .gloss{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  nav{order:3;width:100%;gap:2px;flex-wrap:nowrap}
+  nav a{padding:9px 12px;font-size:14px;white-space:nowrap}
+  .anatomy{aspect-ratio:auto;display:flex;flex-direction:column;gap:18px}
+  .anatomy svg.sym{position:static;width:60%;height:auto;margin:0 auto}
+  .note{position:static;max-width:none;text-align:left!important;align-items:flex-start!important}
+  .note::before{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <a href="./" class="brand" aria-label="Irrigua, meu jardim">
+      <svg width="34" height="34" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+        <path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#5E6B3A"/>
+        <path d="M60 104 C60 84 60 56 60 30" stroke="#F5F1E3" stroke-width="5" stroke-linecap="round"/>
+        <path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#F5F1E3" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span class="wm">Irr<span class="i">ı<svg viewBox="0 0 10 13" aria-hidden="true"><path d="M5 0 C5 0 0 6 0 8.5 A5 5 0 0 0 10 8.5 C10 6 5 0 5 0Z" fill="#C9837B"/></svg></span>gua</span>
+    </a>
+    <nav aria-label="Principal">
+      <a href="./">Meu jardim</a>
+      <a href="./#explorar">Explorar plantas</a>
+      <a href="conceito.html" class="on" aria-current="page">Conceito</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- abertura -->
+  <section class="hero wrap">
+    <svg width="150" height="150" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+      <path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#A9B98A"/>
+      <path d="M60 104 C60 84 60 56 60 30" stroke="#333A22" stroke-width="4" stroke-linecap="round"/>
+      <path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#333A22" stroke-width="3.2" stroke-linecap="round"/>
+    </svg>
+    <h1 class="wm" style="margin:0">Irr<span class="i">ı<svg viewBox="0 0 10 13" aria-hidden="true"><path d="M5 0 C5 0 0 6 0 8.5 A5 5 0 0 0 10 8.5 C10 6 5 0 5 0Z" fill="#E5ABA4"/></svg></span>gua</h1>
+    <span class="lbl" style="color:var(--sutil)">cuidado de plantas no tempo certo</span>
+    <p class="lead">Um jardim de bolso que sabe quando cada planta precisa de água, para você parar de adivinhar e começar a cuidar.</p>
+    <div class="row">
+      <a class="btn rosa" href="./">Abrir meu jardim</a>
+      <a class="btn linha" href="#nome">Conhecer a ideia</a>
+    </div>
+  </section>
+
+  <!-- a origem -->
+  <section class="creme" id="origem">
+    <div class="wrap split">
+      <div class="stack">
+        <span class="lbl">De onde veio</span>
+        <h2>Tudo começou com <em>uma pergunta boba.</em></h2>
+      </div>
+      <div class="stack">
+        <p style="font-size:20px">“Quando eu rego?” Cada planta tem o seu ritmo, e a memória não dá conta. Uma pede água a cada três dias, outra aguenta duas semanas. E a pergunta vira chute.</p>
+        <p class="muted">Quase sempre o problema não é falta de carinho: é água demais, ou na hora errada. A Irrigua existe para tirar essa dúvida do caminho, com um painel simples que diz, todo dia, quem está com sede.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- o nome -->
+  <section id="nome">
+    <div class="wrap split">
+      <div class="stack">
+        <span class="lbl" style="color:var(--rosa)">O nome</span>
+        <span class="word" style="color:var(--salvia)">irriguus</span>
+        <p class="muted">latim · adjetivo</p>
+      </div>
+      <div class="stack">
+        <h2>Quem rega, e quem <em>é bem regado.</em></h2>
+        <p class="muted">Irrigua é a forma feminina de <i>irriguus</i>, palavra latina que quer dizer as duas coisas ao mesmo tempo: o gesto e o resultado. O cuidado de quem rega, e a planta que recebe na medida certa.</p>
+        <div class="gloss">
+          <div><b>que rega</b><span class="muted">o gesto, a rotina, a mão que cuida</span></div>
+          <div><b>bem regado</b><span class="muted">a planta viva, no ponto, sem excesso</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- o símbolo -->
+  <section class="creme" id="simbolo">
+    <div class="wrap split">
+      <div class="stack">
+        <span class="lbl">O símbolo</span>
+        <h2>Uma gota que <em>virou folha.</em></h2>
+        <p class="muted">Água e planta numa forma só. O contorno é o de uma gota caindo, e por dentro, as nervuras transformam essa gota em folha. No nome, o pingo do “i” também vira gota, em rosa: o detalhe do cuidado.</p>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:6px">
+          <span style="width:88px;height:88px;border-radius:24px;background:var(--oliva);display:flex;align-items:center;justify-content:center">
+            <svg width="60" height="60" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#A9B98A"/><path d="M60 104 C60 84 60 56 60 30" stroke="#333A22" stroke-width="6" stroke-linecap="round"/><path d="M60 80 L45 67 M60 66 L74 54" stroke="#333A22" stroke-width="5" stroke-linecap="round"/></svg>
+          </span>
+          <span style="width:88px;height:88px;border-radius:24px;background:var(--rosa);display:flex;align-items:center;justify-content:center">
+            <svg width="60" height="60" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#333A22"/><path d="M60 104 C60 84 60 56 60 30" stroke="#E5ABA4" stroke-width="6" stroke-linecap="round"/><path d="M60 80 L45 67 M60 66 L74 54" stroke="#E5ABA4" stroke-width="5" stroke-linecap="round"/></svg>
+          </span>
+          <span class="wm" style="font-size:52px;color:var(--tinta)">Irr<span class="i">ı<svg viewBox="0 0 10 13" aria-hidden="true"><path d="M5 0 C5 0 0 6 0 8.5 A5 5 0 0 0 10 8.5 C10 6 5 0 5 0Z" fill="#C9837B"/></svg></span>gua</span>
+        </div>
+      </div>
+      <div style="background:var(--oliva);border-radius:36px;padding:28px">
+        <div class="anatomy" role="img" aria-label="O símbolo da Irrigua com três partes indicadas: o contorno de gota, as nervuras de folha e a ponta que cai.">
+          <svg class="sym" viewBox="20 6 80 102" fill="none" aria-hidden="true">
+            <path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#A9B98A"/>
+            <path d="M60 104 C60 84 60 56 60 30" stroke="#333A22" stroke-width="3.4" stroke-linecap="round"/>
+            <path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#333A22" stroke-width="2.8" stroke-linecap="round"/>
+          </svg>
+          <div class="note n1"><b>A ponta</b>a gota no instante em que cai: o momento da rega</div>
+          <div class="note n2"><b>As nervuras</b>o caule e as veias que fazem da água uma folha</div>
+          <div class="note n3"><b>O contorno</b>a curva cheia da gota, a forma da água</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- como funciona -->
+  <section id="como">
+    <div class="wrap stack" style="gap:36px">
+      <div class="stack" style="max-width:640px">
+        <span class="lbl" style="color:var(--rosa)">Como funciona</span>
+        <h2>Três passos, <em>todo dia igual.</em></h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+          <span class="num">um</span>
+          <h3>Adicione sua planta</h3>
+          <p class="muted">Escolha a espécie, conte quanta luz o cantinho recebe e, se quiser, tire uma foto dela.</p>
+        </div>
+        <div class="step">
+          <span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z"/><path d="M9 15.5 a3 3 0 0 0 3 3"/></svg></span>
+          <span class="num">dois</span>
+          <h3>A Irrigua calcula a rega</h3>
+          <p class="muted">Pela espécie e pela luz, ela sugere de quanto em quanto tempo regar. Você ajusta quando quiser.</p>
+        </div>
+        <div class="step">
+          <span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 l4.5 4.5 L19 7.5"/></svg></span>
+          <span class="num">três</span>
+          <h3>Regou? Um toque.</h3>
+          <p class="muted">O painel mostra quem está com sede hoje. Tocou em “Reguei”, a próxima rega já está marcada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- cores -->
+  <section class="creme" id="cores">
+    <div class="wrap stack" style="gap:36px">
+      <div class="split" style="align-items:flex-end;gap:24px">
+        <div class="stack"><span class="lbl">As cores</span><h2>A paleta de um <em>jardim à meia-luz.</em></h2></div>
+        <p class="muted">Tons de folha e de terra úmida, com o rosa como a cor do cuidado: ele marca o que precisa de atenção hoje.</p>
+      </div>
+      <div class="swatches">
+        <div class="sw"><div class="c" style="background:#333A22"></div><div class="t"><b>Oliva</b><span>o fundo, a terra</span><code>#333A22</code></div></div>
+        <div class="sw"><div class="c" style="background:#5E6B3A"></div><div class="t"><b>Folha</b><span>o símbolo no claro</span><code>#5E6B3A</code></div></div>
+        <div class="sw"><div class="c" style="background:#A9B98A"></div><div class="t"><b>Sálvia</b><span>regada, tudo certo</span><code>#A9B98A</code></div></div>
+        <div class="sw"><div class="c" style="background:#E5ABA4"></div><div class="t"><b>Rosa</b><span>com sede, atenção</span><code>#E5ABA4</code></div></div>
+        <div class="sw"><div class="c" style="background:#F5F1E3;border-bottom:1px solid rgba(38,51,31,.1)"></div><div class="t"><b>Creme</b><span>o texto, a luz</span><code>#F5F1E3</code></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- tipografia -->
+  <section class="creme" id="letras" style="padding-top:0">
+    <div class="wrap stack" style="gap:28px">
+      <div class="types">
+        <div class="type">
+          <span class="lbl">Títulos</span>
+          <span class="aa serif">A<i>a</i></span>
+          <b class="serif" style="font-size:26px">Fraunces</b>
+          <p class="muted">Uma serifa com curvas suaves, quase botânica. Dá o tom editorial: “Bom dia. <i>2 plantas com sede.</i>”</p>
+        </div>
+        <div class="type">
+          <span class="lbl">Interface</span>
+          <span class="aa" style="font-weight:600">Aa</span>
+          <b style="font-size:24px">Plus Jakarta Sans</b>
+          <p class="muted">Limpa e legível em tamanhos pequenos: datas, botões, frequência de rega.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- fecho -->
+  <section class="quote wrap">
+    <svg width="70" height="70" viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#A9B98A"/><path d="M60 104 C60 84 60 56 60 30" stroke="#333A22" stroke-width="5" stroke-linecap="round"/><path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#333A22" stroke-width="4" stroke-linecap="round"/></svg>
+    <p class="big">Nem água demais, nem de menos. <em>Cada planta no seu tempo.</em></p>
+    <a class="btn rosa" href="./">Começar meu jardim</a>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Irrigua · um projeto pessoal que começou com uma pergunta boba.</span>
+    <a href="./">Voltar ao jardim</a>
+  </div>
+</footer>
+
+<script>
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
+</script>
+</body>
+</html>

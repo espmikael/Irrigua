@@ -7,7 +7,7 @@
 <meta name="description" content="Irrigua: seu jardim, com a rega de cada planta no tempo certo.">
 <meta name="theme-color" content="#F5F1E3">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="icon" href="icone.svg?v=2" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -37,6 +37,9 @@ header{background:var(--texto);color:#26331F;border-bottom:1px solid #E2DAD0;pad
 header a,header a:hover{color:#26331F}
 .top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:18px;padding-bottom:18px}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:28px;font-weight:600;letter-spacing:-.01em}
+.wm{font-family:var(--serif);font-weight:600;letter-spacing:-.015em;line-height:1;white-space:nowrap}
+.wm .i{position:relative;display:inline-block}
+.wm .i svg{position:absolute;left:50%;top:.14em;width:.2em;height:.27em;transform:translateX(-50%)}
 nav{display:flex;flex-wrap:wrap;gap:6px}
 nav a,nav button{padding:10px 16px;border-radius:999px;font-weight:500;border:none;background:transparent;font-size:15px;color:#26331F}
 nav a:hover,nav button:hover{background:rgba(38,51,31,.08);color:#26331F}
@@ -126,6 +129,14 @@ h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spaci
 .wl .t{flex:1;min-width:0}
 .wl .n{font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(255,255,255,.07);color:var(--texto);line-height:1.3}
+.tag svg{width:14px;height:14px;flex:none}
+.tag.safe{background:rgba(169,185,138,.16);color:#D3DDB4}
+.tag.tox{background:rgba(244,165,155,.14);color:#F6BDB5}
+.storybox{display:flex;justify-content:center;background:rgba(0,0,0,.2);border-radius:20px;padding:16px}
+.storybox img{width:auto;max-width:100%;max-height:58vh;max-height:58dvh;aspect-ratio:9/16;border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.storybox .wait{aspect-ratio:9/16;height:min(58vh,520px);border-radius:14px;background:var(--sup);display:flex;align-items:center;justify-content:center;color:var(--sutil);font-size:14px;text-align:center;padding:20px}
 .chip{padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid rgba(169,185,138,.5)}
 .chip.hoje{border:none;background:var(--rosa);color:var(--rosa-tinta)}
 .chip.ok{border:none;background:var(--salvia);color:var(--salvia-tinta)}
@@ -223,12 +234,12 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
         <path d="M60 104 C60 84 60 56 60 30" stroke="#F5F1E3" stroke-width="5" stroke-linecap="round"/>
         <path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#F5F1E3" stroke-width="4" stroke-linecap="round"/>
       </svg>
-      Irrigua
+      <span class="wm">Irr<span class="i">ı<svg viewBox="0 0 10 13" aria-hidden="true"><path d="M5 0 C5 0 0 6 0 8.5 A5 5 0 0 0 10 8.5 C10 6 5 0 5 0Z" fill="#C9837B"/></svg></span>gua</span>
     </a>
     <nav aria-label="Principal">
       <a href="./" class="on">Meu jardim</a>
       <button type="button" data-add>Explorar plantas</button>
-      <a href="logo.html">Marca</a>
+      <a href="conceito.html">Conceito</a>
     </nav>
     <button class="avatar" type="button" aria-label="Perfil">M</button>
   </div>
@@ -266,7 +277,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     <section class="garden" aria-labelledby="jardim-t">
       <div class="between">
         <h2 id="jardim-t">Meu jardim</h2>
-        <button class="add" type="button" data-add>+ Adicionar planta</button>
+        <span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-share id="share-btn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15 V4 M7.5 8.5 L12 4 L16.5 8.5"/><path d="M5 13 V19 H19 V13"/></svg>Compartilhar</button><button class="add" type="button" data-add>+ Adicionar planta</button></span>
       </div>
       <div class="grid" id="cards"></div>
     </section>
@@ -399,6 +410,21 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     catch (e) { toast('Não deu para salvar: o espaço do navegador acabou. Tente uma foto menor.'); return false; }
   }
 
+  // ---------- etiquetas de luz e pet ----------
+  var LUZ = {
+    sombra:   { label:'Meia-sombra', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 5 A7 7 0 0 1 12 19 Z" fill="currentColor"/></svg>' },
+    indireta: { label:'Luz indireta', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3.5 V5.5 M12 18.5 V20.5 M3.5 12 H5.5 M18.5 12 H20.5"/></svg>' },
+    sol:      { label:'Sol', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2.5 V5 M12 19 V21.5 M2.5 12 H5 M19 12 H21.5 M5.3 5.3 L7 7 M17 17 L18.7 18.7 M5.3 18.7 L7 17 M17 7 L18.7 5.3"/></svg>' }
+  };
+  var PAW = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="4.6" ry="3.8"/><circle cx="6.2" cy="10.6" r="1.9"/><circle cx="9.6" cy="6.8" r="1.9"/><circle cx="14.4" cy="6.8" r="1.9"/><circle cx="17.8" cy="10.6" r="1.9"/></svg>';
+  function tagsHtml(s){
+    if (!s) return '';
+    var out = '';
+    if (s.luz && LUZ[s.luz]) out += '<span class="tag">' + LUZ[s.luz].icon + LUZ[s.luz].label + '</span>';
+    if (typeof s.petSafe === 'boolean') out += s.petSafe ? '<span class="tag safe">' + PAW + 'Pet friendly</span>' : '<span class="tag tox">' + PAW + 'Tóxica para pets</span>';
+    return out ? '<div class="tags">' + out + '</div>' : '';
+  }
+
   function nameOf(p){ var s = sp(p.sp); return (p.name && p.name.trim()) || (s ? s.name : 'Planta'); }
   function coverOf(p){
     var s = sp(p.sp);
@@ -525,7 +551,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       var st = c.ok ? 'st-ok' : (c.late ? 'st-late' : (c.due ? 'st-due' : ''));
       return '<article class="card' + (c.late ? ' late' : '') + '"><div class="photo">' + pic(c.cover, '', 'Foto de ' + c.name) +
         '<button class="info" type="button" data-info="' + c.p.id + '" aria-label="Sobre ' + esc(c.name) + '">' + I_INFO + '</button></div>' +
-        '<div><h3>' + esc(c.name) + '</h3>' + (c.s ? '<p class="sci">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== c.s.name ? c.s.name + ' · ' + c.s.sci : c.s.sci) + '</p>' : '<p class="sci">Sem espécie definida</p>') + '</div>' +
+        '<div><h3>' + esc(c.name) + '</h3>' + (c.s ? '<p class="sci">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== c.s.name ? c.s.name + ' · ' + c.s.sci : c.s.sci) + '</p>' : '<p class="sci">Sem espécie definida</p>') + tagsHtml(c.s) + '</div>' +
         '<div style="display:flex;flex-direction:column;gap:6px"><div class="meta"><span class="muted">Regada ' + lastLbl + '</span><span class="' + st + '">' + nextLbl + '</span></div>' +
         '<div class="bar"><div style="width:' + c.pct + '%;background:' + (c.ok ? '#A9B98A' : (c.late ? '#F4A59B' : (c.due ? '#E5ABA4' : '#C9C99A'))) + '"></div></div>' +
         '<span class="lbl muted" style="font-weight:500">A cada ' + c.p.interval + ' dias · ' + (c.late ? 'era ' : '') + fmt(c.next) + '</span></div>' +
@@ -539,6 +565,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       html = '<div class="empty">Nenhuma planta do seu jardim combina com <b>“' + esc(query.trim()) + '”</b>.<br><button class="btn plan" type="button" data-add data-q="' + esc(query.trim()) + '" style="margin-top:12px">Adicionar “' + esc(query.trim()) + '” ao jardim</button></div>';
     }
     document.getElementById('cards').innerHTML = html;
+    document.getElementById('share-btn').hidden = empty;
 
     document.getElementById('semana').style.display = empty ? 'none' : '';
     var h = '<div class="trow"><span class="lbl muted" style="padding-left:4px">Planta</span>';
@@ -586,6 +613,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     setTimeout(function(){ var f = sheetEl.querySelector('[data-autofocus]') || sheetEl.querySelector('.close'); if (f) f.focus(); }, 30);
   }
   function closeSheet(){
+    if (sheet.mode === 'share') { if (story.url) URL.revokeObjectURL(story.url); story = { blob:null, url:null }; }
     sheet = { mode:null };
     overlay.classList.remove('open');
     document.body.style.overflow = '';
@@ -597,6 +625,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     if (sheet.mode === 'info') return renderInfo();
     if (sheet.mode === 'pick') return renderPick();
     if (sheet.mode === 'form') return renderForm();
+    if (sheet.mode === 'share') return renderShare();
   }
 
   function renderInfo(){
@@ -617,7 +646,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       '<div class="body"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div style="min-width:0">' +
       '<h2 style="font-weight:600;font-size:34px;line-height:1.05;overflow-wrap:anywhere">' + esc(c.name) + '</h2>' +
       (s ? '<p class="sci" style="font-size:15px;margin-top:4px">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== s.name ? s.name + ' · ' + s.sci : s.sci) + '</p>' : '') + '</div>' +
-      '<button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' + light + facts +
+      '<button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' + tagsHtml(s).replace('class="tags"', 'class="tags" style="margin-top:-6px"') + light + facts +
       (s && c.cover && c.cover === spPhoto(s) && spCredit(s) ? '<p class="credit" style="margin:0">' + spCredit(s) + '</p>' : '') +
       '<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--linha);padding-top:16px">' +
       '<span class="muted" style="font-size:13px">A cada ' + p.interval + ' dias · ' + (c.late ? lateText(c.lateDays).toLowerCase() : 'próxima ' + fmt(c.next)) + '</span>' +
@@ -771,6 +800,184 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     img.src = url;
   }
 
+  // ---------- card para compartilhar (stories 1080x1920) ----------
+  var LEAF_PATH = 'M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z';
+  var VEINS_PATH = 'M60 104 C60 84 60 56 60 30 M60 80 L45 67 M60 66 L74 54 M60 92 L75 81';
+  var story = { blob:null, url:null };
+
+  function loadImg(src){
+    return new Promise(function(res){
+      if (!src) return res(null);
+      var im = new Image();
+      if (!/^data:/.test(src) && new URL(src, location.href).origin !== location.origin) im.crossOrigin = 'anonymous';
+      im.onload = function(){ res(im); };
+      im.onerror = function(){ res(null); };
+      im.src = src;
+    });
+  }
+  function rr(ctx, x, y, w, h, r){
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function fit(ctx, text, max){
+    if (ctx.measureText(text).width <= max) return text;
+    while (text.length > 1 && ctx.measureText(text + '…').width > max) text = text.slice(0, -1);
+    return text.trim() + '…';
+  }
+  function drawLeaf(ctx, x, y, size, fill, vein){
+    ctx.save(); ctx.translate(x, y); ctx.scale(size / 120, size / 120);
+    ctx.fillStyle = fill; ctx.fill(new Path2D(LEAF_PATH));
+    ctx.strokeStyle = vein; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.stroke(new Path2D(VEINS_PATH));
+    ctx.restore();
+  }
+  function setSpacing(ctx, px){ try { ctx.letterSpacing = px + 'px'; } catch (e) {} }
+
+  function drawStory(items, images){
+    var W = 1080, H = 1920, M = 72;
+    var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    var ctx = cv.getContext('2d');
+    var SERIF = 'Fraunces, Georgia, serif', SANS = '"Plus Jakarta Sans", system-ui, sans-serif';
+    var all = items.all, pending = items.pending, okToday = items.okToday;
+
+    ctx.fillStyle = '#333A22'; ctx.fillRect(0, 0, W, H);
+
+    // faixa creme com a marca
+    ctx.fillStyle = '#F5F1E3'; ctx.fillRect(0, 0, W, 190);
+    ctx.fillStyle = '#E2DAD0'; ctx.fillRect(0, 189, W, 2);
+    drawLeaf(ctx, M, 58, 76, '#5E6B3A', '#F5F1E3');
+    ctx.fillStyle = '#26331F'; ctx.font = '600 62px ' + SERIF; ctx.textBaseline = 'alphabetic';
+    (function(){ // "Irr" + ı + gota rosa + "gua"
+      var x0 = M + 92, y0 = 120;
+      ctx.fillText('Irr', x0, y0); var w1 = ctx.measureText('Irr').width;
+      ctx.fillText('\u0131', x0 + w1, y0); var wi = ctx.measureText('\u0131').width;
+      ctx.fillText('gua', x0 + w1 + wi, y0);
+      var cx = x0 + w1 + wi / 2, top = y0 - 62 * 0.8, dw = 62 * 0.2, dh = 62 * 0.27;
+      ctx.save(); ctx.translate(cx - dw / 2, top); ctx.scale(dw / 10, dh / 13);
+      ctx.fillStyle = '#C9837B'; ctx.fill(new Path2D('M5 0 C5 0 0 6 0 8.5 A5 5 0 0 0 10 8.5 C10 6 5 0 5 0Z')); ctx.restore();
+      ctx.fillStyle = '#26331F';
+    })();
+    ctx.font = '600 26px ' + SANS; setSpacing(ctx, 3); ctx.textAlign = 'right'; ctx.fillStyle = '#5E6B3A';
+    ctx.fillText('MEU JARDIM', W - M, 116); ctx.textAlign = 'left'; setSpacing(ctx, 0);
+
+    // data + manchete
+    ctx.font = '600 30px ' + SANS; setSpacing(ctx, 4); ctx.fillStyle = '#E5ABA4';
+    ctx.fillText((DOWL[TODAY.getDay()] + ', ' + TODAY.getDate() + ' de ' + MESL[TODAY.getMonth()]).toUpperCase(), M, 300);
+    setSpacing(ctx, 0);
+    ctx.fillStyle = '#F5F1E3'; ctx.font = '500 118px ' + SERIF;
+    ctx.fillText('Meu jardim', M - 4, 430);
+    ctx.fillStyle = '#E5ABA4'; ctx.font = 'italic 400 118px ' + SERIF;
+    ctx.fillText(fit(ctx, pending === 0 ? 'está em dia.' : (pending === 1 ? 'tem 1 com sede.' : 'tem ' + pending + ' com sede.'), W - 2 * M), M - 4, 552);
+
+    // mosaico de plantas (até 6)
+    var cols = 3, gap = 30, tile = Math.floor((W - 2 * M - gap * (cols - 1)) / cols), top = 640;
+    var extra = all.length > 6 ? all.length - 5 : 0;
+    var shown = extra ? all.slice(0, 5) : all.slice(0, 6);
+    shown.forEach(function(c, i){
+      var x = M + (i % cols) * (tile + gap), y = top + Math.floor(i / cols) * (tile + 86);
+      ctx.save(); rr(ctx, x, y, tile, tile, 34); ctx.clip();
+      var im = images[i];
+      if (im) {
+        var r = Math.max(tile / im.naturalWidth, tile / im.naturalHeight), iw = im.naturalWidth * r, ih = im.naturalHeight * r;
+        ctx.drawImage(im, x + (tile - iw) / 2, y + (tile - ih) / 2, iw, ih);
+      } else {
+        ctx.fillStyle = '#3E4528'; ctx.fillRect(x, y, tile, tile);
+        drawLeaf(ctx, x + tile / 2 - 50, y + tile / 2 - 52, 100, '#A9B98A', '#3E4528');
+      }
+      ctx.restore();
+      if (c.ok) { // selo de regada
+        ctx.fillStyle = '#A9B98A'; ctx.beginPath(); ctx.arc(x + tile - 34, y + 34, 22, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = '#24301A'; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.beginPath(); ctx.moveTo(x + tile - 44, y + 35); ctx.lineTo(x + tile - 37, y + 42); ctx.lineTo(x + tile - 24, y + 27); ctx.stroke();
+      }
+      ctx.fillStyle = '#F5F1E3'; ctx.font = '600 30px ' + SANS;
+      ctx.fillText(fit(ctx, c.name, tile), x + 2, y + tile + 46);
+    });
+    if (extra) {
+      var i5 = 5, ex = M + (i5 % cols) * (tile + gap), ey = top + Math.floor(i5 / cols) * (tile + 86);
+      ctx.fillStyle = 'rgba(255,255,255,0.07)'; rr(ctx, ex, ey, tile, tile, 34); ctx.fill();
+      ctx.fillStyle = '#F5F1E3'; ctx.font = '500 104px ' + SERIF; ctx.textAlign = 'center';
+      ctx.fillText('+' + extra, ex + tile / 2, ey + tile / 2 + 36);
+      ctx.font = '600 30px ' + SANS; ctx.fillText('plantas', ex + tile / 2, ey + tile + 46); ctx.textAlign = 'left';
+    }
+
+    // números
+    var rows = Math.ceil(Math.min(all.length, 6) / cols);
+    var sy = top + rows * (tile + 86) + 40;
+    var pets = all.filter(function(c){ return c.s && c.s.petSafe === true; }).length;
+    var pills = [
+      all.length + (all.length === 1 ? ' planta' : ' plantas'),
+      okToday ? okToday + (okToday === 1 ? ' regada hoje' : ' regadas hoje') : (pending ? pending + ' com sede hoje' : 'nenhuma rega hoje'),
+    ];
+    if (pets) pills.push(pets + ' pet friendly');
+    ctx.font = '600 32px ' + SANS;
+    var px = M, py = sy;
+    pills.forEach(function(t){
+      var w = ctx.measureText(t).width + 56;
+      if (px + w > W - M) { px = M; py += 88; }
+      ctx.fillStyle = 'rgba(255,255,255,0.08)'; rr(ctx, px, py, w, 70, 35); ctx.fill();
+      ctx.fillStyle = '#F5F1E3'; ctx.fillText(t, px + 28, py + 46);
+      px += w + 16;
+    });
+
+    // rodapé
+    ctx.fillStyle = 'rgba(245,241,227,0.14)'; ctx.fillRect(M, H - 210, W - 2 * M, 2);
+    ctx.fillStyle = '#E5ABA4'; ctx.font = 'italic 400 46px ' + SERIF;
+    ctx.fillText('cuidado no tempo certo', M, H - 128);
+    ctx.fillStyle = '#D3D3B5'; ctx.font = '500 28px ' + SANS;
+    ctx.fillText((location.host + location.pathname).replace(/index\.html$/, '').replace(/\/$/, '') || 'Irrigua', M, H - 78);
+    return cv;
+  }
+
+  function buildStory(){
+    var all = db.plants.map(compute);
+    all.sort(function(a, b){ return (b.cover ? 1 : 0) - (a.cover ? 1 : 0); }); // com foto primeiro
+    var items = { all:all, pending:all.filter(function(c){ return c.due; }).length, okToday:all.filter(function(c){ return c.ok; }).length };
+    var list = all.length > 6 ? all.slice(0, 5) : all.slice(0, 6);
+    var fonts = document.fonts && document.fonts.load ? Promise.all([
+      document.fonts.load('500 118px Fraunces'), document.fonts.load('italic 400 118px Fraunces'), document.fonts.load('600 62px Fraunces'),
+      document.fonts.load('600 30px "Plus Jakarta Sans"'), document.fonts.load('500 28px "Plus Jakarta Sans"')
+    ]).catch(function(){}) : Promise.resolve();
+    return fonts.then(function(){ return Promise.all(list.map(function(c){ return loadImg(c.cover); })); }).then(function(imgs){
+      var cv = drawStory(items, imgs);
+      return new Promise(function(res){
+        try { cv.toBlob(function(b){ b ? res(b) : res(null); }, 'image/png'); }
+        catch (e) { // alguma foto de fora bloqueou a exportação: refaz sem ela
+          var safe = imgs.map(function(im){ return im && (/^data:/.test(im.src) || new URL(im.src).origin === location.origin) ? im : null; });
+          drawStory(items, safe).toBlob(function(b){ res(b); }, 'image/png');
+        }
+      });
+    });
+  }
+
+  function renderShare(){
+    sheetEl.className = 'sheet form';
+    sheetEl.setAttribute('aria-label', 'Compartilhar meu jardim');
+    var canShareFiles = false;
+    try { canShareFiles = !!(navigator.canShare && navigator.canShare({ files:[new File([''], 'a.png', { type:'image/png' })] })); } catch (e) {}
+    sheetEl.innerHTML = '<div class="body">' +
+      '<div class="fhead"><h2>Compartilhar</h2><button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' +
+      '<div class="storybox" id="storybox">' + (story.url ? '<img src="' + story.url + '" alt="Card do meu jardim para stories">' : '<div class="wait">Montando o card do seu jardim…</div>') + '</div>' +
+      '<p class="hint" style="margin:0">' + (canShareFiles ? 'Toque em <b>Compartilhar</b> e escolha o Instagram para postar nos stories.' : 'Baixe a imagem e poste nos stories pelo celular.') + '</p>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end">' +
+      '<a class="btn plan" id="story-dl" ' + (story.url ? 'href="' + story.url + '" download="irrigua-meu-jardim.png"' : 'aria-disabled="true"') + '>Baixar imagem</a>' +
+      (canShareFiles ? '<button class="btn now" type="button" data-share-go' + (story.blob ? '' : ' disabled') + '>Compartilhar</button>' : '') + '</div></div>';
+    if (!story.blob && !story.loading) {
+      story.loading = true;
+      buildStory().then(function(b){
+        story.loading = false;
+        if (!b) { toast('Não consegui montar a imagem'); return; }
+        if (story.url) URL.revokeObjectURL(story.url);
+        story.blob = b; story.url = URL.createObjectURL(b);
+        if (sheet.mode === 'share') renderShare();
+      });
+    }
+  }
+  function shareStory(){
+    if (!story.blob) return;
+    var file = new File([story.blob], 'irrigua-meu-jardim.png', { type:'image/png' });
+    navigator.share({ files:[file], title:'Meu jardim no Irrigua' }).catch(function(){});
+  }
+
   // ---------- exemplo ----------
   function loadDemo(){
     var demo = [['aglaonema',7,7],['palmeira',5,5],['lirio',3,2],['comigo',6,4],['bambu',7,8],['dracena',10,9]];
@@ -811,6 +1018,8 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     var el;
     if ((el = e.target.closest('[data-water]'))) { toggleWater(el.getAttribute('data-water')); return; }
     if ((el = e.target.closest('[data-info]'))) { openSheet({ mode:'info', id:el.getAttribute('data-info') }); return; }
+    if (e.target.closest('[data-share]')) { openSheet({ mode:'share' }); return; }
+    if (e.target.closest('[data-share-go]')) { shareStory(); return; }
     if ((el = e.target.closest('[data-add]'))) { openSheet({ mode:'pick', q:el.getAttribute('data-q') || '' }); return; }
     if (e.target.closest('#demo')) { loadDemo(); return; }
     if (e.target.closest('[data-close]') || e.target === overlay) { closeSheet(); return; }
@@ -863,6 +1072,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   setInterval(function(){ if (document.visibilityState === 'visible' && !sheet.mode) { TODAY = startOf(new Date()); render(); } }, 10 * 60 * 1000);
 
   render();
+  if (location.hash === '#explorar') { history.replaceState(null, '', location.pathname); openSheet({ mode:'pick', q:'' }); }
 
   // app instalável e funcionando sem internet
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
