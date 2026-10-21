@@ -2,47 +2,57 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Irrigua — Meu jardim</title>
-<meta name="theme-color" content="#333A22">
+<meta name="description" content="Irrigua: seu jardim, com a rega de cada planta no tempo certo.">
+<meta name="theme-color" content="#F5F1E3">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Irrigua">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --oliva:#333A22; --oliva-esc:#2A2F1B; --texto:#F5F1E3; --sutil:#D3D3B5;
-  --rosa:#E5ABA4; --rosa-tinta:#3A1C22; --salvia:#A9B98A; --salvia-tinta:#24301A;
+  --oliva:#333A22; --oliva-esc:#2A2F1B; --oliva-med:#3E4528; --texto:#F5F1E3; --sutil:#D3D3B5;
+  --rosa:#E5ABA4; --rosa-tinta:#3A1C22; --atraso:#F4A59B; --salvia:#A9B98A; --salvia-tinta:#24301A;
   --sup:rgba(255,255,255,.05); --sup2:rgba(255,255,255,.07); --fundo:rgba(0,0,0,.2);
   --linha:rgba(255,255,255,.08); --linha2:rgba(255,255,255,.14);
   --serif:'Fraunces',Georgia,serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--oliva);color:var(--texto);font-family:var(--sans);font-size:15px;line-height:1.5}
+body{margin:0;background:var(--oliva);color:var(--texto);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-tap-highlight-color:transparent}
 a{color:var(--texto);text-decoration:none}a:hover{color:var(--rosa)}
-button{font:inherit;cursor:pointer}
+button{font:inherit;cursor:pointer;color:inherit}
 img{display:block}
-.wrap{max-width:1180px;margin:0 auto;padding-left:24px;padding-right:24px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
 .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 .serif{font-family:var(--serif)}
-header{border-bottom:1px solid var(--linha)}
+.muted{color:var(--sutil)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+header{background:var(--texto);color:#26331F;border-bottom:1px solid #E2DAD0;padding-top:env(safe-area-inset-top)}
+header a,header a:hover{color:#26331F}
 .top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:18px;padding-bottom:18px}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:28px;font-weight:600;letter-spacing:-.01em}
 nav{display:flex;flex-wrap:wrap;gap:6px}
-nav a{padding:10px 16px;border-radius:999px;font-weight:500}
-nav a:hover{background:rgba(255,255,255,.06);color:var(--texto)}
-nav a.on{background:var(--texto);color:var(--oliva-esc);font-weight:600}
+nav a,nav button{padding:10px 16px;border-radius:999px;font-weight:500;border:none;background:transparent;font-size:15px;color:#26331F}
+nav a:hover,nav button:hover{background:rgba(38,51,31,.08);color:#26331F}
+nav a.on,nav a.on:hover{background:var(--oliva);color:var(--texto);font-weight:600}
+header :focus-visible{outline:2px solid var(--oliva);outline-offset:2px}
 .avatar{width:44px;height:44px;border-radius:50%;border:none;background:var(--rosa);color:var(--rosa-tinta);font-family:var(--serif);font-size:19px;font-weight:600}
 main.wrap{padding-top:44px;padding-bottom:64px;display:flex;flex-direction:column;gap:36px}
 .hero{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
 h1{margin:0;font-family:var(--serif);font-weight:500;font-size:clamp(40px,6vw,58px);line-height:1.02;letter-spacing:-.02em}
 h1 em{font-weight:400;color:var(--rosa)}
 h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spacing:-.01em}
-.muted{color:var(--sutil)}
-.search{display:flex;gap:8px;flex:0 1 420px;min-width:260px}
+.search{display:flex;gap:8px;flex:0 1 440px;min-width:260px}
 .search input{flex:1;min-width:0;height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--texto);font:inherit}
-.search input::placeholder{color:#BDBD9C}
-.round{width:48px;height:48px;border-radius:50%;border:none;background:var(--rosa);color:var(--rosa-tinta);display:flex;align-items:center;justify-content:center}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.search input::placeholder,.field input::placeholder{color:#BDBD9C}
+.round{width:48px;height:48px;flex:none;border-radius:50%;border:none;background:var(--rosa);color:var(--rosa-tinta);display:flex;align-items:center;justify-content:center}
+.clear{height:48px;padding:0 14px;border-radius:999px;border:1px solid var(--linha2);background:transparent;display:none}
+.clear.show{display:block}
 .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
 .day{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px;border-radius:20px;border:1px solid var(--linha);color:var(--sutil)}
 .day.has{background:var(--sup2);color:var(--texto);border-color:rgba(255,255,255,.1)}
@@ -55,16 +65,20 @@ h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spaci
 .task{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:18px;background:var(--sup);transition:background .2s}
 .task.ok{background:rgba(169,185,138,.14)}
 .thumb{width:52px;height:52px;border-radius:14px;object-fit:cover;background:var(--texto);flex:none}
+.ph{background:var(--oliva-med);display:flex;align-items:center;justify-content:center;color:var(--salvia)}
+.thumb.ph svg{width:26px;height:26px}
 .task .t{flex:1;min-width:0}
 .task .n{font-weight:600}
 .task .s{font-size:13px;color:var(--sutil)}
-.btn{min-height:44px;border-radius:999px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,color .2s;padding:0 16px}
+.btn{min-height:44px;border-radius:999px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,color .2s;padding:0 16px;font-size:15px}
 .btn.go{border:1px solid var(--rosa);background:transparent;color:var(--texto)}
 .btn.go:hover{background:rgba(229,171,164,.12)}
 .btn.now{border:none;background:var(--rosa);color:var(--rosa-tinta)}
 .btn.plan{border:1px solid rgba(255,255,255,.18);background:transparent;color:var(--texto)}
 .btn.plan:hover{background:rgba(255,255,255,.06)}
 .btn.done{border:none;background:var(--salvia);color:var(--salvia-tinta)}
+.btn.danger{border:1px solid rgba(244,165,155,.5);background:transparent;color:var(--atraso)}
+.btn.danger.sure{background:var(--atraso);color:var(--rosa-tinta);border-color:var(--atraso)}
 .thanks{margin:0;font-family:var(--serif);font-style:italic;font-size:21px;color:var(--salvia)}
 .tomorrow{border-top:1px solid var(--linha);padding-top:16px;display:flex;flex-direction:column;gap:6px}
 .garden{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:18px}
@@ -72,16 +86,25 @@ h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spaci
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
 .card{background:var(--sup);border:1px solid var(--sup2);border-radius:26px;padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,background .2s}
 .card:hover{transform:translateY(-2px);background:rgba(255,255,255,.08)}
+.card.late{border-color:rgba(244,165,155,.45)}
 .photo{position:relative}
-.photo img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:20px;background:var(--texto)}
+.photo img,.photo .ph{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:20px;background:var(--texto)}
+.photo .ph{background:var(--oliva-med)}
+.photo .ph svg{width:64px;height:64px;opacity:.9}
 .info{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(42,47,27,.85);color:var(--texto);display:flex;align-items:center;justify-content:center}
 .info:hover{background:var(--oliva-esc)}
-.card h3{margin:0;font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.1;letter-spacing:-.01em}
+.card h3{margin:0;font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.1;letter-spacing:-.01em;overflow-wrap:anywhere}
 .sci{margin:2px 0 0;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--sutil)}
-.meta{display:flex;justify-content:space-between;font-size:13px}
-.st-due{color:var(--rosa);font-weight:700}.st-ok{color:var(--salvia);font-weight:700}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.st-due{color:var(--rosa);font-weight:700}.st-ok{color:var(--salvia);font-weight:700}.st-late{color:var(--atraso);font-weight:700}
 .bar{height:6px;border-radius:99px;background:rgba(0,0,0,.25);overflow:hidden}
 .bar div{height:100%;border-radius:99px}
+.empty{grid-column:1/-1;padding:28px;border:1px dashed var(--linha2);border-radius:22px;text-align:center;color:var(--sutil)}
+.empty b{color:var(--texto)}
+.welcome{grid-column:1/-1;padding:36px 28px;border:1px dashed var(--linha2);border-radius:26px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.welcome h3{margin:0;font-family:var(--serif);font-weight:500;font-size:28px}
+.welcome p{margin:0;max-width:440px;color:var(--sutil)}
+.row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--sutil)}
 .legend span{display:flex;align-items:center;gap:6px}
 .dot{width:14px;height:14px;border-radius:50%}
@@ -97,68 +120,105 @@ h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spaci
 .cell{height:52px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:rgba(255,255,255,.03)}
 .cell.t0{background:var(--sup2)}
 .cell button{width:44px;height:44px;border-radius:50%;border:none;background:transparent;display:flex;align-items:center;justify-content:center}
-/* ficha */
-.overlay{position:fixed;inset:0;z-index:50;background:rgba(18,21,10,.72);display:none;align-items:center;justify-content:center;padding:24px}
-.overlay.open{display:flex}
-.sheet{width:100%;max-width:780px;max-height:calc(100vh - 48px);overflow-y:auto;background:var(--oliva-esc);border:1px solid var(--linha);border-radius:28px;display:flex;flex-wrap:wrap}
-.sheet>img{flex:1 1 260px;min-width:0;min-height:280px;align-self:stretch;object-fit:cover;background:var(--texto);border-radius:27px 0 0 27px}
-.sheet .body{flex:999 1 340px;min-width:0;padding:28px;display:flex;flex-direction:column;gap:18px}
-.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.fact{background:var(--sup);border-radius:16px;padding:12px 14px}
-.fact .lbl{color:var(--rosa)}
-.fact div:last-child{font-size:14px;margin-top:4px}
-.tip{background:rgba(169,185,138,.12);border-radius:16px;padding:14px 16px}
-.close{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid var(--linha2);background:transparent;color:var(--texto);display:flex;align-items:center;justify-content:center}
-footer{border-top:1px solid var(--linha);padding-top:20px;padding-bottom:32px;font-size:13px;color:var(--sutil)}
-/* atrasada */
-.card.late{border-color:rgba(242,148,138,.45)}
-.st-late{color:#F4A59B;font-weight:700}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;background:rgba(242,148,138,.16);color:#F4A59B;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-/* busca */
-.empty{grid-column:1/-1;padding:28px;border:1px dashed var(--linha2);border-radius:22px;text-align:center;color:var(--sutil)}
-.empty b{color:var(--texto)}
-.clear{height:48px;padding:0 14px;border-radius:999px;border:1px solid var(--linha2);background:transparent;color:var(--texto);display:none}
-.clear.show{display:block}
-/* aviso de desfazer */
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);z-index:60;display:flex;align-items:center;gap:14px;padding:10px 10px 10px 18px;border-radius:999px;background:var(--texto);color:var(--oliva-esc);box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .25s ease;max-width:calc(100vw - 32px)}
-.toast.show{transform:translate(-50%,0)}
-.toast span{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.toast button{min-height:40px;padding:0 16px;border-radius:999px;border:none;background:var(--oliva);color:var(--texto);font-weight:700}
-/* semana em lista (celular) */
 .wlist{display:none;flex-direction:column;gap:10px}
 .wl{display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;background:var(--sup)}
 .wl .t{flex:1;min-width:0}
 .wl .n{font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.chip{padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid rgba(169,185,138,.5);color:var(--texto)}
+.chip{padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid rgba(169,185,138,.5)}
 .chip.hoje{border:none;background:var(--rosa);color:var(--rosa-tinta)}
 .chip.ok{border:none;background:var(--salvia);color:var(--salvia-tinta)}
-.chip.late{border:none;background:#F4A59B;color:var(--rosa-tinta)}
+.chip.late{border:none;background:var(--atraso);color:var(--rosa-tinta)}
+/* folha (ficha e formulário) */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(18,21,10,.72);display:none;align-items:center;justify-content:center;padding:24px}
+.overlay.open{display:flex}
+.sheet{width:100%;max-width:780px;max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);overflow-y:auto;background:var(--oliva-esc);border:1px solid var(--linha);border-radius:28px;display:flex;flex-wrap:wrap}
+.sheet>.cover{flex:1 1 260px;min-width:0;min-height:280px;align-self:stretch;object-fit:cover;background:var(--texto);border-radius:27px 0 0 27px}
+.sheet>.cover.ph svg{width:90px;height:90px}
+.sheet .body{flex:999 1 340px;min-width:0;padding:28px;display:flex;flex-direction:column;gap:18px}
+.sheet.form{max-width:620px;flex-direction:column;flex-wrap:nowrap}
+.sheet.form .body{flex:none}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.fact{background:var(--sup);border-radius:16px;padding:12px 14px}
+.fact .lbl{color:var(--rosa)}
+.fact div:last-child{font-size:14px;margin-top:4px}
+.tip{background:rgba(169,185,138,.12);border-radius:16px;padding:14px 16px}
+.close,.back{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid var(--linha2);background:transparent;display:flex;align-items:center;justify-content:center}
+.fhead{display:flex;align-items:center;gap:12px}
+.fhead h2{flex:1;min-width:0;font-size:30px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field>label,.field>.lbl{color:var(--sutil)}
+.field input[type=text],.field input[type=search],.field input[type=number],.field input[type=date]{height:48px;padding:0 16px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--texto);font:inherit;width:100%;color-scheme:dark}
+.field input:focus,.search input:focus{outline:2px solid var(--rosa);outline-offset:1px}
+.hint{font-size:13px;color:var(--sutil)}
+.hint b{color:var(--texto)}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.seg button{min-height:52px;padding:8px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:transparent;font-weight:600;line-height:1.2}
+.seg button small{display:block;font-weight:500;font-size:12px;color:var(--sutil);margin-top:2px}
+.seg button[aria-pressed=true]{background:var(--texto);color:var(--oliva-esc);border-color:var(--texto)}
+.seg button[aria-pressed=true] small{color:#55593F}
+.inline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.inline input[type=number]{width:96px}
+.minis{display:flex;flex-wrap:wrap;gap:6px}
+.mini{min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;font-size:13px;font-weight:600}
+.mini:hover{background:rgba(255,255,255,.06)}
+.pick{display:flex;flex-direction:column;gap:8px;max-height:min(52vh,460px);overflow-y:auto;padding-right:4px}
+.prow{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;border:1px solid transparent;background:var(--sup);text-align:left;width:100%}
+.prow:hover,.prow:focus-visible{border-color:var(--linha2);background:rgba(255,255,255,.08)}
+.prow .t{flex:1;min-width:0}
+.prow .n{font-weight:600}
+.prow .s{font-size:13px;color:var(--sutil)}
+.photobox{display:flex;align-items:center;gap:14px}
+.photobox .pv{width:96px;height:96px;border-radius:18px;object-fit:cover;background:var(--texto);flex:none}
+.photobox .pv.ph{background:var(--oliva-med)}
+.photobox .pv.ph svg{width:40px;height:40px}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.covers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.covers button{display:flex;align-items:center;gap:10px;padding:8px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:transparent;text-align:left;font-weight:600}
+.covers button img{width:52px;height:52px;border-radius:12px;object-fit:cover;background:var(--texto)}
+.covers button[aria-pressed=true]{border:2px solid var(--rosa);padding:7px;background:rgba(229,171,164,.08)}
+.err{color:var(--atraso);font-size:13px;font-weight:600}
+.fact-note{font-size:13px;color:var(--sutil);background:var(--sup);border-radius:16px;padding:12px 14px}
+/* aviso */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,160%);z-index:60;display:flex;align-items:center;gap:14px;padding:10px 10px 10px 18px;min-height:56px;border-radius:999px;background:var(--texto);color:var(--oliva-esc);box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .25s ease;max-width:calc(100vw - 32px)}
+.toast.show{transform:translate(-50%,0)}
+.toast span{font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.toast button{min-height:40px;padding:0 16px;border-radius:999px;border:none;background:var(--oliva);color:var(--texto);font-weight:700;flex:none}
+.toast button[hidden]{display:none}
+footer{border-top:1px solid var(--linha);padding-top:22px;padding-bottom:calc(32px + env(safe-area-inset-bottom));font-size:13px;color:var(--sutil)}
+footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
 @media (max-width:640px){
   .tbox{display:none}
   .wlist{display:flex}
   .legend{display:none}
   .search{flex:1 1 100%}
-  nav{order:3;width:100%}
+  nav{order:3;width:100%;gap:2px;flex-wrap:nowrap}
+  nav a,nav button{padding:9px 12px;font-size:14px;white-space:nowrap}
   .week{gap:4px}.day{padding:10px 2px}.day .q{font-size:10px}
-  .sheet>img{border-radius:27px 27px 0 0;max-height:280px}
+  .overlay{padding:0;align-items:flex-end}
+  .sheet{border-radius:28px 28px 0 0;max-height:94vh;max-height:94dvh}
+  .sheet>.cover{border-radius:27px 27px 0 0;max-height:260px;min-height:220px}
+  .sheet .body{padding:22px 20px calc(24px + env(safe-area-inset-bottom))}
+  .facts{grid-template-columns:1fr 1fr}
+  .seg button small{display:none}
 }
 </style>
 </head>
 <body>
 <header>
   <div class="wrap top">
-    <a href="#" class="brand" aria-label="Irrigua, início">
+    <a href="./" class="brand" aria-label="Irrigua, início">
       <svg width="36" height="36" viewBox="0 0 120 120" fill="none" aria-hidden="true">
-        <path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#A9B98A"/>
-        <path d="M60 104 C60 84 60 56 60 30" stroke="#333A22" stroke-width="5" stroke-linecap="round"/>
-        <path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#333A22" stroke-width="4" stroke-linecap="round"/>
+        <path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#5E6B3A"/>
+        <path d="M60 104 C60 84 60 56 60 30" stroke="#F5F1E3" stroke-width="5" stroke-linecap="round"/>
+        <path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#F5F1E3" stroke-width="4" stroke-linecap="round"/>
       </svg>
       Irrigua
     </a>
     <nav aria-label="Principal">
-      <a href="#" class="on">Meu jardim</a>
-      <a href="#">Explorar plantas</a>
+      <a href="./" class="on">Meu jardim</a>
+      <button type="button" data-add>Explorar plantas</button>
       <a href="logo.html">Marca</a>
     </nav>
     <button class="avatar" type="button" aria-label="Perfil">M</button>
@@ -169,15 +229,15 @@ footer{border-top:1px solid var(--linha);padding-top:20px;padding-bottom:32px;fo
   <section class="hero">
     <div style="display:flex;flex-direction:column;gap:8px">
       <span class="lbl" style="color:var(--rosa)" id="hoje-data"></span>
-      <h1>Bom dia. <em id="due-text"></em></h1>
+      <h1 id="hero-title">Bom dia. <em id="due-text"></em></h1>
       <p class="muted" style="margin:0" id="plant-count"></p>
     </div>
     <form class="search" role="search" onsubmit="return false">
-      <label for="busca" class="sr">Buscar planta pelo nome</label>
-      <input id="busca" type="search" placeholder="Buscar planta pelo nome…" autocomplete="off">
+      <label for="busca" class="sr">Buscar no seu jardim</label>
+      <input id="busca" type="search" placeholder="Buscar no seu jardim…" autocomplete="off">
       <button class="clear" id="limpar" type="button">Limpar</button>
-      <button class="round" type="button" aria-label="Identificar por foto">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+      <button class="round" type="button" data-add aria-label="Adicionar planta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5 V19 M5 12 H19"/></svg>
       </button>
     </form>
   </section>
@@ -197,13 +257,13 @@ footer{border-top:1px solid var(--linha);padding-top:20px;padding-bottom:32px;fo
     <section class="garden" aria-labelledby="jardim-t">
       <div class="between">
         <h2 id="jardim-t">Meu jardim</h2>
-        <button class="add" type="button">+ Adicionar planta</button>
+        <button class="add" type="button" data-add>+ Adicionar planta</button>
       </div>
       <div class="grid" id="cards"></div>
     </section>
   </div>
 
-  <section aria-labelledby="semana-t" style="display:flex;flex-direction:column;gap:18px">
+  <section aria-labelledby="semana-t" style="display:flex;flex-direction:column;gap:18px" id="semana">
     <div class="between">
       <h2 id="semana-t">Semana do jardim</h2>
       <div class="legend">
@@ -218,15 +278,25 @@ footer{border-top:1px solid var(--linha);padding-top:20px;padding-bottom:32px;fo
 </main>
 
 <div class="overlay" id="overlay">
-  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="ficha-nome" id="sheet"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Planta" id="sheet"></div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-msg"></span><button type="button" id="desfazer">Desfazer</button></div>
 
-<footer><div class="wrap">Irrigua · protótipo. Fotos de exemplo do projeto aberto deilen (Kaggle/Unsplash).</div></footer>
+<footer>
+  <div class="wrap">
+    <span>Irrigua · seus dados ficam salvos só neste aparelho.</span>
+    <span class="row" style="justify-content:flex-end">
+      <button class="mini" type="button" id="exportar">Exportar backup</button>
+      <span class="mini filebtn" style="display:inline-flex;align-items:center">Importar backup<input type="file" id="importar" accept="application/json,.json" aria-label="Importar backup"></span>
+    </span>
+  </div>
+</footer>
 
+<script src="especies.js"></script>
 <script>
 (function () {
+  'use strict';
   var DOW = ['dom','seg','ter','qua','qui','sex','sáb'];
   var DOWL = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
   var MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
@@ -235,219 +305,500 @@ footer{border-top:1px solid var(--linha);padding-top:20px;padding-bottom:32px;fo
   function add(d,n){ var x = new Date(d.getTime()); x.setDate(x.getDate()+n); return x; }
   function diff(a,b){ return Math.round((startOf(a)-startOf(b))/86400000); }
   function fmt(d){ return DOW[d.getDay()]+', '+d.getDate()+' '+MES[d.getMonth()]; }
-  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function parse(s){ var p = String(s||'').split('-'); var d = new Date(+p[0], +p[1]-1, +p[2]); return isNaN(d) ? null : d; }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function norm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
 
   var TODAY = startOf(new Date());
+  var ESPECIES = window.IRRIGUA_ESPECIES || [];
+  function sp(id){ for (var i = 0; i < ESPECIES.length; i++) if (ESPECIES[i].id === id) return ESPECIES[i]; return null; }
 
-  // Plantas de exemplo; "ago" = há quantos dias foi a última rega
-  var PLANTS = [
-    { id:'aglaonema', name:'Aglaonema', sci:'Aglaonema commutatum', interval:7, ago:7, photo:'fotos/aglaonema.jpg',
-      light:'Indireta, média a baixa', water:'Quando os 2–3 cm de cima do solo secarem', humidity:'Gosta de ar úmido', pets:'Tóxica para cães e gatos',
-      origin:'Florestas tropicais do Sudeste Asiático.', tip:'Tolera cantos com pouca luz, mas as variegadas ficam mais vivas perto de uma janela com luz filtrada.' },
-    { id:'palmeira', name:'Palmeira-majestosa', sci:'Ravenea rivularis', interval:5, ago:5, photo:'fotos/palmeira.jpg',
-      light:'Indireta e forte', water:'Solo sempre levemente úmido, nunca encharcado', humidity:'Alta; borrife nos dias secos', pets:'Não tóxica para cães e gatos',
-      origin:'Margens de rios em Madagascar.', tip:'Pontas marrons costumam indicar ar seco ou falta de água. Gire o vaso de vez em quando para crescer por igual.' },
-    { id:'lirio', name:'Lírio-da-paz', sci:'Spathiphyllum wallisii', interval:3, ago:2, photo:'fotos/lirio.jpg',
-      light:'Indireta; aceita meia-sombra', water:'Quando o topo do solo secar', humidity:'Gosta de ar úmido', pets:'Tóxica para cães e gatos',
-      origin:'Florestas tropicais da América Central e do Sul.', tip:'Ela avisa: quando as folhas murcham, é hora de regar. Volta ao normal em poucas horas.' },
-    { id:'comigo', name:'Comigo-ninguém-pode', sci:'Dieffenbachia seguine', interval:6, ago:4, photo:'fotos/comigo.jpg',
-      light:'Indireta e clara', water:'Quando a camada de cima do solo secar', humidity:'Média a alta', pets:'Tóxica para pessoas e pets',
-      origin:'Regiões tropicais das Américas.', tip:'A seiva irrita pele e boca: use luvas ao podar e mantenha longe de crianças e animais.' },
-    { id:'bambu', name:'Bambu-da-sorte', sci:'Dracaena sanderiana', interval:7, ago:8, photo:'fotos/bambu.jpg',
-      light:'Indireta; evite sol direto', water:'Na água: troque a cada 1–2 semanas', humidity:'Indiferente', pets:'Tóxica para cães e gatos',
-      origin:'África Central. Apesar do nome, não é um bambu.', tip:'Use água filtrada ou deixada em repouso: o cloro pode amarelar as folhas.' },
-    { id:'dracena', name:'Dracena', sci:'Dracaena fragrans', interval:10, ago:9, photo:'fotos/dracena.jpg',
-      light:'Indireta; tolera pouca luz', water:'Quando metade do solo secar', humidity:'Média', pets:'Tóxica para cães e gatos',
-      origin:'África tropical.', tip:'É sensível ao flúor da água da torneira: pontas queimadas são o sinal. Regue menos no inverno.' }
-  ];
+  var LIGHT = {
+    pouca:    { label:'Pouca luz', hint:'longe da janela', factor:1.3 },
+    indireta: { label:'Luz indireta', hint:'claro, sem sol direto', factor:1 },
+    muita:    { label:'Muita luz', hint:'sol algumas horas', factor:0.75 }
+  };
+  function suggest(s, light){ var f = (LIGHT[light] || LIGHT.indireta).factor; return Math.max(1, Math.round(s.interval * f)); }
 
-  // As regas ficam guardadas no navegador de quem usa; se falhar, seguem só na memória
-  var KEY = 'irrigua.regas.v1';
-  var log = {};
-  try { log = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { log = {}; }
-  function save(){ try { localStorage.setItem(KEY, JSON.stringify(log)); } catch (e) {} }
-
-  var openId = null;
-
-  function compute(){
-    return PLANTS.map(function(b){
-      var base = add(TODAY, -b.ago);
-      var t = log[b.id] ? startOf(new Date(log[b.id])) : null;
-      var last = (t && t > base) ? t : base;
-      var next = add(last, b.interval);
-      var left = diff(next, TODAY);
-      var since = diff(TODAY, last);
-      var ok = since === 0 && !!t && diff(t, TODAY) === 0;
-      var due = left <= 0;
-      var occ = {}, step = left < 0 ? 0 : left;
-      while (step < 7) { occ[step] = true; step += b.interval; }
-      var lateDays = (!ok && left < 0) ? -left : 0;
-      return { b:b, next:next, left:left, since:since, due:due, ok:ok, occ:occ, late:lateDays > 0, lateDays:lateDays,
-        pct: ok ? 100 : Math.max(6, Math.min(100, Math.round((b.interval-left)/b.interval*100))) };
-    });
+  // ---------- dados (ficam no navegador deste aparelho) ----------
+  var KEY = 'irrigua.dados.v1';
+  var db = load();
+  function load(){
+    try { var d = JSON.parse(localStorage.getItem(KEY)); if (d && Array.isArray(d.plants)) return d; } catch (e) {}
+    return { v:1, plants:[] };
+  }
+  function persist(){
+    try { localStorage.setItem(KEY, JSON.stringify(db)); return true; }
+    catch (e) { toast('Não deu para salvar: o espaço do navegador acabou. Tente uma foto menor.'); return false; }
   }
 
-  // busca: ignora maiúsculas e acentos
-  var query = '';
-  function norm(s){ return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
-  function matches(p){ var q = norm(query).trim(); return !q || norm(p.b.name).indexOf(q) >= 0 || norm(p.b.sci).indexOf(q) >= 0; }
+  function nameOf(p){ var s = sp(p.sp); return (p.name && p.name.trim()) || (s ? s.name : 'Planta'); }
+  function coverOf(p){
+    var s = sp(p.sp);
+    if (p.cover === 'own' && p.photo) return p.photo;
+    if (s && s.photo) return s.photo;
+    return p.photo || null;
+  }
+  var LEAF = '<svg viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="currentColor"/><path d="M60 104 C60 84 60 56 60 30" stroke="#3E4528" stroke-width="5" stroke-linecap="round"/><path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#3E4528" stroke-width="4" stroke-linecap="round"/></svg>';
+  function pic(src, cls, alt){
+    if (src) return '<img class="' + cls + '" src="' + esc(src) + '" alt="' + esc(alt) + '">';
+    return '<div class="' + cls + ' ph" role="img" aria-label="' + esc(alt || 'Sem foto') + '">' + LEAF + '</div>';
+  }
+
+  function compute(p){
+    var s = sp(p.sp);
+    var last = parse(p.last) || TODAY;
+    var next = add(last, p.interval);
+    var left = diff(next, TODAY);
+    var since = diff(TODAY, last);
+    var ok = since === 0;
+    var due = !ok && left <= 0;
+    var lateDays = (!ok && left < 0) ? -left : 0;
+    var occ = {}, step = left < 0 ? 0 : left;
+    while (step < 7) { occ[step] = true; step += p.interval; }
+    return { p:p, s:s, name:nameOf(p), sci:s ? s.sci : '', cover:coverOf(p), next:next, left:left, since:since, ok:ok, due:due,
+      late:lateDays > 0, lateDays:lateDays, occ:occ,
+      pct: ok ? 100 : Math.max(6, Math.min(100, Math.round((p.interval-left)/p.interval*100))) };
+  }
   function lateText(n){ return 'Atrasada há ' + n + (n === 1 ? ' dia' : ' dias'); }
 
-  // aviso com "Desfazer"
+  // ---------- aviso com "Desfazer" ----------
   var undo = null, toastTimer = null;
-  function showToast(msg, restore){
-    undo = restore;
+  function toast(msg, restore){
+    undo = restore || null;
     document.getElementById('toast-msg').textContent = msg;
-    var t = document.getElementById('toast');
-    t.classList.add('show');
+    document.getElementById('desfazer').hidden = !undo;
+    document.getElementById('toast').classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(hideToast, 5000);
+    toastTimer = setTimeout(hideToast, restore ? 5000 : 3500);
   }
   function hideToast(){ document.getElementById('toast').classList.remove('show'); undo = null; }
 
-  function toggle(id){
-    var prev = log[id];
-    var wateredToday = prev && diff(new Date(prev), TODAY) === 0;
-    var name = PLANTS.filter(function(x){ return x.id === id; })[0].name;
-    if (wateredToday) { delete log[id]; hideToast(); }
-    else {
-      log[id] = TODAY.toISOString();
-      showToast(name + ' regada', function(){ if (prev) log[id] = prev; else delete log[id]; save(); render(); });
+  function find(id){ for (var i = 0; i < db.plants.length; i++) if (db.plants[i].id === id) return db.plants[i]; return null; }
+
+  function toggleWater(id){
+    var p = find(id); if (!p) return;
+    if (p.last === iso(TODAY)) {
+      if (p.prevLast) { p.last = p.prevLast; delete p.prevLast; persist(); hideToast(); render(); }
+      else toast(nameOf(p) + ' já está marcada como regada hoje');
+      return;
     }
-    save(); render();
+    var prev = p.last;
+    p.prevLast = prev; p.last = iso(TODAY);
+    persist();
+    toast(nameOf(p) + ' regada', function(){ p.last = prev; delete p.prevLast; persist(); render(); });
+    render();
   }
 
+  // ---------- busca no jardim ----------
+  var query = '';
+  function matches(c){
+    var q = norm(query).trim(); if (!q) return true;
+    return norm(c.name).indexOf(q) >= 0 || norm(c.sci).indexOf(q) >= 0 || (c.s && norm(c.s.name).indexOf(q) >= 0);
+  }
+
+  // ---------- ícones ----------
   var I_CHECK = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 l4.5 4.5 L19 7.5"/></svg>';
   var I_INFO = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11 V16.5"/><circle cx="12" cy="7.8" r="0.6" fill="currentColor"/></svg>';
   var I_DROP = '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" fill="#E5ABA4"/></svg>';
+  var I_DROP_LATE = '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" fill="#F4A59B"/></svg>';
   var I_DROP_LINE = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" role="img" aria-label="Rega prevista"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" stroke="#A9B98A" stroke-width="1.8"/></svg>';
   var I_DONE = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#A9B98A"/><path d="M7.5 12.5 l3 3 l6-6.5" stroke="#24301A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var I_X = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>';
+  var I_BACK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 L8 12 L15 19"/></svg>';
+  var I_CAM = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
 
-  function btnFor(p, compact){
-    var cls = p.ok ? 'done' : (p.due ? (compact ? 'go' : 'now') : 'plan');
-    var lbl = p.ok ? (compact ? 'Regada' : 'Regada hoje') : (p.due ? (compact ? 'Reguei' : 'Reguei agora') : 'Registrar rega');
-    return '<button class="btn ' + cls + '" type="button" data-water="' + p.b.id + '">' + (p.ok ? I_CHECK : '') + lbl + '</button>';
+  function btnFor(c, compact){
+    var cls = c.ok ? 'done' : (c.due ? (compact ? 'go' : 'now') : 'plan');
+    var lbl = c.ok ? (compact ? 'Regada' : 'Regada hoje') : (c.due ? (compact ? 'Reguei' : 'Reguei agora') : 'Registrar rega');
+    return '<button class="btn ' + cls + '" type="button" data-water="' + c.p.id + '">' + (c.ok ? I_CHECK : '') + lbl + '</button>';
   }
 
+  // ---------- tela principal ----------
   function render(){
-    var plants = compute();
-    var today = plants.filter(function(p){ return p.due || p.ok; });
-    today.sort(function(x, y){ return y.lateDays - x.lateDays; }); // atrasadas primeiro
-    var done = today.filter(function(p){ return p.ok; }).length;
+    var all = db.plants.map(compute);
+    var today = all.filter(function(c){ return c.due || c.ok; });
+    today.sort(function(a, b){ return b.lateDays - a.lateDays; });
+    var done = today.filter(function(c){ return c.ok; }).length;
     var pending = today.length - done;
+    var empty = !all.length;
 
     document.getElementById('hoje-data').textContent = DOWL[TODAY.getDay()] + ', ' + TODAY.getDate() + ' de ' + MESL[TODAY.getMonth()];
-    document.getElementById('due-text').textContent = pending === 0 ? 'Tudo em dia.' : (pending === 1 ? '1 planta com sede.' : pending + ' plantas com sede.');
-    document.getElementById('plant-count').textContent = plants.length + ' plantas no seu jardim';
-    document.getElementById('today-count').textContent = done + ' de ' + today.length + ' feitas';
+    document.getElementById('due-text').textContent = empty ? 'Vamos começar?' : (pending === 0 ? 'Tudo em dia.' : (pending === 1 ? '1 planta com sede.' : pending + ' plantas com sede.'));
+    document.getElementById('plant-count').textContent = empty ? 'Seu jardim ainda está vazio' : (all.length + (all.length === 1 ? ' planta' : ' plantas') + ' no seu jardim');
+    document.getElementById('today-count').textContent = today.length ? done + ' de ' + today.length + ' feitas' : '';
 
     var w = '';
     for (var i = 0; i < 7; i++) {
       var d = add(TODAY, i);
-      var c = plants.filter(function(p){ return i === 0 ? p.left <= 0 : !!p.occ[i]; }).length;
-      w += '<div class="day' + (i === 0 ? ' today' : (c ? ' has' : '')) + '"><span class="lbl">' + (i === 0 ? 'Hoje' : DOW[d.getDay()]) +
-        '</span><span class="num">' + d.getDate() + '</span><span class="q">' + (c ? c + (c === 1 ? ' planta' : ' plantas') : '—') + '</span></div>';
+      var cnt = all.filter(function(c){ return i === 0 ? (c.due || c.ok) : !!c.occ[i]; }).length;
+      w += '<div class="day' + (i === 0 ? ' today' : (cnt ? ' has' : '')) + '"><span class="lbl">' + (i === 0 ? 'Hoje' : DOW[d.getDay()]) +
+        '</span><span class="num">' + d.getDate() + '</span><span class="q">' + (cnt ? cnt + (cnt === 1 ? ' planta' : ' plantas') : '—') + '</span></div>';
     }
     document.getElementById('week').innerHTML = w;
 
-    var t = today.map(function(p){
-      return '<div class="task' + (p.ok ? ' ok' : '') + '"><img class="thumb" src="' + p.b.photo + '" alt=""><div class="t"><div class="n">' + esc(p.b.name) +
-        '</div><div class="s">' + (p.ok ? 'Próxima rega ' + fmt(p.next) : (p.late ? '<span class="st-late">' + lateText(p.lateDays) + '</span>' : 'A cada ' + p.b.interval + ' dias')) + '</div></div>' + btnFor(p, true) + '</div>';
+    var t = today.map(function(c){
+      return '<div class="task' + (c.ok ? ' ok' : '') + '">' + pic(c.cover, 'thumb', '') + '<div class="t"><div class="n">' + esc(c.name) +
+        '</div><div class="s">' + (c.ok ? 'Próxima rega ' + fmt(c.next) : (c.late ? '<span class="st-late">' + lateText(c.lateDays) + '</span>' : 'A cada ' + c.p.interval + ' dias')) +
+        '</div></div>' + btnFor(c, true) + '</div>';
     }).join('');
     if (today.length && pending === 0) t += '<p class="thanks">Tudo regado por hoje. Seu jardim agradece.</p>';
-    if (!today.length) t = '<p class="thanks">Nenhuma rega para hoje.</p>';
+    if (!today.length) t = '<p class="thanks">' + (empty ? 'Adicione uma planta e as regas aparecem aqui.' : 'Nenhuma rega para hoje.') + '</p>';
     document.getElementById('today-list').innerHTML = t;
-    var tm = plants.filter(function(p){ return p.left === 1; }).map(function(p){ return p.b.name; });
+    var tm = all.filter(function(c){ return c.left === 1 && !c.ok; }).map(function(c){ return c.name; });
     document.getElementById('tomorrow').textContent = tm.length ? tm.join(' e ') : 'Nenhuma rega prevista';
 
-    var shown = plants.filter(matches);
+    var shown = all.filter(matches);
     document.getElementById('limpar').classList.toggle('show', !!query.trim());
-    var cardsHtml = shown.map(function(p){
-      var lastLbl = p.since === 0 ? 'hoje' : (p.since === 1 ? 'ontem' : 'há ' + p.since + ' dias');
-      var nextLbl = p.ok ? 'Hidratada' : (p.late ? lateText(p.lateDays) : (p.due ? 'Regar hoje' : (p.left === 1 ? 'Amanhã' : 'em ' + p.left + ' dias')));
-      var stCls = p.ok ? 'st-ok' : (p.late ? 'st-late' : (p.due ? 'st-due' : ''));
-      return '<article class="card' + (p.late ? ' late' : '') + '"><div class="photo"><img src="' + p.b.photo + '" alt="Foto de ' + esc(p.b.name) + '">' +
-        '<button class="info" type="button" data-info="' + p.b.id + '" aria-label="Sobre ' + esc(p.b.name) + '">' + I_INFO + '</button></div>' +
-        '<div><h3>' + esc(p.b.name) + '</h3><p class="sci">' + esc(p.b.sci) + '</p></div>' +
-        '<div style="display:flex;flex-direction:column;gap:6px"><div class="meta"><span class="muted">Regada ' + lastLbl + '</span><span class="' + stCls + '">' + nextLbl + '</span></div>' +
-        '<div class="bar"><div style="width:' + p.pct + '%;background:' + (p.ok ? '#A9B98A' : (p.late ? '#F4A59B' : (p.due ? '#E5ABA4' : '#C9C99A'))) + '"></div></div>' +
-        '<span class="lbl muted" style="font-weight:500">A cada ' + p.b.interval + ' dias · ' + (p.late ? 'era ' : '') + fmt(p.next) + '</span></div>' +
-        btnFor(p, false) + '</article>';
+    var html = shown.map(function(c){
+      var lastLbl = c.since === 0 ? 'hoje' : (c.since === 1 ? 'ontem' : 'há ' + c.since + ' dias');
+      var nextLbl = c.ok ? 'Hidratada' : (c.late ? lateText(c.lateDays) : (c.due ? 'Regar hoje' : (c.left === 1 ? 'Amanhã' : 'em ' + c.left + ' dias')));
+      var st = c.ok ? 'st-ok' : (c.late ? 'st-late' : (c.due ? 'st-due' : ''));
+      return '<article class="card' + (c.late ? ' late' : '') + '"><div class="photo">' + pic(c.cover, '', 'Foto de ' + c.name) +
+        '<button class="info" type="button" data-info="' + c.p.id + '" aria-label="Sobre ' + esc(c.name) + '">' + I_INFO + '</button></div>' +
+        '<div><h3>' + esc(c.name) + '</h3>' + (c.s ? '<p class="sci">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== c.s.name ? c.s.name + ' · ' + c.s.sci : c.s.sci) + '</p>' : '<p class="sci">Sem espécie definida</p>') + '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:6px"><div class="meta"><span class="muted">Regada ' + lastLbl + '</span><span class="' + st + '">' + nextLbl + '</span></div>' +
+        '<div class="bar"><div style="width:' + c.pct + '%;background:' + (c.ok ? '#A9B98A' : (c.late ? '#F4A59B' : (c.due ? '#E5ABA4' : '#C9C99A'))) + '"></div></div>' +
+        '<span class="lbl muted" style="font-weight:500">A cada ' + c.p.interval + ' dias · ' + (c.late ? 'era ' : '') + fmt(c.next) + '</span></div>' +
+        btnFor(c, false) + '</article>';
     }).join('');
-    if (!shown.length) cardsHtml = '<div class="empty">Nenhuma planta encontrada para <b>“' + esc(query.trim()) + '”</b>.<br>No app de verdade, aqui viria a opção de adicionar essa planta ao jardim.</div>';
-    document.getElementById('cards').innerHTML = cardsHtml;
+    if (empty) {
+      html = '<div class="welcome">' + '<div class="ph" style="width:72px;height:72px;border-radius:20px;color:var(--salvia)">' + LEAF.replace('<svg ', '<svg width="40" height="40" ') + '</div>' +
+        '<h3>Seu jardim começa aqui</h3><p>Adicione suas plantas: a Irrigua sugere de quanto em quanto tempo regar cada uma e avisa quando chegar o dia.</p>' +
+        '<div class="row"><button class="add" type="button" data-add>+ Adicionar primeira planta</button><button class="btn plan" type="button" id="demo">Ver com plantas de exemplo</button></div></div>';
+    } else if (!shown.length) {
+      html = '<div class="empty">Nenhuma planta do seu jardim combina com <b>“' + esc(query.trim()) + '”</b>.<br><button class="btn plan" type="button" data-add data-q="' + esc(query.trim()) + '" style="margin-top:12px">Adicionar “' + esc(query.trim()) + '” ao jardim</button></div>';
+    }
+    document.getElementById('cards').innerHTML = html;
 
+    document.getElementById('semana').style.display = empty ? 'none' : '';
     var h = '<div class="trow"><span class="lbl muted" style="padding-left:4px">Planta</span>';
     for (var j = 0; j < 7; j++) { var dd = add(TODAY, j);
       h += '<div class="th' + (j === 0 ? ' today' : '') + '"><span class="lbl">' + (j === 0 ? 'Hoje' : DOW[dd.getDay()]) + '</span><span class="n">' + dd.getDate() + '</span></div>'; }
     h += '</div>';
-    shown.forEach(function(p){
-      h += '<div class="trow"><div class="pl"><img class="thumb" src="' + p.b.photo + '" alt=""><div style="min-width:0"><div class="nm">' + esc(p.b.name) +
-        '</div><div class="muted" style="font-size:12px">a cada ' + p.b.interval + ' dias</div></div></div>';
+    shown.forEach(function(c){
+      h += '<div class="trow"><div class="pl">' + pic(c.cover, 'thumb', '') + '<div style="min-width:0"><div class="nm">' + esc(c.name) +
+        '</div><div class="muted" style="font-size:12px">a cada ' + c.p.interval + ' dias</div></div></div>';
       for (var k = 0; k < 7; k++) {
         var inner = '';
-        if (k === 0 && p.ok) inner = '<button type="button" data-water="' + p.b.id + '" aria-label="Desfazer rega de ' + esc(p.b.name) + '">' + I_DONE + '</button>';
-        else if (k === 0 && p.occ[0]) inner = '<button type="button" data-water="' + p.b.id + '" aria-label="Marcar ' + esc(p.b.name) + ' como regada">' + I_DROP + '</button>';
-        else if (k > 0 && p.occ[k]) inner = I_DROP_LINE;
+        if (k === 0 && c.ok) inner = '<button type="button" data-water="' + c.p.id + '" aria-label="Desfazer rega de ' + esc(c.name) + '">' + I_DONE + '</button>';
+        else if (k === 0 && c.due) inner = '<button type="button" data-water="' + c.p.id + '" aria-label="Marcar ' + esc(c.name) + ' como regada">' + (c.late ? I_DROP_LATE : I_DROP) + '</button>';
+        else if (k > 0 && c.occ[k]) inner = I_DROP_LINE;
         h += '<div class="cell' + (k === 0 ? ' t0' : '') + '">' + inner + '</div>';
       }
       h += '</div>';
     });
     document.getElementById('table').innerHTML = h;
 
-    // semana em lista, para o celular
-    document.getElementById('wlist').innerHTML = shown.map(function(p){
+    document.getElementById('wlist').innerHTML = shown.map(function(c){
       var chips = '';
-      if (p.ok) chips += '<span class="chip ok">Regada hoje</span>';
-      else if (p.late) chips += '<span class="chip late">' + lateText(p.lateDays) + '</span>';
-      else if (p.occ[0]) chips += '<span class="chip hoje">Hoje</span>';
-      for (var k = 1; k < 7; k++) if (p.occ[k]) { var dk = add(TODAY, k); chips += '<span class="chip">' + (k === 1 ? 'Amanhã' : DOW[dk.getDay()] + ' ' + dk.getDate()) + '</span>'; }
+      if (c.ok) chips += '<span class="chip ok">Regada hoje</span>';
+      else if (c.late) chips += '<span class="chip late">' + lateText(c.lateDays) + '</span>';
+      else if (c.due) chips += '<span class="chip hoje">Hoje</span>';
+      for (var k = 1; k < 7; k++) if (c.occ[k]) { var dk = add(TODAY, k); chips += '<span class="chip">' + (k === 1 ? 'Amanhã' : DOW[dk.getDay()] + ' ' + dk.getDate()) + '</span>'; }
       if (!chips) chips = '<span class="muted" style="font-size:12px">Sem rega nesta semana</span>';
-      return '<div class="wl"><img class="thumb" src="' + p.b.photo + '" alt=""><div class="t"><div class="n">' + esc(p.b.name) +
-        '</div><div class="chips">' + chips + '</div></div></div>';
-    }).join('') || '<div class="empty">Nenhuma planta encontrada.</div>';
+      return '<div class="wl">' + pic(c.cover, 'thumb', '') + '<div class="t"><div class="n">' + esc(c.name) + '</div><div class="chips">' + chips + '</div></div></div>';
+    }).join('');
 
-    renderSheet(plants);
+    if (sheet.mode === 'info') renderSheet();
   }
 
-  function renderSheet(plants){
-    var ov = document.getElementById('overlay');
-    var p = plants.filter(function(x){ return x.b.id === openId; })[0];
-    if (!p) { ov.classList.remove('open'); return; }
-    var b = p.b;
-    document.getElementById('sheet').innerHTML =
-      '<img src="' + b.photo + '" alt="Foto de ' + esc(b.name) + '">' +
-      '<div class="body"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div>' +
-      '<h2 id="ficha-nome" style="font-weight:600;font-size:34px;line-height:1.05">' + esc(b.name) + '</h2><p class="sci" style="font-size:15px;margin-top:4px">' + esc(b.sci) + '</p></div>' +
-      '<button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' +
-      '<div class="facts"><div class="fact"><div class="lbl">Luz</div><div>' + esc(b.light) + '</div></div>' +
-      '<div class="fact"><div class="lbl">Rega</div><div>' + esc(b.water) + '</div></div>' +
-      '<div class="fact"><div class="lbl">Umidade</div><div>' + esc(b.humidity) + '</div></div>' +
-      '<div class="fact"><div class="lbl">Pets</div><div>' + esc(b.pets) + '</div></div></div>' +
-      '<div><div class="lbl muted">Origem</div><p style="margin:4px 0 0">' + esc(b.origin) + '</p></div>' +
-      '<div class="tip"><div class="serif" style="font-style:italic;font-size:19px;color:var(--salvia)">Dica</div><p style="margin:2px 0 0">' + esc(b.tip) + '</p></div>' +
+  // ---------- folha: ficha (info) e formulário (adicionar/editar) ----------
+  var sheet = { mode:null };
+  var overlay = document.getElementById('overlay');
+  var sheetEl = document.getElementById('sheet');
+  var lastFocus = null;
+
+  function openSheet(s){
+    if (!sheet.mode) lastFocus = document.activeElement;
+    sheet = s; renderSheet();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ var f = sheetEl.querySelector('[data-autofocus]') || sheetEl.querySelector('.close'); if (f) f.focus(); }, 30);
+  }
+  function closeSheet(){
+    sheet = { mode:null };
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    sheetEl.innerHTML = '';
+    if (lastFocus && lastFocus.focus) try { lastFocus.focus(); } catch (e) {}
+  }
+
+  function renderSheet(){
+    if (sheet.mode === 'info') return renderInfo();
+    if (sheet.mode === 'pick') return renderPick();
+    if (sheet.mode === 'form') return renderForm();
+  }
+
+  function renderInfo(){
+    var p = find(sheet.id); if (!p) return closeSheet();
+    var c = compute(p), s = c.s;
+    sheetEl.className = 'sheet';
+    sheetEl.setAttribute('aria-label', c.name);
+    var facts = s ?
+      '<div class="facts"><div class="fact"><div class="lbl">Luz</div><div>' + esc(s.light) + '</div></div>' +
+      '<div class="fact"><div class="lbl">Rega</div><div>' + esc(s.water) + '</div></div>' +
+      '<div class="fact"><div class="lbl">Umidade</div><div>' + esc(s.humidity) + '</div></div>' +
+      '<div class="fact"><div class="lbl">Pets</div><div>' + esc(s.pets) + '</div></div></div>' +
+      '<div><div class="lbl muted">Origem</div><p style="margin:4px 0 0">' + esc(s.origin) + '</p></div>' +
+      '<div class="tip"><div class="serif" style="font-style:italic;font-size:19px;color:var(--salvia)">Dica</div><p style="margin:2px 0 0">' + esc(s.tip) + '</p></div>'
+      : '<p class="fact-note">Esta planta não tem espécie definida, então não há ficha de cuidados. Em <b>Editar</b> você pode escolher a espécie.</p>';
+    var light = p.light && LIGHT[p.light] ? '<span class="lbl" style="color:var(--sutil);font-weight:500">No seu jardim: ' + LIGHT[p.light].label.toLowerCase() + '</span>' : '';
+    sheetEl.innerHTML = pic(c.cover, 'cover', 'Foto de ' + c.name) +
+      '<div class="body"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div style="min-width:0">' +
+      '<h2 style="font-weight:600;font-size:34px;line-height:1.05;overflow-wrap:anywhere">' + esc(c.name) + '</h2>' +
+      (s ? '<p class="sci" style="font-size:15px;margin-top:4px">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== s.name ? s.name + ' · ' + s.sci : s.sci) + '</p>' : '') + '</div>' +
+      '<button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' + light + facts +
       '<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--linha);padding-top:16px">' +
-      '<span class="muted" style="font-size:13px">A cada ' + b.interval + ' dias · próxima ' + fmt(p.next) + '</span>' + btnFor(p, false) + '</div></div>';
-    ov.classList.add('open');
+      '<span class="muted" style="font-size:13px">A cada ' + p.interval + ' dias · ' + (c.late ? lateText(c.lateDays).toLowerCase() : 'próxima ' + fmt(c.next)) + '</span>' +
+      '<span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-edit="' + p.id + '">Editar</button>' + btnFor(c, false) + '</span></div></div>';
   }
 
+  function speciesRow(s){
+    return '<button class="prow" type="button" data-pick="' + s.id + '">' + pic(s.photo, 'thumb', '') +
+      '<span class="t"><span class="n" style="display:block">' + esc(s.name) + '</span><span class="s" style="display:block">' + esc(s.sci) + ' · rega a cada ' + s.interval + ' dias</span></span></button>';
+  }
+  function pickList(){
+    var q = norm(sheet.q).trim();
+    var list = ESPECIES.filter(function(s){ return !q || norm(s.name + ' ' + s.sci + ' ' + (s.aka || '')).indexOf(q) >= 0; });
+    var out = list.map(speciesRow).join('');
+    if (!list.length) out = '<p class="fact-note">Não encontrei “' + esc(sheet.q.trim()) + '” na base. Você pode cadastrar mesmo assim e definir a rega.</p>';
+    return out;
+  }
+  function renderPick(){
+    sheetEl.className = 'sheet form';
+    sheetEl.setAttribute('aria-label', 'Adicionar planta');
+    sheetEl.innerHTML = '<div class="body">' +
+      '<div class="fhead"><h2>Adicionar planta</h2><button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' +
+      '<div class="field"><label for="q" class="lbl">Qual é a planta?</label>' +
+      '<input id="q" type="search" placeholder="Ex.: jiboia, costela-de-adão, orquídea" autocomplete="off" value="' + esc(sheet.q) + '" data-autofocus></div>' +
+      '<div class="pick" id="pick">' + pickList() + '</div>' +
+      '<button class="btn plan" type="button" data-manual>Não encontrei: cadastrar sem espécie</button></div>';
+  }
+
+  function formFromPlant(p){
+    return { mode:'form', edit:true, id:p.id, sp:p.sp || null, name:p.name || '', interval:p.interval, touched:true,
+      light:p.light || 'indireta', last:p.last, photo:p.photo || null, cover:p.cover || (p.photo ? 'own' : 'species'), confirmDel:false, error:'' };
+  }
+  function newForm(spId, q){
+    var s = sp(spId);
+    return { mode:'form', edit:false, id:null, sp:spId || null, name:spId ? '' : (q || ''), interval:s ? suggest(s, 'indireta') : 7, touched:!s,
+      light:'indireta', last:iso(TODAY), photo:null, cover:'species', confirmDel:false, error:'', q:q || '' };
+  }
+
+  function syncForm(){
+    if (sheet.mode !== 'form') return;
+    var n = document.getElementById('f-name'); if (n) sheet.name = n.value;
+    var i = document.getElementById('f-int'); if (i) sheet.interval = i.value;
+    var l = document.getElementById('f-last'); if (l) sheet.last = l.value;
+  }
+
+  function renderForm(){
+    var f = sheet, s = sp(f.sp);
+    sheetEl.className = 'sheet form';
+    sheetEl.setAttribute('aria-label', f.edit ? 'Editar planta' : 'Adicionar planta');
+    var title = f.edit ? 'Editar planta' : (s ? s.name : 'Nova planta');
+    var ownSrc = f.photo, spSrc = s && s.photo ? s.photo : null;
+    var preview = (f.cover === 'own' && ownSrc) ? ownSrc : (spSrc || ownSrc);
+    var lights = Object.keys(LIGHT).map(function(k){
+      return '<button type="button" data-light="' + k + '" aria-pressed="' + (f.light === k) + '">' + LIGHT[k].label + '<small>' + LIGHT[k].hint + '</small></button>';
+    }).join('');
+    var sugg = s ? suggest(s, f.light) : null;
+    var html = '<div class="body">' +
+      '<div class="fhead">' + (!f.edit ? '<button class="back" type="button" data-back aria-label="Trocar espécie">' + I_BACK + '</button>' : '') +
+      '<h2>' + esc(title) + '</h2><button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>';
+
+    if (s) html += '<div class="prow" style="cursor:default">' + pic(s.photo, 'thumb', '') + '<span class="t"><span class="n" style="display:block">' + esc(s.name) +
+      '</span><span class="s" style="display:block">' + esc(s.sci) + ' · ' + esc(s.light) + '</span></span>' +
+      (f.edit ? '<button class="mini" type="button" data-change-sp>Trocar</button>' : '') + '</div>';
+    else if (f.edit) html += '<button class="btn plan" type="button" data-change-sp>Escolher a espécie</button>';
+
+    html += '<div class="field"><label for="f-name" class="lbl">' + (s ? 'Apelido no seu jardim (opcional)' : 'Nome da planta') + '</label>' +
+      '<input id="f-name" type="text" maxlength="40" value="' + esc(f.name) + '" placeholder="' + (s ? 'Ex.: ' + esc(s.name) + ' da sala' : 'Ex.: Jiboia da cozinha') + '"' + (!s ? ' data-autofocus' : '') + '></div>';
+
+    html += '<div class="field"><span class="lbl">Foto</span><div class="photobox">' + pic(preview, 'pv', 'Capa') +
+      '<div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">' +
+      '<span class="btn plan filebtn">' + I_CAM + (ownSrc ? 'Trocar minha foto' : 'Tirar ou escolher foto') + '<input type="file" id="f-photo" accept="image/*" aria-label="Tirar ou escolher foto"></span>' +
+      (ownSrc ? '<button class="mini" type="button" data-rmphoto>Remover minha foto</button>' : '<span class="hint">' + (spSrc ? 'Sem foto sua, a capa usa a foto da espécie.' : 'Opcional.') + '</span>') +
+      '</div></div></div>';
+
+    if (ownSrc && spSrc) html += '<div class="field"><span class="lbl">Capa do card</span><div class="covers">' +
+      '<button type="button" data-cover="own" aria-pressed="' + (f.cover === 'own') + '"><img src="' + esc(ownSrc) + '" alt="">Minha foto</button>' +
+      '<button type="button" data-cover="species" aria-pressed="' + (f.cover !== 'own') + '"><img src="' + esc(spSrc) + '" alt="">Foto da espécie</button></div></div>';
+
+    html += '<div class="field"><span class="lbl">Quanta luz o cantinho recebe?</span><div class="seg" role="group" aria-label="Luz">' + lights + '</div></div>';
+
+    html += '<div class="field"><label for="f-int" class="lbl">Regar a cada</label><div class="inline">' +
+      '<input id="f-int" type="number" inputmode="numeric" min="1" max="90" value="' + esc(f.interval) + '"><span>dias</span>' +
+      (s && f.touched && Number(f.interval) !== sugg ? '<button class="mini" type="button" data-use-sugg>Usar sugestão (' + sugg + ')</button>' : '') + '</div>' +
+      (s ? '<span class="hint">Sugestão da Irrigua para <b>' + LIGHT[f.light].label.toLowerCase() + '</b>: a cada <b>' + sugg + ' dias</b>. ' + esc(s.water) + '.</span>' : '<span class="hint">Sem espécie, comece com 7 dias e ajuste com o tempo.</span>') + '</div>';
+
+    html += '<div class="field"><label for="f-last" class="lbl">Última rega</label>' +
+      '<input id="f-last" type="date" max="' + iso(TODAY) + '" value="' + esc(f.last) + '">' +
+      '<div class="minis"><button class="mini" type="button" data-last="0">Hoje</button><button class="mini" type="button" data-last="1">Ontem</button><button class="mini" type="button" data-last="3">Há 3 dias</button><button class="mini" type="button" data-last="7">Há 1 semana</button></div></div>';
+
+    if (f.error) html += '<p class="err" role="alert" style="margin:0">' + esc(f.error) + '</p>';
+
+    html += '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;border-top:1px solid var(--linha);padding-top:16px">' +
+      (f.edit ? '<button class="btn danger' + (f.confirmDel ? ' sure' : '') + '" type="button" data-delete>' + (f.confirmDel ? 'Confirmar: remover' : 'Remover do jardim') + '</button>' : '<span></span>') +
+      '<button class="btn now" type="button" data-save>' + (f.edit ? 'Salvar' : 'Adicionar ao jardim') + '</button></div></div>';
+    sheetEl.innerHTML = html;
+  }
+
+  function saveForm(){
+    syncForm();
+    var f = sheet, s = sp(f.sp);
+    var name = String(f.name || '').trim();
+    var interval = parseInt(f.interval, 10);
+    var last = parse(f.last);
+    f.error = '';
+    if (!s && !name) f.error = 'Dê um nome para a planta.';
+    else if (!(interval >= 1 && interval <= 90)) f.error = 'O intervalo de rega precisa ser entre 1 e 90 dias.';
+    else if (!last || last > TODAY) f.error = 'Escolha uma data de última rega até hoje.';
+    if (f.error) return renderForm();
+    var data = { sp:f.sp, name:name, interval:interval, light:f.light, last:iso(last), photo:f.photo || null, cover:(f.photo && f.cover === 'own') || (f.photo && !(s && s.photo)) ? 'own' : 'species' };
+    var backup = JSON.stringify(db);
+    var shownName;
+    if (f.edit) {
+      var p = find(f.id); if (!p) return closeSheet();
+      Object.keys(data).forEach(function(k){ p[k] = data[k]; });
+      delete p.prevLast;
+      shownName = nameOf(p);
+    } else {
+      data.id = uid(); data.created = iso(TODAY);
+      db.plants.push(data);
+      shownName = nameOf(data);
+    }
+    if (!persist()) { db = JSON.parse(backup); return; }
+    closeSheet(); render();
+    toast(f.edit ? 'Alterações salvas' : shownName + ' entrou no seu jardim');
+  }
+
+  function deletePlant(){
+    var f = sheet;
+    if (!f.confirmDel) { syncForm(); f.confirmDel = true; return renderForm(); }
+    var idx = -1;
+    for (var i = 0; i < db.plants.length; i++) if (db.plants[i].id === f.id) idx = i;
+    if (idx < 0) return closeSheet();
+    var removed = db.plants.splice(idx, 1)[0];
+    persist(); closeSheet(); render();
+    toast(nameOf(removed) + ' saiu do jardim', function(){ db.plants.splice(idx, 0, removed); persist(); render(); });
+  }
+
+  // foto: reduz para no máximo 720 px e JPEG, para caber no armazenamento do navegador
+  function readPhoto(file, cb){
+    if (!file || !/^image\//.test(file.type)) { toast('Escolha um arquivo de imagem'); return; }
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function(){
+      var max = 720, w = img.naturalWidth, h = img.naturalHeight, r = Math.min(1, max / Math.max(w, h));
+      var cv = document.createElement('canvas'); cv.width = Math.round(w * r); cv.height = Math.round(h * r);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      URL.revokeObjectURL(url);
+      cb(cv.toDataURL('image/jpeg', 0.78));
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); toast('Não consegui abrir essa imagem'); };
+    img.src = url;
+  }
+
+  // ---------- exemplo ----------
+  function loadDemo(){
+    var demo = [['aglaonema',7,7],['palmeira',5,5],['lirio',3,2],['comigo',6,4],['bambu',7,8],['dracena',10,9]];
+    db.plants = demo.map(function(d){ return { id:uid(), sp:d[0], name:'', interval:d[1], light:'indireta', last:iso(add(TODAY, -d[2])), photo:null, cover:'species', created:iso(TODAY), demo:true }; });
+    persist(); render();
+    toast('Plantas de exemplo adicionadas', function(){ db.plants = []; persist(); render(); });
+  }
+
+  // ---------- backup ----------
+  function exportBackup(){
+    var blob = new Blob([JSON.stringify({ app:'irrigua', v:1, exported:new Date().toISOString(), plants:db.plants }, null, 2)], { type:'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'irrigua-backup-' + iso(TODAY) + '.json';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    toast('Backup exportado');
+  }
+  function importBackup(file){
+    var r = new FileReader();
+    r.onload = function(){
+      try {
+        var d = JSON.parse(r.result);
+        if (!d || !Array.isArray(d.plants)) throw new Error('formato');
+        var ok = d.plants.every(function(p){ return p && typeof p.id === 'string' && Number(p.interval) >= 1 && parse(p.last); });
+        if (!ok) throw new Error('formato');
+        if (db.plants.length && !window.confirm('Substituir o jardim atual (' + db.plants.length + ' plantas) pelo backup (' + d.plants.length + ' plantas)?')) return;
+        var prev = db.plants;
+        db.plants = d.plants;
+        if (!persist()) { db.plants = prev; return; }
+        render(); toast('Backup importado: ' + d.plants.length + ' plantas');
+      } catch (e) { toast('Esse arquivo não é um backup da Irrigua'); }
+    };
+    r.readAsText(file);
+  }
+
+  // ---------- eventos ----------
   document.addEventListener('click', function(e){
-    var w = e.target.closest('[data-water]');
-    if (w) { toggle(w.getAttribute('data-water')); return; }
-    var i = e.target.closest('[data-info]');
-    if (i) { openId = i.getAttribute('data-info'); render(); var c = document.querySelector('.close'); if (c) c.focus(); return; }
-    if (e.target.closest('[data-close]') || e.target.id === 'overlay') { openId = null; render(); }
+    var el;
+    if ((el = e.target.closest('[data-water]'))) { toggleWater(el.getAttribute('data-water')); return; }
+    if ((el = e.target.closest('[data-info]'))) { openSheet({ mode:'info', id:el.getAttribute('data-info') }); return; }
+    if ((el = e.target.closest('[data-add]'))) { openSheet({ mode:'pick', q:el.getAttribute('data-q') || '' }); return; }
+    if (e.target.closest('#demo')) { loadDemo(); return; }
+    if (e.target.closest('[data-close]') || e.target === overlay) { closeSheet(); return; }
+    if ((el = e.target.closest('[data-edit]'))) { openSheet(formFromPlant(find(el.getAttribute('data-edit')))); return; }
+    if ((el = e.target.closest('[data-pick]'))) {
+      var id = el.getAttribute('data-pick');
+      if (sheet.editing) { var keep = sheet.editing; keep.sp = id; var s = sp(id); if (!keep.touched || !keep.interval) keep.interval = suggest(s, keep.light); keep.touched = true; sheet = keep; return renderSheet(); }
+      sheet = newForm(id, sheet.q); return renderSheet();
+    }
+    if (e.target.closest('[data-manual]')) {
+      if (sheet.editing) { var k2 = sheet.editing; k2.sp = null; sheet = k2; return renderSheet(); }
+      sheet = newForm(null, sheet.q); return renderSheet();
+    }
+    if (sheet.mode === 'form') {
+      if (e.target.closest('[data-back]')) { syncForm(); sheet = { mode:'pick', q:sheet.q || '' }; return renderSheet(); }
+      if (e.target.closest('[data-change-sp]')) { syncForm(); var cur = sheet; sheet = { mode:'pick', q:'', editing:cur }; return renderSheet(); }
+      if ((el = e.target.closest('[data-light]'))) { syncForm(); sheet.light = el.getAttribute('data-light'); var s2 = sp(sheet.sp); if (s2 && !sheet.touched) sheet.interval = suggest(s2, sheet.light); return renderForm(); }
+      if (e.target.closest('[data-use-sugg]')) { syncForm(); sheet.interval = suggest(sp(sheet.sp), sheet.light); sheet.touched = false; return renderForm(); }
+      if ((el = e.target.closest('[data-last]'))) { syncForm(); sheet.last = iso(add(TODAY, -Number(el.getAttribute('data-last')))); return renderForm(); }
+      if ((el = e.target.closest('[data-cover]'))) { syncForm(); sheet.cover = el.getAttribute('data-cover'); return renderForm(); }
+      if (e.target.closest('[data-rmphoto]')) { syncForm(); sheet.photo = null; sheet.cover = 'species'; return renderForm(); }
+      if (e.target.closest('[data-save]')) { saveForm(); return; }
+      if (e.target.closest('[data-delete]')) { deletePlant(); return; }
+    }
   });
-  var busca = document.getElementById('busca');
-  busca.addEventListener('input', function(){ query = busca.value; render(); });
-  document.getElementById('limpar').addEventListener('click', function(){ busca.value = ''; query = ''; render(); busca.focus(); });
+  document.addEventListener('input', function(e){
+    if (e.target.id === 'q' && sheet.mode === 'pick') { sheet.q = e.target.value; document.getElementById('pick').innerHTML = pickList(); }
+    if (e.target.id === 'f-int' && sheet.mode === 'form') { sheet.touched = true; }
+    if (e.target.id === 'busca') { query = e.target.value; render(); }
+  });
+  document.addEventListener('change', function(e){
+    if (e.target.id === 'f-photo' && e.target.files && e.target.files[0]) {
+      syncForm();
+      readPhoto(e.target.files[0], function(data){ if (sheet.mode !== 'form') return; sheet.photo = data; sheet.cover = 'own'; renderForm(); });
+    }
+    if (e.target.id === 'importar' && e.target.files && e.target.files[0]) { importBackup(e.target.files[0]); e.target.value = ''; }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && sheet.mode) { closeSheet(); }
+    if (e.key === 'Enter' && sheet.mode === 'form' && e.target.tagName === 'INPUT' && e.target.type !== 'file') { e.preventDefault(); saveForm(); }
+  });
+  document.getElementById('limpar').addEventListener('click', function(){ var b = document.getElementById('busca'); b.value = ''; query = ''; render(); b.focus(); });
   document.getElementById('desfazer').addEventListener('click', function(){ var u = undo; hideToast(); if (u) u(); });
-  document.getElementById('overlay').addEventListener('keydown', function(e){
-    if (e.key === 'Escape') { openId = null; render(); }
+  document.getElementById('exportar').addEventListener('click', exportBackup);
+
+  // virou o dia com a página aberta? atualiza
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'visible' && diff(new Date(), TODAY) !== 0) { TODAY = startOf(new Date()); render(); }
   });
 
   render();
+
+  // app instalável e funcionando sem internet
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
 })();
 </script>
 </body>
