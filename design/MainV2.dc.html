@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu jardim — v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#333A22}
+a{color:#F5F1E3;text-decoration:none}a:hover{color:#E5ABA4}
+.navlink:hover{background:rgba(255,255,255,0.06)}
+.card{transition:transform .2s, background .2s}
+.card:hover{transform:translateY(-2px);background:rgba(255,255,255,0.08)}
+.lbl{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+#busca2::placeholder{color:#BDBD9C}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #333A22; color: #F5F1E3; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.5">
+
+  <header style="border-bottom: 1px solid rgba(255,255,255,0.08)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <a href="#" style="display: flex; align-items: center; gap: 10px">
+        <svg width="36" height="36" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+          <path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#A9B98A"></path>
+          <path d="M60 104 C60 84 60 56 60 30" stroke="#333A22" stroke-width="5" stroke-linecap="round"></path>
+          <path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#333A22" stroke-width="4" stroke-linecap="round"></path>
+        </svg>
+        <span style="font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 600; letter-spacing: -0.01em">Irrigua</span>
+      </a>
+      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 6px">
+        <a href="#" style="padding: 10px 16px; border-radius: 999px; background: #F5F1E3; color: #2A2F1B; font-weight: 600">Meu jardim</a>
+        <a href="#" class="navlink" style="padding: 10px 16px; border-radius: 999px; font-weight: 500">Explorar plantas</a>
+        <a href="#" class="navlink" style="padding: 10px 16px; border-radius: 999px; font-weight: 500">Identificar por foto</a>
+      </nav>
+      <button type="button" aria-label="Perfil" style="width: 44px; height: 44px; border-radius: 50%; border: none; background: #E5ABA4; color: #3A1C22; font-family: 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 600; cursor: pointer">M</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1180px; margin: 0 auto; padding: 44px 24px 64px; display: flex; flex-direction: column; gap: 36px">
+
+    <section style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="color: #E5ABA4">Quarta-feira, 21 de outubro</span>
+        <h1 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 58px; line-height: 1.02; letter-spacing: -0.02em">Bom dia. <em style="font-style: italic; font-weight: 400; color: #E5ABA4">{{dueText}}</em></h1>
+        <p style="margin: 0; color: #D3D3B5">{{plantCount}} plantas no seu jardim</p>
+      </div>
+      <form role="search" style="display: flex; gap: 8px; flex: 0 1 420px; min-width: 260px">
+        <label for="busca2" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Buscar planta pelo nome</label>
+        <input id="busca2" type="search" placeholder="Buscar planta pelo nome…" style="flex: 1; min-width: 0; height: 48px; padding: 0 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: #F5F1E3; font: inherit">
+        <button type="button" aria-label="Identificar por foto" style="width: 48px; height: 48px; border-radius: 50%; border: none; background: #E5ABA4; color: #3A1C22; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+        </button>
+      </form>
+    </section>
+
+    <section aria-label="Semana" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+        <div style="{{d.boxStyle}}">
+          <span class="lbl">{{d.dow}}</span>
+          <span style="font-family: 'Fraunces', Georgia, serif; font-size: 30px; font-weight: 500; line-height: 1">{{d.num}}</span>
+          <span style="font-size: 12px; min-height: 18px">{{d.label}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+
+      <section aria-labelledby="hoje-t2" style="flex: 1 1 300px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.06); border-radius: 28px; padding: 28px; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+          <h2 id="hoje-t2" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 32px; letter-spacing: -0.01em">Para hoje</h2>
+          <span class="lbl" style="color: #E5ABA4">{{todayDone}} de {{todayTotal}} feitas</span>
+        </div>
+        <sc-for list="{{today}}" as="t" hint-placeholder-count="3">
+          <div style="{{t.rowStyle}}">
+            <img src="{{t.photo}}" alt="" style="width: 52px; height: 52px; border-radius: 14px; object-fit: cover; flex: none; background: #F5F1E3">
+            <div style="flex: 1; min-width: 0">
+              <div style="font-weight: 600">{{t.name}}</div>
+              <div style="font-size: 13px; color: #D3D3B5">{{t.sub}}</div>
+            </div>
+            <button type="button" onClick="{{t.water}}" style="{{t.btnStyle}}">
+              <sc-if value="{{t.watered}}" hint-placeholder-val="{{ false }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 l4.5 4.5 L19 7.5"></path></svg>
+              </sc-if>
+              {{t.btnLabel}}
+            </button>
+          </div>
+        </sc-for>
+        <sc-if value="{{allDone}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 21px; color: #A9B98A">Tudo regado por hoje. Seu jardim agradece.</p>
+        </sc-if>
+        <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+          <span class="lbl" style="color: #D3D3B5">Amanhã</span>
+          <span>{{tomorrowText}}</span>
+        </div>
+      </section>
+
+      <section aria-labelledby="jardim-t2" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px">
+          <h2 id="jardim-t2" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 32px; letter-spacing: -0.01em">Meu jardim</h2>
+          <button type="button" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: none; background: #E5ABA4; color: #3A1C22; font: inherit; font-weight: 700; cursor: pointer">+ Adicionar planta</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px">
+          <sc-for list="{{plants}}" as="p" hint-placeholder-count="5">
+            <article class="card" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); border-radius: 26px; padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 12px">
+              <div style="position: relative">
+                <img src="{{p.photo}}" alt="Foto de {{p.name}}" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 20px; display: block; background: #F5F1E3">
+                <button type="button" onClick="{{p.openInfo}}" aria-label="Sobre {{p.name}}" style="position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(42, 47, 27, 0.85); color: #F5F1E3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11 V16.5"></path><circle cx="12" cy="7.8" r="0.6" fill="currentColor"></circle></svg>
+                </button>
+              </div>
+              <div>
+                <h3 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; line-height: 1.1; letter-spacing: -0.01em">{{p.name}}</h3>
+                <p style="margin: 2px 0 0; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 14px; color: #D3D3B5">{{p.sci}}</p>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; font-size: 13px">
+                  <span style="color: #D3D3B5">Regada {{p.lastLabel}}</span>
+                  <span style="{{p.nextStyle}}">{{p.nextLabel}}</span>
+                </div>
+                <div style="height: 6px; border-radius: 99px; background: rgba(0,0,0,0.25); overflow: hidden">
+                  <div style="height: 100%; border-radius: 99px; background: {{p.barColor}}; width: {{p.pct}}%"></div>
+                </div>
+                <span class="lbl" style="color: #D3D3B5; font-weight: 500">A cada {{p.interval}} dias · {{p.nextDate}}</span>
+              </div>
+              <button type="button" onClick="{{p.water}}" style="{{p.btnStyle}}">
+                <sc-if value="{{p.wateredNow}}" hint-placeholder-val="{{ false }}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 l4.5 4.5 L19 7.5"></path></svg>
+                </sc-if>
+                {{p.btnLabel}}
+              </button>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+
+    <section aria-labelledby="semana-t2" style="display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px">
+        <h2 id="semana-t2" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 32px; letter-spacing: -0.01em">Semana do jardim</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; color: #D3D3B5">
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #E5ABA4"></span>Regar hoje</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid #A9B98A; box-sizing: border-box"></span>Rega prevista</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #A9B98A"></span>Regada</span>
+        </div>
+      </div>
+      <div style="overflow-x: auto; border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; background: rgba(0,0,0,0.2); padding: 16px">
+        <div style="min-width: 760px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: grid; grid-template-columns: 220px repeat(7, minmax(0, 1fr)); gap: 8px; align-items: end">
+            <span class="lbl" style="color: #D3D3B5; padding-left: 4px">Planta</span>
+            <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+              <div style="{{d.headStyle}}">
+                <span class="lbl">{{d.dow}}</span>
+                <span style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 500; line-height: 1">{{d.num}}</span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-for list="{{plants}}" as="r" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 220px repeat(7, minmax(0, 1fr)); gap: 8px; align-items: center">
+              <div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+                <img src="{{r.photo}}" alt="" style="width: 48px; height: 48px; border-radius: 14px; object-fit: cover; flex: none; background: #F5F1E3">
+                <div style="min-width: 0">
+                  <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.name}}</div>
+                  <div style="font-size: 12px; color: #D3D3B5">a cada {{r.interval}} dias</div>
+                </div>
+              </div>
+              <sc-for list="{{r.cells}}" as="c" hint-placeholder-count="7">
+                <div style="{{c.cellStyle}}">
+                  <sc-if value="{{c.due}}" hint-placeholder-val="{{ false }}">
+                    <button type="button" onClick="{{r.water}}" aria-label="Marcar {{r.name}} como regada" style="width: 44px; height: 44px; border-radius: 50%; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+                      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" fill="#E5ABA4"></path></svg>
+                    </button>
+                  </sc-if>
+                  <sc-if value="{{c.done}}" hint-placeholder-val="{{ false }}">
+                    <button type="button" onClick="{{r.water}}" aria-label="Desfazer rega de {{r.name}}" style="width: 44px; height: 44px; border-radius: 50%; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#A9B98A"></circle><path d="M7.5 12.5 l3 3 l6-6.5" stroke="#24301A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </button>
+                  </sc-if>
+                  <sc-if value="{{c.plan}}" hint-placeholder-val="{{ false }}">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" role="img" aria-label="Rega prevista"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" stroke="#A9B98A" stroke-width="1.8"></path></svg>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <sc-if value="{{hasInfo}}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 50; background: rgba(18, 21, 10, 0.72); display: flex; align-items: center; justify-content: center; padding: 24px">
+      <div role="dialog" aria-modal="true" aria-labelledby="info-t2" style="width: 100%; max-width: 780px; max-height: calc(100vh - 48px); overflow-y: auto; background: #2A2F1B; border: 1px solid rgba(255,255,255,0.08); border-radius: 28px; display: flex; flex-wrap: wrap">
+        <img src="{{info.photo}}" alt="Foto de {{info.name}}" style="flex: 1 1 260px; min-width: 0; min-height: 280px; max-height: 440px; object-fit: cover; display: block; background: #F5F1E3; border-radius: 27px 0 0 27px">
+        <div style="flex: 999 1 340px; min-width: 0; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+            <div>
+              <h2 id="info-t2" style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 34px; line-height: 1.05; letter-spacing: -0.01em">{{info.name}}</h2>
+              <p style="margin: 4px 0 0; font-family: 'Fraunces', Georgia, serif; font-style: italic; color: #D3D3B5">{{info.sci}}</p>
+            </div>
+            <button type="button" onClick="{{closeInfo}}" aria-label="Fechar" style="width: 44px; height: 44px; flex: none; border-radius: 50%; border: 1px solid rgba(255,255,255,0.14); background: transparent; color: #F5F1E3; display: flex; align-items: center; justify-content: center; cursor: pointer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"></path></svg>
+            </button>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+            <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px 14px"><div class="lbl" style="color: #E5ABA4">Luz</div><div style="font-size: 14px; margin-top: 4px">{{info.light}}</div></div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px 14px"><div class="lbl" style="color: #E5ABA4">Rega</div><div style="font-size: 14px; margin-top: 4px">{{info.waterText}}</div></div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px 14px"><div class="lbl" style="color: #E5ABA4">Umidade</div><div style="font-size: 14px; margin-top: 4px">{{info.humidity}}</div></div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px 14px"><div class="lbl" style="color: #E5ABA4">Pets</div><div style="font-size: 14px; margin-top: 4px">{{info.pets}}</div></div>
+          </div>
+          <div>
+            <div class="lbl" style="color: #D3D3B5">Origem</div>
+            <p style="margin: 4px 0 0">{{info.origin}}</p>
+          </div>
+          <div style="background: rgba(169,185,138,0.12); border-radius: 16px; padding: 14px 16px">
+            <div style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 19px; color: #A9B98A">Dica</div>
+            <p style="margin: 2px 0 0">{{info.tip}}</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px">
+            <span style="font-size: 13px; color: #D3D3B5">A cada {{info.interval}} dias · próxima {{info.nextDate}}</span>
+            <button type="button" onClick="{{info.water}}" style="{{info.btnStyle}}; padding: 0 20px">{{info.btnLabel}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1760}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { watered: {}, info: null };
+  }
+  renderVals() {
+    var TODAY = new Date(2026, 9, 21);
+    var DOW = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+    var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+    var self = this;
+    function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+    function diff(a, b) { return Math.round((a - b) / 86400000); }
+    function fmt(d) { return DOW[d.getDay()] + ', ' + d.getDate() + ' ' + MES[d.getMonth()]; }
+
+    var ROSE = '#E5ABA4', INK = '#3A1C22', SAGE = '#A9B98A', SAGE_INK = '#24301A', TEXT = '#F5F1E3';
+    var BTN = 'min-height: 44px; border-radius: 999px; font: inherit; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background .2s, color .2s; ';
+
+    var base = [
+      { id: 'aglaonema', name: 'Aglaonema', sci: 'Aglaonema commutatum', interval: 7, last: 14, photo: '/_blob/5041801e0cf6ee203fb4c771924f0161',
+        light: 'Indireta, média a baixa', water: 'Quando os 2–3 cm de cima do solo secarem', humidity: 'Gosta de ar úmido', pets: 'Tóxica para cães e gatos',
+        origin: 'Florestas tropicais do Sudeste Asiático.', tip: 'Tolera cantos com pouca luz, mas as variegadas ficam mais vivas perto de uma janela com luz filtrada.' },
+      { id: 'palmeira', name: 'Palmeira-majestosa', sci: 'Ravenea rivularis', interval: 5, last: 16, photo: '/_blob/04f38f66d9550881ba45c4d6aa742c1f',
+        light: 'Indireta e forte', water: 'Solo sempre levemente úmido, nunca encharcado', humidity: 'Alta; borrife nos dias secos', pets: 'Não tóxica para cães e gatos',
+        origin: 'Margens de rios em Madagascar.', tip: 'Pontas marrons costumam indicar ar seco ou falta de água. Gire o vaso de vez em quando para crescer por igual.' },
+      { id: 'lirio', name: 'Lírio-da-paz', sci: 'Spathiphyllum wallisii', interval: 3, last: 19, photo: '/_blob/21be78b751dba3ea08cca9e7a29d8590',
+        light: 'Indireta; aceita meia-sombra', water: 'Quando o topo do solo secar', humidity: 'Gosta de ar úmido', pets: 'Tóxica para cães e gatos',
+        origin: 'Florestas tropicais da América Central e do Sul.', tip: 'Ela avisa: quando as folhas murcham, é hora de regar. Volta ao normal em poucas horas.' },
+      { id: 'comigo', name: 'Comigo-ninguém-pode', sci: 'Dieffenbachia seguine', interval: 6, last: 17, photo: '/_blob/c5949a585d5668b5ee6dc09e76ec3b11',
+        light: 'Indireta e clara', water: 'Quando a camada de cima do solo secar', humidity: 'Média a alta', pets: 'Tóxica para pessoas e pets',
+        origin: 'Regiões tropicais das Américas.', tip: 'A seiva irrita pele e boca: use luvas ao podar e mantenha longe de crianças e animais.' },
+      { id: 'bambu', name: 'Bambu-da-sorte', sci: 'Dracaena sanderiana', interval: 7, last: 13, photo: '/_blob/1347cf4f1bf466cd3738926eb801b4f6',
+        light: 'Indireta; evite sol direto', water: 'Na água: troque a cada 1–2 semanas', humidity: 'Indiferente', pets: 'Tóxica para cães e gatos',
+        origin: 'África Central. Apesar do nome, não é um bambu.', tip: 'Use água filtrada ou deixada em repouso: o cloro pode amarelar as folhas.' },
+      { id: 'dracena', name: 'Dracena', sci: 'Dracaena fragrans', interval: 10, last: 12, photo: '/_blob/96cc72c479bcb04071ff5e5deed49a88',
+        light: 'Indireta; tolera pouca luz', water: 'Quando metade do solo secar', humidity: 'Média', pets: 'Tóxica para cães e gatos',
+        origin: 'África tropical.', tip: 'É sensível ao flúor da água da torneira: pontas queimadas são o sinal. Regue menos no inverno.' }
+    ];
+
+    var plants = base.map(function (b) {
+      var wateredNow = !!self.state.watered[b.id];
+      var lastD = wateredNow ? TODAY : new Date(2026, 9, b.last);
+      var nextD = add(lastD, b.interval);
+      var left = diff(nextD, TODAY);
+      var since = diff(TODAY, lastD);
+      var due = left <= 0;
+      var pct = Math.max(6, Math.min(100, Math.round((b.interval - left) / b.interval * 100)));
+      var occ = {};
+      var step = left < 0 ? 0 : left;
+      while (step < 7) { occ[step] = true; step += b.interval; }
+      var cells = [];
+      for (var k = 0; k < 7; k++) {
+        var isDone = k === 0 && wateredNow;
+        var isDue = k === 0 && occ[0] && !wateredNow;
+        var isPlan = !!occ[k] && k > 0;
+        cells.push({ done: isDone, due: isDue, plan: isPlan,
+          cellStyle: 'height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 14px; ' + (k === 0 ? 'background: rgba(255,255,255,0.07)' : 'background: rgba(255,255,255,0.03)') });
+      }
+      var water = function () {
+        var w = Object.assign({}, self.state.watered);
+        w[b.id] = !w[b.id];
+        self.setState({ watered: w });
+      };
+      return {
+        id: b.id, name: b.name, sci: b.sci, interval: b.interval, photo: b.photo,
+        light: b.light, humidity: b.humidity, pets: b.pets, origin: b.origin, tip: b.tip, waterHow: b.water,
+        openInfo: function () { self.setState({ info: b.id }); },
+        cells: cells,
+        lastLabel: since === 0 ? 'hoje' : (since === 1 ? 'ontem' : 'há ' + since + ' dias'),
+        nextLabel: wateredNow ? 'Hidratada' : (due ? 'Regar hoje' : (left === 1 ? 'Amanhã' : 'em ' + left + ' dias')),
+        nextStyle: wateredNow ? 'color: ' + SAGE + '; font-weight: 700' : (due ? 'color: ' + ROSE + '; font-weight: 700' : 'color: ' + TEXT + '; font-weight: 500'),
+        nextDate: fmt(nextD),
+        nextKey: nextD.getTime(),
+        due: due, wateredNow: wateredNow, left: left,
+        pct: wateredNow ? 100 : pct,
+        barColor: wateredNow ? SAGE : (due ? ROSE : '#C9C99A'),
+        btnLabel: wateredNow ? 'Regada hoje' : (due ? 'Reguei agora' : 'Registrar rega'),
+        btnStyle: BTN + (wateredNow ? 'border: none; background: ' + SAGE + '; color: ' + SAGE_INK
+          : (due ? 'border: none; background: ' + ROSE + '; color: ' + INK : 'border: 1px solid rgba(255,255,255,0.18); background: transparent; color: ' + TEXT)),
+        water: water
+      };
+    });
+
+    var today = plants.filter(function (p) { return p.due || p.wateredNow; }).map(function (p) {
+      return {
+        name: p.name, photo: p.photo,
+        sub: p.wateredNow ? 'Próxima rega ' + p.nextDate : 'A cada ' + p.interval + ' dias',
+        watered: p.wateredNow, water: p.water,
+        btnLabel: p.wateredNow ? 'Regada' : 'Reguei',
+        rowStyle: 'display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 18px; transition: background .2s; background: ' + (p.wateredNow ? 'rgba(169,185,138,0.14)' : 'rgba(255,255,255,0.05)'),
+        btnStyle: BTN + 'padding: 0 16px; ' + (p.wateredNow ? 'border: none; background: ' + SAGE + '; color: ' + SAGE_INK : 'border: 1px solid ' + ROSE + '; background: transparent; color: ' + TEXT)
+      };
+    });
+    var todayDone = today.filter(function (t) { return t.watered; }).length;
+    var pendingCount = today.length - todayDone;
+    var tomorrowNames = plants.filter(function (p) { return p.left === 1; }).map(function (p) { return p.name; });
+
+    var week = [];
+    for (var i = 0; i < 7; i++) {
+      var d = add(TODAY, i);
+      var count = plants.filter(function (p) { return i === 0 ? p.left <= 0 : !!p.cells[i].plan; }).length;
+      var isToday = i === 0;
+      week.push({
+        dow: isToday ? 'Hoje' : DOW[d.getDay()],
+        num: d.getDate(),
+        label: count ? (count + (count === 1 ? ' planta' : ' plantas')) : '—',
+        headStyle: 'display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border-radius: 12px; ' + (isToday ? 'background: ' + ROSE + '; color: ' + INK : 'color: #D3D3B5'),
+        boxStyle: 'display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 6px; border-radius: 20px; ' +
+          (isToday ? 'background: ' + ROSE + '; color: ' + INK
+            : (count ? 'background: rgba(255,255,255,0.07); color: ' + TEXT + '; border: 1px solid rgba(255,255,255,0.10)' : 'background: transparent; color: #D3D3B5; border: 1px solid rgba(255,255,255,0.08)'))
+      });
+    }
+
+    var sel = plants.filter(function (p) { return p.id === self.state.info; })[0];
+    var info = sel ? {
+      name: sel.name, sci: sel.sci, photo: sel.photo, light: sel.light, waterText: sel.waterHow, humidity: sel.humidity,
+      pets: sel.pets, origin: sel.origin, tip: sel.tip, interval: sel.interval, nextDate: sel.nextDate,
+      btnLabel: sel.btnLabel, btnStyle: sel.btnStyle, water: sel.water
+    } : {};
+
+    return {
+      hasInfo: !!sel,
+      info: info,
+      closeInfo: function () { self.setState({ info: null }); },
+      plants: plants,
+      plantCount: plants.length,
+      today: today,
+      todayDone: todayDone,
+      todayTotal: today.length,
+      allDone: today.length > 0 && pendingCount === 0,
+      dueText: pendingCount === 0 ? 'Tudo em dia.' : (pendingCount === 1 ? '1 planta com sede.' : pendingCount + ' plantas com sede.'),
+      tomorrowText: tomorrowNames.length ? tomorrowNames.join(' e ') : 'Nenhuma rega prevista',
+      week: week
+    };
+  }
+}
+</script>
+</body>
+</html>

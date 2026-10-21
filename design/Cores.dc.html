@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Irrigua — paletas</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=DM+Sans:wght@400;500;600&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; height: 1000px; box-sizing: border-box; padding: 56px; background: #1F2417; color: #F4F1E8; font-family: 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 32px">
+  <div style="display: flex; align-items: baseline; justify-content: space-between">
+    <h1 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 44px">Irrigua <em style="color: #E9B9B8">· paletas</em></h1>
+    <span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #CFD5B8">do musgo ao oliva</span>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; flex: 1">
+    <sc-for list="{{palettes}}" as="p" hint-placeholder-count="3">
+      <section style="display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: baseline; justify-content: space-between">
+          <h2 style="margin: 0; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #E9B9B8; font-weight: 600">{{p.label}}</h2>
+          <span style="font-size: 12px; color: #CFD5B8">{{p.note}}</span>
+        </div>
+        <div style="{{p.panelStyle}}">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 24px; font-weight: 600">Irrigua</span>
+            <span style="{{p.avatarStyle}}">M</span>
+          </div>
+          <div>
+            <div style="{{p.kickerStyle}}">Quarta-feira, 21 de outubro</div>
+            <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 34px; line-height: 1.05; margin-top: 4px">Bom dia. <em style="{{p.emStyle}}">3 com sede.</em></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+            <div style="{{p.chipToday}}"><span style="font-size: 10px; letter-spacing: 0.1em">HOJE</span><span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1">21</span></div>
+            <div style="{{p.chipHas}}"><span style="font-size: 10px; letter-spacing: 0.1em">QUI</span><span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1">22</span></div>
+            <div style="{{p.chipHas}}"><span style="font-size: 10px; letter-spacing: 0.1em">SEX</span><span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1">23</span></div>
+            <div style="{{p.chipEmpty}}"><span style="font-size: 10px; letter-spacing: 0.1em">SÁB</span><span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1">24</span></div>
+          </div>
+          <div style="{{p.cardStyle}}">
+            <img src="/_blob/5041801e0cf6ee203fb4c771924f0161" alt="Foto de aglaonema" style="width: 96px; height: 96px; border-radius: 14px; object-fit: cover; flex: none; background: #F4F1E8">
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+              <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1.1">Aglaonema</div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px"><span style="{{p.mutedStyle}}">Regada há 7 dias</span><span style="{{p.dueStyle}}">Regar hoje</span></div>
+              <div style="{{p.trackStyle}}"><div style="{{p.fillStyle}}"></div></div>
+              <span style="{{p.btnStyle}}">Reguei agora</span>
+            </div>
+          </div>
+          <div style="{{p.deepStyle}}">
+            <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px">Para hoje</span>
+            <span style="{{p.ghostStyle}}">Reguei</span>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px">
+          <sc-for list="{{p.swatches}}" as="s" hint-placeholder-count="6">
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <div style="{{s.box}}"></div>
+              <span style="font-size: 11px; color: #F4F1E8">{{s.name}}</span>
+              <span style="font-size: 10px; color: #CFD5B8; font-family: ui-monospace, monospace">{{s.hex}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var defs = [
+      { label: 'A — Musgo (atual)', note: 'verde frio, mais escuro',
+        bg: '#3F4A2C', surface: '#4A5634', deep: '#2C3520', line: '#56633D', text: '#F4F1E8', muted: '#CFD5B8', leaf: '#B1BD86', rose: '#E9B9B8', roseInk: '#3A1C22' },
+      { label: 'B — Oliva', note: 'verde-oliva clássico, mais quente',
+        bg: '#4E5228', surface: '#5C6131', deep: '#383B1C', line: '#6E7340', text: '#F5F1E3', muted: '#D9D6B8', leaf: '#C2C68C', rose: '#E8B4B0', roseInk: '#3A1C22' },
+      { label: 'C — Oliva suave', note: 'mais claro, tom de folha seca',
+        bg: '#666A36', surface: '#737841', deep: '#4A4D26', line: '#868A52', text: '#FAF7EC', muted: '#EDEBD5', leaf: '#D3D69E', rose: '#F0C4C2', roseInk: '#3A1C22' }
+    ];
+    var palettes = defs.map(function (c) {
+      return {
+        label: c.label, note: c.note,
+        panelStyle: 'flex: 1; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 16px; background: ' + c.bg + '; color: ' + c.text,
+        avatarStyle: 'width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: Georgia, serif; font-weight: 600; background: ' + c.rose + '; color: ' + c.roseInk,
+        kickerStyle: 'font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: ' + c.rose,
+        emStyle: 'color: ' + c.rose,
+        chipToday: 'display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 4px; border-radius: 14px; background: ' + c.rose + '; color: ' + c.roseInk,
+        chipHas: 'display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 4px; border-radius: 14px; background: ' + c.surface + '; border: 1px solid ' + c.line,
+        chipEmpty: 'display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 4px; border-radius: 14px; border: 1px solid ' + c.line + '; color: ' + c.muted,
+        cardStyle: 'display: flex; gap: 14px; align-items: center; padding: 14px; border-radius: 20px; background: ' + c.surface + '; border: 1px solid ' + c.line,
+        mutedStyle: 'color: ' + c.muted,
+        dueStyle: 'font-weight: 600; color: ' + c.rose,
+        trackStyle: 'height: 6px; border-radius: 99px; overflow: hidden; background: ' + c.deep,
+        fillStyle: 'height: 100%; width: 100%; border-radius: 99px; background: ' + c.rose,
+        btnStyle: 'align-self: flex-start; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; background: ' + c.rose + '; color: ' + c.roseInk,
+        deepStyle: 'display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-radius: 20px; background: ' + c.deep + '; border: 1px solid ' + c.line,
+        ghostStyle: 'padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; border: 1px solid ' + c.rose,
+        swatches: [
+          { name: 'Fundo', hex: c.bg }, { name: 'Superfície', hex: c.surface }, { name: 'Profundo', hex: c.deep },
+          { name: 'Folha', hex: c.leaf }, { name: 'Rosa', hex: c.rose }, { name: 'Creme', hex: c.text }
+        ].map(function (s) { return { name: s.name, hex: s.hex, box: 'height: 44px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: ' + s.hex }; })
+      };
+    });
+    return { palettes: palettes };
+  }
+}
+</script>
+</body>
+</html>

@@ -112,7 +112,12 @@ a{color:#F4F1E8;text-decoration:none}a:hover{color:#E9B9B8}
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px">
           <sc-for list="{{plants}}" as="p" hint-placeholder-count="6">
             <article class="card" style="background: #4A5634; border: 1px solid #56633D; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 14px; transition: transform .2s">
-              <img src="{{p.photo}}" alt="Foto de {{p.name}}" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; display: block; background: #F4F1E8">
+              <div style="position: relative">
+                <img src="{{p.photo}}" alt="Foto de {{p.name}}" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; display: block; background: #F4F1E8">
+                <button type="button" onClick="{{p.openInfo}}" aria-label="Sobre {{p.name}}" style="position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(44, 53, 32, 0.88); color: #F4F1E8; display: flex; align-items: center; justify-content: center; cursor: pointer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11 V16.5"></path><circle cx="12" cy="7.8" r="0.6" fill="currentColor"></circle></svg>
+                </button>
+              </div>
 
               <div>
                 <h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; line-height: 1.1">{{p.name}}</h3>
@@ -187,13 +192,62 @@ a{color:#F4F1E8;text-decoration:none}a:hover{color:#E9B9B8}
       </div>
     </section>
   </main>
+
+  <sc-if value="{{hasInfo}}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 50; background: rgba(20, 26, 14, 0.72); display: flex; align-items: center; justify-content: center; padding: 24px">
+      <div role="dialog" aria-modal="true" aria-labelledby="info-t" style="width: 100%; max-width: 760px; max-height: calc(100vh - 48px); overflow-y: auto; background: #2C3520; border: 1px solid #56633D; border-radius: 28px; display: flex; flex-wrap: wrap">
+        <img src="{{info.photo}}" alt="Foto de {{info.name}}" style="flex: 1 1 260px; min-height: 260px; max-height: 420px; object-fit: cover; background: #F4F1E8; border-radius: 27px 0 0 27px; display: block; min-width: 0">
+        <div style="flex: 999 1 340px; min-width: 0; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+            <div>
+              <h2 id="info-t" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; font-size: 36px; line-height: 1.05">{{info.name}}</h2>
+              <p style="margin: 4px 0 0; font-style: italic; color: #CFD5B8">{{info.sci}}</p>
+            </div>
+            <button type="button" onClick="{{closeInfo}}" aria-label="Fechar" style="width: 44px; height: 44px; flex: none; border-radius: 50%; border: 1px solid #56633D; background: transparent; color: #F4F1E8; display: flex; align-items: center; justify-content: center; cursor: pointer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"></path></svg>
+            </button>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+            <div style="background: #3A4428; border-radius: 16px; padding: 12px 14px">
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E9B9B8; font-weight: 600">Luz</div>
+              <div style="font-size: 14px; margin-top: 4px">{{info.light}}</div>
+            </div>
+            <div style="background: #3A4428; border-radius: 16px; padding: 12px 14px">
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E9B9B8; font-weight: 600">Rega</div>
+              <div style="font-size: 14px; margin-top: 4px">{{info.waterText}}</div>
+            </div>
+            <div style="background: #3A4428; border-radius: 16px; padding: 12px 14px">
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E9B9B8; font-weight: 600">Umidade</div>
+              <div style="font-size: 14px; margin-top: 4px">{{info.humidity}}</div>
+            </div>
+            <div style="background: #3A4428; border-radius: 16px; padding: 12px 14px">
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #E9B9B8; font-weight: 600">Pets</div>
+              <div style="font-size: 14px; margin-top: 4px">{{info.pets}}</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #CFD5B8; font-weight: 600">Origem</div>
+            <p style="margin: 4px 0 0">{{info.origin}}</p>
+          </div>
+          <div style="background: #3F4A2C; border-radius: 16px; padding: 14px 16px">
+            <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 20px; color: #E9B9B8">Dica</div>
+            <p style="margin: 2px 0 0">{{info.tip}}</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #4A5634; padding-top: 16px">
+            <span style="font-size: 13px; color: #CFD5B8">A cada {{info.interval}} dias · próxima {{info.nextDate}}</span>
+            <button type="button" onClick="{{info.water}}" style="{{info.btnStyle}}; padding: 0 20px">{{info.btnLabel}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1720}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { watered: {} };
+    this.state = { watered: {}, info: null };
   }
   renderVals() {
     var TODAY = new Date(2026, 9, 21);
@@ -205,12 +259,24 @@ class Component extends DCLogic {
     function fmt(d) { return DOW[d.getDay()] + ', ' + d.getDate() + ' ' + MES[d.getMonth()]; }
 
     var base = [
-      { id: 'aglaonema', name: 'Aglaonema', sci: 'Aglaonema commutatum', interval: 7, last: 14, photo: '/_blob/5041801e0cf6ee203fb4c771924f0161', bg: '#2F3A22' },
-      { id: 'palmeira', name: 'Palmeira-majestosa', sci: 'Ravenea rivularis', interval: 5, last: 16, photo: '/_blob/04f38f66d9550881ba45c4d6aa742c1f', bg: '#56633D' },
-      { id: 'lirio', name: 'Lírio-da-paz', sci: 'Spathiphyllum wallisii', interval: 3, last: 19, photo: '/_blob/21be78b751dba3ea08cca9e7a29d8590', bg: '#2F3A22' },
-      { id: 'comigo', name: 'Comigo-ninguém-pode', sci: 'Dieffenbachia seguine', interval: 6, last: 17, photo: '/_blob/c5949a585d5668b5ee6dc09e76ec3b11', bg: '#56633D' },
-      { id: 'bambu', name: 'Bambu-da-sorte', sci: 'Dracaena sanderiana', interval: 7, last: 13, photo: '/_blob/1347cf4f1bf466cd3738926eb801b4f6', bg: '#2F3A22' },
-      { id: 'dracena', name: 'Dracena', sci: 'Dracaena fragrans', interval: 10, last: 12, photo: '/_blob/96cc72c479bcb04071ff5e5deed49a88', bg: '#56633D' }
+      { id: 'aglaonema', name: 'Aglaonema', sci: 'Aglaonema commutatum', interval: 7, last: 14, photo: '/_blob/5041801e0cf6ee203fb4c771924f0161', bg: '#2F3A22',
+        light: 'Indireta, média a baixa', water: 'Quando os 2–3 cm de cima do solo secarem', humidity: 'Gosta de ar úmido', pets: 'Tóxica para cães e gatos',
+        origin: 'Florestas tropicais do Sudeste Asiático.', tip: 'Tolera cantos com pouca luz, mas as variegadas ficam mais vivas perto de uma janela com luz filtrada.' },
+      { id: 'palmeira', name: 'Palmeira-majestosa', sci: 'Ravenea rivularis', interval: 5, last: 16, photo: '/_blob/04f38f66d9550881ba45c4d6aa742c1f', bg: '#56633D',
+        light: 'Indireta e forte', water: 'Solo sempre levemente úmido, nunca encharcado', humidity: 'Alta; borrife nos dias secos', pets: 'Não tóxica para cães e gatos',
+        origin: 'Margens de rios em Madagascar.', tip: 'Pontas marrons costumam indicar ar seco ou falta de água. Gire o vaso de vez em quando para crescer por igual.' },
+      { id: 'lirio', name: 'Lírio-da-paz', sci: 'Spathiphyllum wallisii', interval: 3, last: 19, photo: '/_blob/21be78b751dba3ea08cca9e7a29d8590', bg: '#2F3A22',
+        light: 'Indireta; aceita meia-sombra', water: 'Quando o topo do solo secar', humidity: 'Gosta de ar úmido', pets: 'Tóxica para cães e gatos',
+        origin: 'Florestas tropicais da América Central e do Sul.', tip: 'Ela avisa: quando as folhas murcham, é hora de regar. Volta ao normal em poucas horas.' },
+      { id: 'comigo', name: 'Comigo-ninguém-pode', sci: 'Dieffenbachia seguine', interval: 6, last: 17, photo: '/_blob/c5949a585d5668b5ee6dc09e76ec3b11', bg: '#56633D',
+        light: 'Indireta e clara', water: 'Quando a camada de cima do solo secar', humidity: 'Média a alta', pets: 'Tóxica para pessoas e pets',
+        origin: 'Regiões tropicais das Américas.', tip: 'A seiva irrita pele e boca: use luvas ao podar e mantenha longe de crianças e animais.' },
+      { id: 'bambu', name: 'Bambu-da-sorte', sci: 'Dracaena sanderiana', interval: 7, last: 13, photo: '/_blob/1347cf4f1bf466cd3738926eb801b4f6', bg: '#2F3A22',
+        light: 'Indireta; evite sol direto', water: 'Na água: troque a cada 1–2 semanas', humidity: 'Indiferente', pets: 'Tóxica para cães e gatos',
+        origin: 'África Central. Apesar do nome, não é um bambu.', tip: 'Use água filtrada ou deixada em repouso: o cloro pode amarelar as folhas.' },
+      { id: 'dracena', name: 'Dracena', sci: 'Dracaena fragrans', interval: 10, last: 12, photo: '/_blob/96cc72c479bcb04071ff5e5deed49a88', bg: '#56633D',
+        light: 'Indireta; tolera pouca luz', water: 'Quando metade do solo secar', humidity: 'Média', pets: 'Tóxica para cães e gatos',
+        origin: 'África tropical.', tip: 'É sensível ao flúor da água da torneira: pontas queimadas são o sinal. Regue menos no inverno.' }
     ];
 
     var plants = base.map(function (b) {
@@ -236,6 +302,8 @@ class Component extends DCLogic {
       }
       return {
         id: b.id, name: b.name, sci: b.sci, interval: b.interval,
+        light: b.light, humidity: b.humidity, pets: b.pets, origin: b.origin, tip: b.tip, waterHow: b.water,
+        openInfo: function () { self.setState({ info: b.id }); },
         artStyle: 'height: 170px; border-radius: 18px; background: ' + b.bg + '; border: 1px dashed #7C8A55; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; text-align: center; padding: 0 12px',
         photo: b.photo,
         cells: cells,
@@ -290,7 +358,17 @@ class Component extends DCLogic {
       });
     }
 
+    var sel = plants.filter(function (p) { return p.id === self.state.info; })[0];
+    var info = sel ? {
+      name: sel.name, sci: sel.sci, photo: sel.photo, light: sel.light, waterText: sel.waterHow, humidity: sel.humidity,
+      pets: sel.pets, origin: sel.origin, tip: sel.tip, interval: sel.interval, nextDate: sel.nextDate,
+      btnLabel: sel.btnLabel, btnStyle: sel.btnStyle, water: sel.water
+    } : {};
+
     return {
+      hasInfo: !!sel,
+      info: info,
+      closeInfo: function () { self.setState({ info: null }); },
       plants: plants,
       plantCount: plants.length,
       today: today,

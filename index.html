@@ -4,119 +4,162 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Irrigua — Meu jardim</title>
+<meta name="theme-color" content="#333A22">
 <link rel="icon" href="icone.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --musgo:#3F4A2C; --musgo-esc:#2C3520; --musgo-med:#4A5634; --linha:#56633D; --oliva:#7C8A55;
-  --folha:#B1BD86; --creme:#F4F1E8; --sutil:#CFD5B8; --rosa:#E9B9B8; --rosa-esc:#3A1C22;
-  --serif:'Cormorant Garamond',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+  --oliva:#333A22; --oliva-esc:#2A2F1B; --texto:#F5F1E3; --sutil:#D3D3B5;
+  --rosa:#E5ABA4; --rosa-tinta:#3A1C22; --salvia:#A9B98A; --salvia-tinta:#24301A;
+  --sup:rgba(255,255,255,.05); --sup2:rgba(255,255,255,.07); --fundo:rgba(0,0,0,.2);
+  --linha:rgba(255,255,255,.08); --linha2:rgba(255,255,255,.14);
+  --serif:'Fraunces',Georgia,serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--musgo);color:var(--creme);font-family:var(--sans);font-size:15px;line-height:1.5}
-a{color:var(--creme);text-decoration:none}a:hover{color:var(--rosa)}
+body{margin:0;background:var(--oliva);color:var(--texto);font-family:var(--sans);font-size:15px;line-height:1.5}
+a{color:var(--texto);text-decoration:none}a:hover{color:var(--rosa)}
 button{font:inherit;cursor:pointer}
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+img{display:block}
+.wrap{max-width:1180px;margin:0 auto;padding-left:24px;padding-right:24px}
+.lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.serif{font-family:var(--serif)}
 header{border-bottom:1px solid var(--linha)}
-.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:18px 0}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:.02em}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:18px;padding-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:28px;font-weight:600;letter-spacing:-.01em}
 nav{display:flex;flex-wrap:wrap;gap:6px}
 nav a{padding:10px 16px;border-radius:999px;font-weight:500}
-nav a:hover{background:var(--musgo-med)}
-nav a.on{background:var(--creme);color:#2F3A22}
-.avatar{width:44px;height:44px;border-radius:50%;border:none;background:var(--rosa);color:#5C2A33;font-family:var(--serif);font-size:20px;font-weight:600}
-main.wrap{padding-top:40px;padding-bottom:64px;display:flex;flex-direction:column;gap:36px}
+nav a:hover{background:rgba(255,255,255,.06);color:var(--texto)}
+nav a.on{background:var(--texto);color:var(--oliva-esc);font-weight:600}
+.avatar{width:44px;height:44px;border-radius:50%;border:none;background:var(--rosa);color:var(--rosa-tinta);font-family:var(--serif);font-size:19px;font-weight:600}
+main.wrap{padding-top:44px;padding-bottom:64px;display:flex;flex-direction:column;gap:36px}
 .hero{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
-.kicker{margin:0;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--rosa);font-weight:600}
-h1{margin:0;font-family:var(--serif);font-weight:500;font-size:clamp(40px,6vw,56px);line-height:1.05}
-h1 em{color:var(--rosa)}
-h2{margin:0;font-family:var(--serif);font-weight:500;font-size:34px}
+h1{margin:0;font-family:var(--serif);font-weight:500;font-size:clamp(40px,6vw,58px);line-height:1.02;letter-spacing:-.02em}
+h1 em{font-weight:400;color:var(--rosa)}
+h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spacing:-.01em}
 .muted{color:var(--sutil)}
 .search{display:flex;gap:8px;flex:0 1 420px;min-width:260px}
-.search input{flex:1;min-width:0;height:48px;padding:0 18px;border-radius:999px;border:1px solid #6B7A45;background:var(--musgo-med);color:var(--creme);font:inherit}
-.search input::placeholder{color:#B9C1A0}
-.cam{width:48px;height:48px;border-radius:50%;border:none;background:var(--rosa);color:#5C2A33;display:flex;align-items:center;justify-content:center}
+.search input{flex:1;min-width:0;height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--texto);font:inherit}
+.search input::placeholder{color:#BDBD9C}
+.round{width:48px;height:48px;border-radius:50%;border:none;background:var(--rosa);color:var(--rosa-tinta);display:flex;align-items:center;justify-content:center}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
 .day{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px;border-radius:20px;border:1px solid var(--linha);color:var(--sutil)}
-.day.has{background:var(--musgo-med);color:var(--creme);border-color:var(--oliva)}
-.day.today{background:var(--rosa);color:var(--rosa-esc);border-color:var(--rosa)}
-.day .dow{font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-.day .num{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1}
-.day .lbl{font-size:12px;min-height:18px;text-align:center}
+.day.has{background:var(--sup2);color:var(--texto);border-color:rgba(255,255,255,.1)}
+.day.today{background:var(--rosa);color:var(--rosa-tinta);border-color:var(--rosa)}
+.day .num{font-family:var(--serif);font-size:30px;font-weight:500;line-height:1}
+.day .q{font-size:12px;min-height:18px;text-align:center}
 .cols{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
-.today-panel{flex:1 1 300px;background:var(--musgo-esc);border:1px solid var(--linha);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px}
-.row-between{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px}
-.task{display:flex;align-items:center;gap:14px;padding:14px;border-radius:18px;background:#3A4428}
-.task img{width:52px;height:52px;border-radius:14px;object-fit:cover;background:var(--creme);flex:none}
+.panel{flex:1 1 340px;background:var(--fundo);border:1px solid rgba(255,255,255,.06);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.between{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px}
+.task{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:18px;background:var(--sup);transition:background .2s}
+.task.ok{background:rgba(169,185,138,.14)}
+.thumb{width:52px;height:52px;border-radius:14px;object-fit:cover;background:var(--texto);flex:none}
 .task .t{flex:1;min-width:0}
 .task .n{font-weight:600}
 .task .s{font-size:13px;color:var(--sutil)}
-.pill-done{padding:10px 14px;border-radius:999px;background:var(--rosa);color:#5C2A33;font-size:13px;font-weight:600;border:none}
-.pill-go{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--rosa);background:transparent;color:var(--creme);font-weight:600}
-.pill-go:hover{background:#2F3A22}
-.thanks{margin:0;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--rosa)}
-.tomorrow{border-top:1px solid var(--musgo-med);padding-top:16px;display:flex;flex-direction:column;gap:6px}
-.tomorrow span:first-child{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sutil)}
+.btn{min-height:44px;border-radius:999px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,color .2s;padding:0 16px}
+.btn.go{border:1px solid var(--rosa);background:transparent;color:var(--texto)}
+.btn.go:hover{background:rgba(229,171,164,.12)}
+.btn.now{border:none;background:var(--rosa);color:var(--rosa-tinta)}
+.btn.plan{border:1px solid rgba(255,255,255,.18);background:transparent;color:var(--texto)}
+.btn.plan:hover{background:rgba(255,255,255,.06)}
+.btn.done{border:none;background:var(--salvia);color:var(--salvia-tinta)}
+.thanks{margin:0;font-family:var(--serif);font-style:italic;font-size:21px;color:var(--salvia)}
+.tomorrow{border-top:1px solid var(--linha);padding-top:16px;display:flex;flex-direction:column;gap:6px}
 .garden{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:18px}
-.add{min-height:44px;padding:0 20px;border-radius:999px;border:none;background:var(--rosa);color:var(--rosa-esc);font-weight:600}
+.add{min-height:44px;padding:0 20px;border-radius:999px;border:none;background:var(--rosa);color:var(--rosa-tinta);font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-.card{background:var(--musgo-med);border:1px solid var(--linha);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:14px;transition:transform .2s}
-.card:hover{transform:translateY(-2px)}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;display:block;background:var(--creme)}
-.card h3{margin:0;font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.1}
-.card .sci{margin:2px 0 0;font-style:italic;font-size:13px;color:var(--sutil)}
+.card{background:var(--sup);border:1px solid var(--sup2);border-radius:26px;padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,background .2s}
+.card:hover{transform:translateY(-2px);background:rgba(255,255,255,.08)}
+.photo{position:relative}
+.photo img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:20px;background:var(--texto)}
+.info{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(42,47,27,.85);color:var(--texto);display:flex;align-items:center;justify-content:center}
+.info:hover{background:var(--oliva-esc)}
+.card h3{margin:0;font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.1;letter-spacing:-.01em}
+.sci{margin:2px 0 0;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--sutil)}
 .meta{display:flex;justify-content:space-between;font-size:13px}
-.due{color:var(--rosa);font-weight:600}
-.bar{height:6px;border-radius:99px;background:#2F3A22;overflow:hidden}
+.st-due{color:var(--rosa);font-weight:700}.st-ok{color:var(--salvia);font-weight:700}
+.bar{height:6px;border-radius:99px;background:rgba(0,0,0,.25);overflow:hidden}
 .bar div{height:100%;border-radius:99px}
-.small{font-size:12px;color:var(--sutil)}
-.btn{min-height:44px;border-radius:999px;font-weight:600}
-.btn.plan{border:1px solid var(--oliva);background:transparent;color:var(--creme)}
-.btn.now{border:none;background:var(--rosa);color:var(--rosa-esc)}
-.btn.done{border:1px solid var(--rosa);background:transparent;color:var(--rosa)}
 .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--sutil)}
 .legend span{display:flex;align-items:center;gap:6px}
 .dot{width:14px;height:14px;border-radius:50%}
-.table-box{overflow-x:auto;border:1px solid var(--linha);border-radius:24px;background:var(--musgo-esc);padding:16px}
+.tbox{overflow-x:auto;border:1px solid rgba(255,255,255,.06);border-radius:24px;background:var(--fundo);padding:16px}
 .table{min-width:760px;display:flex;flex-direction:column;gap:8px}
 .trow{display:grid;grid-template-columns:220px repeat(7,minmax(0,1fr));gap:8px;align-items:center}
 .th{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;border-radius:12px;color:var(--sutil)}
-.th.today{background:var(--rosa);color:var(--rosa-esc)}
-.th .d{font-size:11px;letter-spacing:.1em;text-transform:uppercase}
-.th .n{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1}
+.th.today{background:var(--rosa);color:var(--rosa-tinta)}
+.th .n{font-family:var(--serif);font-size:22px;font-weight:500;line-height:1}
 .pl{display:flex;align-items:center;gap:12px;min-width:0}
-.pl img{width:48px;height:48px;border-radius:14px;object-fit:cover;background:var(--creme);flex:none}
+.pl .thumb{width:48px;height:48px}
 .pl .nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cell{height:52px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:#36402A}
-.cell.t0{background:var(--musgo-med)}
+.cell{height:52px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:rgba(255,255,255,.03)}
+.cell.t0{background:var(--sup2)}
 .cell button{width:44px;height:44px;border-radius:50%;border:none;background:transparent;display:flex;align-items:center;justify-content:center}
-footer{border-top:1px solid var(--linha);padding:20px 0 32px;font-size:13px;color:var(--sutil)}
-@media (max-width:640px){nav{order:3;width:100%}.week{gap:4px}.day{padding:10px 2px}.day .lbl{font-size:10px}}
+/* ficha */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(18,21,10,.72);display:none;align-items:center;justify-content:center;padding:24px}
+.overlay.open{display:flex}
+.sheet{width:100%;max-width:780px;max-height:calc(100vh - 48px);overflow-y:auto;background:var(--oliva-esc);border:1px solid var(--linha);border-radius:28px;display:flex;flex-wrap:wrap}
+.sheet>img{flex:1 1 260px;min-width:0;min-height:280px;align-self:stretch;object-fit:cover;background:var(--texto);border-radius:27px 0 0 27px}
+.sheet .body{flex:999 1 340px;min-width:0;padding:28px;display:flex;flex-direction:column;gap:18px}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.fact{background:var(--sup);border-radius:16px;padding:12px 14px}
+.fact .lbl{color:var(--rosa)}
+.fact div:last-child{font-size:14px;margin-top:4px}
+.tip{background:rgba(169,185,138,.12);border-radius:16px;padding:14px 16px}
+.close{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid var(--linha2);background:transparent;color:var(--texto);display:flex;align-items:center;justify-content:center}
+footer{border-top:1px solid var(--linha);padding-top:20px;padding-bottom:32px;font-size:13px;color:var(--sutil)}
+/* atrasada */
+.card.late{border-color:rgba(242,148,138,.45)}
+.st-late{color:#F4A59B;font-weight:700}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;background:rgba(242,148,138,.16);color:#F4A59B;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+/* busca */
+.empty{grid-column:1/-1;padding:28px;border:1px dashed var(--linha2);border-radius:22px;text-align:center;color:var(--sutil)}
+.empty b{color:var(--texto)}
+.clear{height:48px;padding:0 14px;border-radius:999px;border:1px solid var(--linha2);background:transparent;color:var(--texto);display:none}
+.clear.show{display:block}
+/* aviso de desfazer */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);z-index:60;display:flex;align-items:center;gap:14px;padding:10px 10px 10px 18px;border-radius:999px;background:var(--texto);color:var(--oliva-esc);box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .25s ease;max-width:calc(100vw - 32px)}
+.toast.show{transform:translate(-50%,0)}
+.toast span{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.toast button{min-height:40px;padding:0 16px;border-radius:999px;border:none;background:var(--oliva);color:var(--texto);font-weight:700}
+/* semana em lista (celular) */
+.wlist{display:none;flex-direction:column;gap:10px}
+.wl{display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;background:var(--sup)}
+.wl .t{flex:1;min-width:0}
+.wl .n{font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid rgba(169,185,138,.5);color:var(--texto)}
+.chip.hoje{border:none;background:var(--rosa);color:var(--rosa-tinta)}
+.chip.ok{border:none;background:var(--salvia);color:var(--salvia-tinta)}
+.chip.late{border:none;background:#F4A59B;color:var(--rosa-tinta)}
+@media (max-width:640px){
+  .tbox{display:none}
+  .wlist{display:flex}
+  .legend{display:none}
+  .search{flex:1 1 100%}
+  nav{order:3;width:100%}
+  .week{gap:4px}.day{padding:10px 2px}.day .q{font-size:10px}
+  .sheet>img{border-radius:27px 27px 0 0;max-height:280px}
+}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap top">
     <a href="#" class="brand" aria-label="Irrigua, início">
-      <svg width="40" height="40" viewBox="0 0 120 120" fill="none" aria-hidden="true">
-        <g transform="rotate(18 33 45)" stroke="#F4F1E8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 32 H48 A4 4 0 0 1 52 36 V56 A4 4 0 0 1 48 60 H18 A4 4 0 0 1 14 56 V36 A4 4 0 0 1 18 32Z"/>
-          <path d="M22 32 C22 22 44 22 44 32"/><path d="M52 52 L76 34"/>
-        </g>
-        <path d="M80 53 C80 53 77 57 77 59 A3 3 0 0 0 83 59 C83 57 80 53 80 53Z" fill="#E9B9B8"/>
-        <path d="M88 60 C88 60 85 64 85 66 A3 3 0 0 0 91 66 C91 64 88 60 88 60Z" fill="#E9B9B8"/>
-        <path d="M84 104 V82" stroke="#C3CE9C" stroke-width="5" stroke-linecap="round"/>
-        <path d="M84 94 C76 94 70 88 69 80 C77 80 84 86 84 94Z" fill="#C3CE9C"/>
-        <path d="M84 89 C84 81 90 75 99 74 C99 82 93 89 84 89Z" fill="#C3CE9C"/>
+      <svg width="36" height="36" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+        <path d="M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z" fill="#A9B98A"/>
+        <path d="M60 104 C60 84 60 56 60 30" stroke="#333A22" stroke-width="5" stroke-linecap="round"/>
+        <path d="M60 80 L45 67 M60 66 L74 54 M60 92 L75 81" stroke="#333A22" stroke-width="4" stroke-linecap="round"/>
       </svg>
       Irrigua
     </a>
     <nav aria-label="Principal">
       <a href="#" class="on">Meu jardim</a>
       <a href="#">Explorar plantas</a>
-      <a href="logo.html">Logo</a>
+      <a href="logo.html">Marca</a>
     </nav>
     <button class="avatar" type="button" aria-label="Perfil">M</button>
   </div>
@@ -124,15 +167,16 @@ footer{border-top:1px solid var(--linha);padding:20px 0 32px;font-size:13px;colo
 
 <main class="wrap">
   <section class="hero">
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <p class="kicker" id="hoje-data"></p>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span class="lbl" style="color:var(--rosa)" id="hoje-data"></span>
       <h1>Bom dia. <em id="due-text"></em></h1>
       <p class="muted" style="margin:0" id="plant-count"></p>
     </div>
     <form class="search" role="search" onsubmit="return false">
       <label for="busca" class="sr">Buscar planta pelo nome</label>
-      <input id="busca" type="search" placeholder="Buscar planta pelo nome…">
-      <button class="cam" type="button" aria-label="Identificar por foto">
+      <input id="busca" type="search" placeholder="Buscar planta pelo nome…" autocomplete="off">
+      <button class="clear" id="limpar" type="button">Limpar</button>
+      <button class="round" type="button" aria-label="Identificar por foto">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
       </button>
     </form>
@@ -141,17 +185,17 @@ footer{border-top:1px solid var(--linha);padding:20px 0 32px;font-size:13px;colo
   <section class="week" aria-label="Semana" id="week"></section>
 
   <div class="cols">
-    <section class="today-panel" aria-labelledby="hoje-t">
-      <div class="row-between">
+    <section class="panel" aria-labelledby="hoje-t">
+      <div class="between">
         <h2 id="hoje-t">Para hoje</h2>
-        <span style="font-size:13px;color:var(--rosa)" id="today-count"></span>
+        <span class="lbl" style="color:var(--rosa)" id="today-count"></span>
       </div>
       <div id="today-list" style="display:flex;flex-direction:column;gap:12px"></div>
-      <div class="tomorrow"><span>Amanhã</span><span id="tomorrow"></span></div>
+      <div class="tomorrow"><span class="lbl muted">Amanhã</span><span id="tomorrow"></span></div>
     </section>
 
     <section class="garden" aria-labelledby="jardim-t">
-      <div class="row-between">
+      <div class="between">
         <h2 id="jardim-t">Meu jardim</h2>
         <button class="add" type="button">+ Adicionar planta</button>
       </div>
@@ -160,17 +204,24 @@ footer{border-top:1px solid var(--linha);padding:20px 0 32px;font-size:13px;colo
   </div>
 
   <section aria-labelledby="semana-t" style="display:flex;flex-direction:column;gap:18px">
-    <div class="row-between">
+    <div class="between">
       <h2 id="semana-t">Semana do jardim</h2>
       <div class="legend">
         <span><span class="dot" style="background:var(--rosa)"></span>Regar hoje</span>
-        <span><span class="dot" style="border:2px solid var(--folha)"></span>Rega prevista</span>
-        <span><span class="dot" style="background:var(--folha)"></span>Regada</span>
+        <span><span class="dot" style="border:2px solid var(--salvia)"></span>Rega prevista</span>
+        <span><span class="dot" style="background:var(--salvia)"></span>Regada</span>
       </div>
     </div>
-    <div class="table-box"><div class="table" id="table"></div></div>
+    <div class="tbox"><div class="table" id="table"></div></div>
+    <div class="wlist" id="wlist"></div>
   </section>
 </main>
+
+<div class="overlay" id="overlay">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="ficha-nome" id="sheet"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-msg"></span><button type="button" id="desfazer">Desfazer</button></div>
 
 <footer><div class="wrap">Irrigua · protótipo. Fotos de exemplo do projeto aberto deilen (Kaggle/Unsplash).</div></footer>
 
@@ -180,65 +231,110 @@ footer{border-top:1px solid var(--linha);padding:20px 0 32px;font-size:13px;colo
   var DOWL = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
   var MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
   var MESL = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
-  var DAY = 86400000;
   function startOf(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
   function add(d,n){ var x = new Date(d.getTime()); x.setDate(x.getDate()+n); return x; }
-  function diff(a,b){ return Math.round((startOf(a)-startOf(b))/DAY); }
+  function diff(a,b){ return Math.round((startOf(a)-startOf(b))/86400000); }
   function fmt(d){ return DOW[d.getDay()]+', '+d.getDate()+' '+MES[d.getMonth()]; }
-  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
 
   var TODAY = startOf(new Date());
 
   // Plantas de exemplo; "ago" = há quantos dias foi a última rega
   var PLANTS = [
-    { id:'aglaonema', name:'Aglaonema', sci:'Aglaonema commutatum', interval:7, ago:7, photo:'fotos/aglaonema.jpg' },
-    { id:'palmeira', name:'Palmeira-majestosa', sci:'Ravenea rivularis', interval:5, ago:5, photo:'fotos/palmeira.jpg' },
-    { id:'lirio', name:'Lírio-da-paz', sci:'Spathiphyllum wallisii', interval:3, ago:2, photo:'fotos/lirio.jpg' },
-    { id:'comigo', name:'Comigo-ninguém-pode', sci:'Dieffenbachia seguine', interval:6, ago:4, photo:'fotos/comigo.jpg' },
-    { id:'bambu', name:'Bambu-da-sorte', sci:'Dracaena sanderiana', interval:7, ago:8, photo:'fotos/bambu.jpg' },
-    { id:'dracena', name:'Dracena', sci:'Dracaena fragrans', interval:10, ago:9, photo:'fotos/dracena.jpg' }
+    { id:'aglaonema', name:'Aglaonema', sci:'Aglaonema commutatum', interval:7, ago:7, photo:'fotos/aglaonema.jpg',
+      light:'Indireta, média a baixa', water:'Quando os 2–3 cm de cima do solo secarem', humidity:'Gosta de ar úmido', pets:'Tóxica para cães e gatos',
+      origin:'Florestas tropicais do Sudeste Asiático.', tip:'Tolera cantos com pouca luz, mas as variegadas ficam mais vivas perto de uma janela com luz filtrada.' },
+    { id:'palmeira', name:'Palmeira-majestosa', sci:'Ravenea rivularis', interval:5, ago:5, photo:'fotos/palmeira.jpg',
+      light:'Indireta e forte', water:'Solo sempre levemente úmido, nunca encharcado', humidity:'Alta; borrife nos dias secos', pets:'Não tóxica para cães e gatos',
+      origin:'Margens de rios em Madagascar.', tip:'Pontas marrons costumam indicar ar seco ou falta de água. Gire o vaso de vez em quando para crescer por igual.' },
+    { id:'lirio', name:'Lírio-da-paz', sci:'Spathiphyllum wallisii', interval:3, ago:2, photo:'fotos/lirio.jpg',
+      light:'Indireta; aceita meia-sombra', water:'Quando o topo do solo secar', humidity:'Gosta de ar úmido', pets:'Tóxica para cães e gatos',
+      origin:'Florestas tropicais da América Central e do Sul.', tip:'Ela avisa: quando as folhas murcham, é hora de regar. Volta ao normal em poucas horas.' },
+    { id:'comigo', name:'Comigo-ninguém-pode', sci:'Dieffenbachia seguine', interval:6, ago:4, photo:'fotos/comigo.jpg',
+      light:'Indireta e clara', water:'Quando a camada de cima do solo secar', humidity:'Média a alta', pets:'Tóxica para pessoas e pets',
+      origin:'Regiões tropicais das Américas.', tip:'A seiva irrita pele e boca: use luvas ao podar e mantenha longe de crianças e animais.' },
+    { id:'bambu', name:'Bambu-da-sorte', sci:'Dracaena sanderiana', interval:7, ago:8, photo:'fotos/bambu.jpg',
+      light:'Indireta; evite sol direto', water:'Na água: troque a cada 1–2 semanas', humidity:'Indiferente', pets:'Tóxica para cães e gatos',
+      origin:'África Central. Apesar do nome, não é um bambu.', tip:'Use água filtrada ou deixada em repouso: o cloro pode amarelar as folhas.' },
+    { id:'dracena', name:'Dracena', sci:'Dracaena fragrans', interval:10, ago:9, photo:'fotos/dracena.jpg',
+      light:'Indireta; tolera pouca luz', water:'Quando metade do solo secar', humidity:'Média', pets:'Tóxica para cães e gatos',
+      origin:'África tropical.', tip:'É sensível ao flúor da água da torneira: pontas queimadas são o sinal. Regue menos no inverno.' }
   ];
 
-  // Guarda as regas no navegador (por pessoa); se falhar, segue só na memória
+  // As regas ficam guardadas no navegador de quem usa; se falhar, seguem só na memória
   var KEY = 'irrigua.regas.v1';
   var log = {};
   try { log = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { log = {}; }
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(log)); } catch (e) {} }
 
-  function lastOf(p){
-    var base = add(TODAY, -p.ago);
-    var t = log[p.id] ? new Date(log[p.id]) : null;
-    return (t && t > base) ? startOf(t) : base;
-  }
+  var openId = null;
 
-  function toggle(id){
-    var p = PLANTS.filter(function(x){return x.id===id;})[0];
-    var wateredToday = log[p.id] && diff(new Date(log[p.id]), TODAY) === 0;
-    if (wateredToday) delete log[p.id]; else log[p.id] = TODAY.toISOString();
-    save(); render();
-  }
-  window.irriguaToggle = toggle;
-
-  var DROP_FULL = '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" fill="#E9B9B8"/></svg>';
-  var DROP_LINE = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" role="img" aria-label="Rega prevista"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" stroke="#B1BD86" stroke-width="1.8"/></svg>';
-  var CHECK = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#B1BD86"/><path d="M7.5 12.5 l3 3 l6-6.5" stroke="#2C3520" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-  function render(){
-    var plants = PLANTS.map(function(b){
-      var last = lastOf(b);
+  function compute(){
+    return PLANTS.map(function(b){
+      var base = add(TODAY, -b.ago);
+      var t = log[b.id] ? startOf(new Date(log[b.id])) : null;
+      var last = (t && t > base) ? t : base;
       var next = add(last, b.interval);
       var left = diff(next, TODAY);
       var since = diff(TODAY, last);
-      var wateredNow = since === 0 && !!log[b.id];
+      var ok = since === 0 && !!t && diff(t, TODAY) === 0;
       var due = left <= 0;
       var occ = {}, step = left < 0 ? 0 : left;
       while (step < 7) { occ[step] = true; step += b.interval; }
-      return { b:b, next:next, left:left, since:since, due:due, wateredNow:wateredNow, occ:occ,
-        pct: Math.max(6, Math.min(100, Math.round((b.interval-left)/b.interval*100))) };
+      var lateDays = (!ok && left < 0) ? -left : 0;
+      return { b:b, next:next, left:left, since:since, due:due, ok:ok, occ:occ, late:lateDays > 0, lateDays:lateDays,
+        pct: ok ? 100 : Math.max(6, Math.min(100, Math.round((b.interval-left)/b.interval*100))) };
     });
+  }
 
-    var today = plants.filter(function(p){ return p.due || p.wateredNow; });
-    var done = today.filter(function(p){ return p.wateredNow; }).length;
+  // busca: ignora maiúsculas e acentos
+  var query = '';
+  function norm(s){ return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function matches(p){ var q = norm(query).trim(); return !q || norm(p.b.name).indexOf(q) >= 0 || norm(p.b.sci).indexOf(q) >= 0; }
+  function lateText(n){ return 'Atrasada há ' + n + (n === 1 ? ' dia' : ' dias'); }
+
+  // aviso com "Desfazer"
+  var undo = null, toastTimer = null;
+  function showToast(msg, restore){
+    undo = restore;
+    document.getElementById('toast-msg').textContent = msg;
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, 5000);
+  }
+  function hideToast(){ document.getElementById('toast').classList.remove('show'); undo = null; }
+
+  function toggle(id){
+    var prev = log[id];
+    var wateredToday = prev && diff(new Date(prev), TODAY) === 0;
+    var name = PLANTS.filter(function(x){ return x.id === id; })[0].name;
+    if (wateredToday) { delete log[id]; hideToast(); }
+    else {
+      log[id] = TODAY.toISOString();
+      showToast(name + ' regada', function(){ if (prev) log[id] = prev; else delete log[id]; save(); render(); });
+    }
+    save(); render();
+  }
+
+  var I_CHECK = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 l4.5 4.5 L19 7.5"/></svg>';
+  var I_INFO = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11 V16.5"/><circle cx="12" cy="7.8" r="0.6" fill="currentColor"/></svg>';
+  var I_DROP = '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" fill="#E5ABA4"/></svg>';
+  var I_DROP_LINE = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" role="img" aria-label="Rega prevista"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" stroke="#A9B98A" stroke-width="1.8"/></svg>';
+  var I_DONE = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#A9B98A"/><path d="M7.5 12.5 l3 3 l6-6.5" stroke="#24301A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var I_X = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>';
+
+  function btnFor(p, compact){
+    var cls = p.ok ? 'done' : (p.due ? (compact ? 'go' : 'now') : 'plan');
+    var lbl = p.ok ? (compact ? 'Regada' : 'Regada hoje') : (p.due ? (compact ? 'Reguei' : 'Reguei agora') : 'Registrar rega');
+    return '<button class="btn ' + cls + '" type="button" data-water="' + p.b.id + '">' + (p.ok ? I_CHECK : '') + lbl + '</button>';
+  }
+
+  function render(){
+    var plants = compute();
+    var today = plants.filter(function(p){ return p.due || p.ok; });
+    today.sort(function(x, y){ return y.lateDays - x.lateDays; }); // atrasadas primeiro
+    var done = today.filter(function(p){ return p.ok; }).length;
     var pending = today.length - done;
 
     document.getElementById('hoje-data').textContent = DOWL[TODAY.getDay()] + ', ' + TODAY.getDate() + ' de ' + MESL[TODAY.getMonth()];
@@ -246,22 +342,18 @@ footer{border-top:1px solid var(--linha);padding:20px 0 32px;font-size:13px;colo
     document.getElementById('plant-count').textContent = plants.length + ' plantas no seu jardim';
     document.getElementById('today-count').textContent = done + ' de ' + today.length + ' feitas';
 
-    // faixa da semana
     var w = '';
     for (var i = 0; i < 7; i++) {
       var d = add(TODAY, i);
-      var c = plants.filter(function(p){ return i === 0 ? p.left <= 0 : p.left === i || (p.occ[i] && i > 0); }).length;
-      w += '<div class="day' + (i === 0 ? ' today' : (c ? ' has' : '')) + '"><span class="dow">' + (i === 0 ? 'Hoje' : DOW[d.getDay()]) +
-        '</span><span class="num">' + d.getDate() + '</span><span class="lbl">' + (c ? c + (c === 1 ? ' planta' : ' plantas') : '—') + '</span></div>';
+      var c = plants.filter(function(p){ return i === 0 ? p.left <= 0 : !!p.occ[i]; }).length;
+      w += '<div class="day' + (i === 0 ? ' today' : (c ? ' has' : '')) + '"><span class="lbl">' + (i === 0 ? 'Hoje' : DOW[d.getDay()]) +
+        '</span><span class="num">' + d.getDate() + '</span><span class="q">' + (c ? c + (c === 1 ? ' planta' : ' plantas') : '—') + '</span></div>';
     }
     document.getElementById('week').innerHTML = w;
 
-    // para hoje
     var t = today.map(function(p){
-      return '<div class="task"><img src="' + p.b.photo + '" alt=""><div class="t"><div class="n">' + esc(p.b.name) + '</div><div class="s">' +
-        (p.wateredNow ? 'Próxima rega ' + fmt(p.next) : 'A cada ' + p.b.interval + ' dias') + '</div></div>' +
-        (p.wateredNow ? '<button class="pill-done" type="button" onclick="irriguaToggle(\'' + p.b.id + '\')">Regada</button>'
-                      : '<button class="pill-go" type="button" onclick="irriguaToggle(\'' + p.b.id + '\')">Reguei</button>') + '</div>';
+      return '<div class="task' + (p.ok ? ' ok' : '') + '"><img class="thumb" src="' + p.b.photo + '" alt=""><div class="t"><div class="n">' + esc(p.b.name) +
+        '</div><div class="s">' + (p.ok ? 'Próxima rega ' + fmt(p.next) : (p.late ? '<span class="st-late">' + lateText(p.lateDays) + '</span>' : 'A cada ' + p.b.interval + ' dias')) + '</div></div>' + btnFor(p, true) + '</div>';
     }).join('');
     if (today.length && pending === 0) t += '<p class="thanks">Tudo regado por hoje. Seu jardim agradece.</p>';
     if (!today.length) t = '<p class="thanks">Nenhuma rega para hoje.</p>';
@@ -269,39 +361,92 @@ footer{border-top:1px solid var(--linha);padding:20px 0 32px;font-size:13px;colo
     var tm = plants.filter(function(p){ return p.left === 1; }).map(function(p){ return p.b.name; });
     document.getElementById('tomorrow').textContent = tm.length ? tm.join(' e ') : 'Nenhuma rega prevista';
 
-    // cards
-    document.getElementById('cards').innerHTML = plants.map(function(p){
+    var shown = plants.filter(matches);
+    document.getElementById('limpar').classList.toggle('show', !!query.trim());
+    var cardsHtml = shown.map(function(p){
       var lastLbl = p.since === 0 ? 'hoje' : (p.since === 1 ? 'ontem' : 'há ' + p.since + ' dias');
-      var nextLbl = p.due ? 'Regar hoje' : (p.left === 1 ? 'Amanhã' : 'em ' + p.left + ' dias');
-      var cls = p.wateredNow ? 'done' : (p.due ? 'now' : 'plan');
-      var lbl = p.wateredNow ? 'Regada hoje' : (p.due ? 'Reguei agora' : 'Registrar rega');
-      return '<article class="card"><img src="' + p.b.photo + '" alt="Foto de ' + esc(p.b.name) + '">' +
+      var nextLbl = p.ok ? 'Hidratada' : (p.late ? lateText(p.lateDays) : (p.due ? 'Regar hoje' : (p.left === 1 ? 'Amanhã' : 'em ' + p.left + ' dias')));
+      var stCls = p.ok ? 'st-ok' : (p.late ? 'st-late' : (p.due ? 'st-due' : ''));
+      return '<article class="card' + (p.late ? ' late' : '') + '"><div class="photo"><img src="' + p.b.photo + '" alt="Foto de ' + esc(p.b.name) + '">' +
+        '<button class="info" type="button" data-info="' + p.b.id + '" aria-label="Sobre ' + esc(p.b.name) + '">' + I_INFO + '</button></div>' +
         '<div><h3>' + esc(p.b.name) + '</h3><p class="sci">' + esc(p.b.sci) + '</p></div>' +
-        '<div style="display:flex;flex-direction:column;gap:6px"><div class="meta"><span class="muted">Regada ' + lastLbl + '</span><span class="' + (p.due ? 'due' : '') + '">' + nextLbl + '</span></div>' +
-        '<div class="bar"><div style="width:' + p.pct + '%;background:' + (p.due ? '#E9B9B8' : '#B1BD86') + '"></div></div>' +
-        '<span class="small">A cada ' + p.b.interval + ' dias · ' + fmt(p.next) + '</span></div>' +
-        '<button class="btn ' + cls + '" type="button" onclick="irriguaToggle(\'' + p.b.id + '\')">' + lbl + '</button></article>';
+        '<div style="display:flex;flex-direction:column;gap:6px"><div class="meta"><span class="muted">Regada ' + lastLbl + '</span><span class="' + stCls + '">' + nextLbl + '</span></div>' +
+        '<div class="bar"><div style="width:' + p.pct + '%;background:' + (p.ok ? '#A9B98A' : (p.late ? '#F4A59B' : (p.due ? '#E5ABA4' : '#C9C99A'))) + '"></div></div>' +
+        '<span class="lbl muted" style="font-weight:500">A cada ' + p.b.interval + ' dias · ' + (p.late ? 'era ' : '') + fmt(p.next) + '</span></div>' +
+        btnFor(p, false) + '</article>';
     }).join('');
+    if (!shown.length) cardsHtml = '<div class="empty">Nenhuma planta encontrada para <b>“' + esc(query.trim()) + '”</b>.<br>No app de verdade, aqui viria a opção de adicionar essa planta ao jardim.</div>';
+    document.getElementById('cards').innerHTML = cardsHtml;
 
-    // visão semanal
-    var h = '<div class="trow"><span class="small" style="letter-spacing:.12em;text-transform:uppercase;padding-left:4px">Planta</span>';
+    var h = '<div class="trow"><span class="lbl muted" style="padding-left:4px">Planta</span>';
     for (var j = 0; j < 7; j++) { var dd = add(TODAY, j);
-      h += '<div class="th' + (j === 0 ? ' today' : '') + '"><span class="d">' + (j === 0 ? 'Hoje' : DOW[dd.getDay()]) + '</span><span class="n">' + dd.getDate() + '</span></div>'; }
+      h += '<div class="th' + (j === 0 ? ' today' : '') + '"><span class="lbl">' + (j === 0 ? 'Hoje' : DOW[dd.getDay()]) + '</span><span class="n">' + dd.getDate() + '</span></div>'; }
     h += '</div>';
-    plants.forEach(function(p){
-      h += '<div class="trow"><div class="pl"><img src="' + p.b.photo + '" alt=""><div style="min-width:0"><div class="nm">' + esc(p.b.name) +
-        '</div><div class="small">a cada ' + p.b.interval + ' dias</div></div></div>';
+    shown.forEach(function(p){
+      h += '<div class="trow"><div class="pl"><img class="thumb" src="' + p.b.photo + '" alt=""><div style="min-width:0"><div class="nm">' + esc(p.b.name) +
+        '</div><div class="muted" style="font-size:12px">a cada ' + p.b.interval + ' dias</div></div></div>';
       for (var k = 0; k < 7; k++) {
         var inner = '';
-        if (k === 0 && p.wateredNow) inner = '<button type="button" aria-label="Desfazer rega de ' + esc(p.b.name) + '" onclick="irriguaToggle(\'' + p.b.id + '\')">' + CHECK + '</button>';
-        else if (k === 0 && p.occ[0]) inner = '<button type="button" aria-label="Marcar ' + esc(p.b.name) + ' como regada" onclick="irriguaToggle(\'' + p.b.id + '\')">' + DROP_FULL + '</button>';
-        else if (k > 0 && p.occ[k]) inner = DROP_LINE;
+        if (k === 0 && p.ok) inner = '<button type="button" data-water="' + p.b.id + '" aria-label="Desfazer rega de ' + esc(p.b.name) + '">' + I_DONE + '</button>';
+        else if (k === 0 && p.occ[0]) inner = '<button type="button" data-water="' + p.b.id + '" aria-label="Marcar ' + esc(p.b.name) + ' como regada">' + I_DROP + '</button>';
+        else if (k > 0 && p.occ[k]) inner = I_DROP_LINE;
         h += '<div class="cell' + (k === 0 ? ' t0' : '') + '">' + inner + '</div>';
       }
       h += '</div>';
     });
     document.getElementById('table').innerHTML = h;
+
+    // semana em lista, para o celular
+    document.getElementById('wlist').innerHTML = shown.map(function(p){
+      var chips = '';
+      if (p.ok) chips += '<span class="chip ok">Regada hoje</span>';
+      else if (p.late) chips += '<span class="chip late">' + lateText(p.lateDays) + '</span>';
+      else if (p.occ[0]) chips += '<span class="chip hoje">Hoje</span>';
+      for (var k = 1; k < 7; k++) if (p.occ[k]) { var dk = add(TODAY, k); chips += '<span class="chip">' + (k === 1 ? 'Amanhã' : DOW[dk.getDay()] + ' ' + dk.getDate()) + '</span>'; }
+      if (!chips) chips = '<span class="muted" style="font-size:12px">Sem rega nesta semana</span>';
+      return '<div class="wl"><img class="thumb" src="' + p.b.photo + '" alt=""><div class="t"><div class="n">' + esc(p.b.name) +
+        '</div><div class="chips">' + chips + '</div></div></div>';
+    }).join('') || '<div class="empty">Nenhuma planta encontrada.</div>';
+
+    renderSheet(plants);
   }
+
+  function renderSheet(plants){
+    var ov = document.getElementById('overlay');
+    var p = plants.filter(function(x){ return x.b.id === openId; })[0];
+    if (!p) { ov.classList.remove('open'); return; }
+    var b = p.b;
+    document.getElementById('sheet').innerHTML =
+      '<img src="' + b.photo + '" alt="Foto de ' + esc(b.name) + '">' +
+      '<div class="body"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div>' +
+      '<h2 id="ficha-nome" style="font-weight:600;font-size:34px;line-height:1.05">' + esc(b.name) + '</h2><p class="sci" style="font-size:15px;margin-top:4px">' + esc(b.sci) + '</p></div>' +
+      '<button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' +
+      '<div class="facts"><div class="fact"><div class="lbl">Luz</div><div>' + esc(b.light) + '</div></div>' +
+      '<div class="fact"><div class="lbl">Rega</div><div>' + esc(b.water) + '</div></div>' +
+      '<div class="fact"><div class="lbl">Umidade</div><div>' + esc(b.humidity) + '</div></div>' +
+      '<div class="fact"><div class="lbl">Pets</div><div>' + esc(b.pets) + '</div></div></div>' +
+      '<div><div class="lbl muted">Origem</div><p style="margin:4px 0 0">' + esc(b.origin) + '</p></div>' +
+      '<div class="tip"><div class="serif" style="font-style:italic;font-size:19px;color:var(--salvia)">Dica</div><p style="margin:2px 0 0">' + esc(b.tip) + '</p></div>' +
+      '<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--linha);padding-top:16px">' +
+      '<span class="muted" style="font-size:13px">A cada ' + b.interval + ' dias · próxima ' + fmt(p.next) + '</span>' + btnFor(p, false) + '</div></div>';
+    ov.classList.add('open');
+  }
+
+  document.addEventListener('click', function(e){
+    var w = e.target.closest('[data-water]');
+    if (w) { toggle(w.getAttribute('data-water')); return; }
+    var i = e.target.closest('[data-info]');
+    if (i) { openId = i.getAttribute('data-info'); render(); var c = document.querySelector('.close'); if (c) c.focus(); return; }
+    if (e.target.closest('[data-close]') || e.target.id === 'overlay') { openId = null; render(); }
+  });
+  var busca = document.getElementById('busca');
+  busca.addEventListener('input', function(){ query = busca.value; render(); });
+  document.getElementById('limpar').addEventListener('click', function(){ busca.value = ''; query = ''; render(); busca.focus(); });
+  document.getElementById('desfazer').addEventListener('click', function(){ var u = undo; hideToast(); if (u) u(); });
+  document.getElementById('overlay').addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { openId = null; render(); }
+  });
+
   render();
 })();
 </script>
