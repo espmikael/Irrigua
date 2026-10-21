@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meu jardim</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=DM+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#3F4A2C}
+a{color:#F4F1E8;text-decoration:none}a:hover{color:#E9B9B8}
+.chip:hover{background:#4A5634}
+.card:hover{transform:translateY(-2px)}
+#busca::placeholder{color:#B9C1A0}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #3F4A2C; color: #F4F1E8; font-family: 'DM Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.5">
+
+  <header style="border-bottom: 1px solid #56633D">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <a href="#" style="display: flex; align-items: center; gap: 10px">
+        <svg width="40" height="40" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+          <g transform="rotate(18 33 45)" stroke="#F4F1E8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 32 H48 A4 4 0 0 1 52 36 V56 A4 4 0 0 1 48 60 H18 A4 4 0 0 1 14 56 V36 A4 4 0 0 1 18 32Z"></path>
+            <path d="M22 32 C22 22 44 22 44 32"></path>
+            <path d="M52 52 L76 34"></path>
+          </g>
+          <path d="M80 53 C80 53 77 57 77 59 A3 3 0 0 0 83 59 C83 57 80 53 80 53Z" fill="#E9B9B8"></path>
+          <path d="M88 60 C88 60 85 64 85 66 A3 3 0 0 0 91 66 C91 64 88 60 88 60Z" fill="#E9B9B8"></path>
+          <path d="M84 104 V82" stroke="#C3CE9C" stroke-width="5" stroke-linecap="round"></path>
+          <path d="M84 94 C76 94 70 88 69 80 C77 80 84 86 84 94Z" fill="#C3CE9C"></path>
+          <path d="M84 89 C84 81 90 75 99 74 C99 82 93 89 84 89Z" fill="#C3CE9C"></path>
+        </svg>
+        <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; letter-spacing: 0.02em; color: #F4F1E8">Irrigua</span>
+      </a>
+      <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 6px">
+        <a href="#" style="padding: 10px 16px; border-radius: 999px; background: #F4F1E8; color: #2F3A22; font-weight: 500">Meu jardim</a>
+        <a href="#" class="chip" style="padding: 10px 16px; border-radius: 999px; font-weight: 500">Explorar plantas</a>
+        <a href="#" class="chip" style="padding: 10px 16px; border-radius: 999px; font-weight: 500">Identificar por foto</a>
+      </nav>
+      <button type="button" aria-label="Perfil" style="width: 44px; height: 44px; border-radius: 50%; border: none; background: #E9B9B8; color: #5C2A33; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; cursor: pointer">M</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1180px; margin: 0 auto; padding: 40px 24px 64px; display: flex; flex-direction: column; gap: 36px">
+
+    <section style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <p style="margin: 0; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #E9B9B8; font-weight: 600">Quarta-feira, 21 de outubro</p>
+        <h1 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 56px; line-height: 1.05; color: #F4F1E8">Bom dia. <em style="font-style: italic; color: #E9B9B8">{{dueText}}</em></h1>
+        <p style="margin: 0; color: #CFD5B8">{{plantCount}} plantas no seu jardim</p>
+      </div>
+      <form role="search" style="display: flex; gap: 8px; flex: 0 1 420px; min-width: 260px">
+        <label for="busca" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Buscar planta pelo nome</label>
+        <input id="busca" type="search" placeholder="Buscar planta pelo nome…" style="flex: 1; min-width: 0; height: 48px; padding: 0 18px; border-radius: 999px; border: 1px solid #6B7A45; background: #4A5634; color: #F4F1E8; font: inherit">
+        <button type="button" aria-label="Identificar por foto" style="width: 48px; height: 48px; border-radius: 50%; border: none; background: #E9B9B8; color: #5C2A33; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+        </button>
+      </form>
+    </section>
+
+    <section aria-label="Semana" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+        <div style="{{d.boxStyle}}">
+          <span style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9">{{d.dow}}</span>
+          <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 600; line-height: 1">{{d.num}}</span>
+          <span style="font-size: 12px; min-height: 18px">{{d.label}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+
+      <section aria-labelledby="hoje-t" style="flex: 1 1 300px; background: #2C3520; color: #F4F1E8; border: 1px solid #56633D; border-radius: 28px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+          <h2 id="hoje-t" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 34px">Para hoje</h2>
+          <span style="font-size: 13px; color: #E9B9B8">{{todayDone}} de {{todayTotal}} feitas</span>
+        </div>
+        <sc-for list="{{today}}" as="t" hint-placeholder-count="2">
+          <div style="display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 18px; background: #3A4428">
+            <img src="{{t.photo}}" alt="" style="width: 52px; height: 52px; border-radius: 14px; flex: none; object-fit: cover; display: block; background: #F4F1E8">
+            <div style="flex: 1; min-width: 0">
+              <div style="font-weight: 600">{{t.name}}</div>
+              <div style="font-size: 13px; color: #CFD5B8">{{t.sub}}</div>
+            </div>
+            <sc-if value="{{t.watered}}" hint-placeholder-val="{{ false }}">
+              <span style="padding: 10px 14px; border-radius: 999px; background: #E9B9B8; color: #5C2A33; font-size: 13px; font-weight: 600">Regada</span>
+            </sc-if>
+            <sc-if value="{{t.pending}}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{t.water}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #E9B9B8; background: transparent; color: #F4F1E8; font: inherit; font-weight: 600; cursor: pointer">Reguei</button>
+            </sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{allDone}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 22px; color: #E9B9B8">Tudo regado por hoje. Seu jardim agradece.</p>
+        </sc-if>
+        <div style="border-top: 1px solid #4A5634; padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #CFD5B8">Amanhã</span>
+          <span>{{tomorrowText}}</span>
+        </div>
+      </section>
+
+      <section aria-labelledby="jardim-t" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px">
+          <h2 id="jardim-t" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 34px">Meu jardim</h2>
+          <button type="button" style="min-height: 44px; padding: 0 20px; border-radius: 999px; border: none; background: #E9B9B8; color: #3A1C22; font: inherit; font-weight: 600; cursor: pointer">+ Adicionar planta</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px">
+          <sc-for list="{{plants}}" as="p" hint-placeholder-count="6">
+            <article class="card" style="background: #4A5634; border: 1px solid #56633D; border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 14px; transition: transform .2s">
+              <img src="{{p.photo}}" alt="Foto de {{p.name}}" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; display: block; background: #F4F1E8">
+
+              <div>
+                <h3 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; font-weight: 600; line-height: 1.1">{{p.name}}</h3>
+                <p style="margin: 2px 0 0; font-style: italic; font-size: 13px; color: #CFD5B8">{{p.sci}}</p>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; font-size: 13px">
+                  <span style="color: #CFD5B8">Regada {{p.lastLabel}}</span>
+                  <span style="{{p.nextStyle}}">{{p.nextLabel}}</span>
+                </div>
+                <div style="height: 6px; border-radius: 99px; background: #2F3A22; overflow: hidden">
+                  <div style="height: 100%; border-radius: 99px; background: {{p.barColor}}; width: {{p.pct}}%"></div>
+                </div>
+                <span style="font-size: 12px; color: #CFD5B8">A cada {{p.interval}} dias · {{p.nextDate}}</span>
+              </div>
+              <button type="button" onClick="{{p.water}}" style="{{p.btnStyle}}">{{p.btnLabel}}</button>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+
+    <section aria-labelledby="semana-t" style="display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px">
+        <h2 id="semana-t" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 34px">Semana do jardim</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; color: #CFD5B8">
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #E9B9B8"></span>Regar hoje</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid #B1BD86; box-sizing: border-box"></span>Rega prevista</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #B1BD86"></span>Regada</span>
+        </div>
+      </div>
+      <div style="overflow-x: auto; border: 1px solid #56633D; border-radius: 24px; background: #2C3520; padding: 16px">
+        <div style="min-width: 760px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: grid; grid-template-columns: 220px repeat(7, minmax(0, 1fr)); gap: 8px; align-items: end">
+            <span style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #CFD5B8; padding-left: 4px">Planta</span>
+            <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+              <div style="{{d.headStyle}}">
+                <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase">{{d.dow}}</span>
+                <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1">{{d.num}}</span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-for list="{{plants}}" as="r" hint-placeholder-count="6">
+            <div style="display: grid; grid-template-columns: 220px repeat(7, minmax(0, 1fr)); gap: 8px; align-items: center">
+              <div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+                <img src="{{r.photo}}" alt="" style="width: 48px; height: 48px; border-radius: 14px; flex: none; object-fit: cover; display: block; background: #F4F1E8">
+                <div style="min-width: 0">
+                  <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.name}}</div>
+                  <div style="font-size: 12px; color: #CFD5B8">a cada {{r.interval}} dias</div>
+                </div>
+              </div>
+              <sc-for list="{{r.cells}}" as="c" hint-placeholder-count="7">
+                <div style="{{c.cellStyle}}">
+                  <sc-if value="{{c.due}}" hint-placeholder-val="{{ false }}">
+                    <button type="button" onClick="{{r.water}}" aria-label="Marcar {{r.name}} como regada" style="width: 44px; height: 44px; border-radius: 50%; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+                      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" fill="#E9B9B8"></path></svg>
+                    </button>
+                  </sc-if>
+                  <sc-if value="{{c.done}}" hint-placeholder-val="{{ false }}">
+                    <button type="button" onClick="{{r.water}}" aria-label="Desfazer rega de {{r.name}}" style="width: 44px; height: 44px; border-radius: 50%; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#B1BD86"></circle><path d="M7.5 12.5 l3 3 l6-6.5" stroke="#2C3520" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </button>
+                  </sc-if>
+                  <sc-if value="{{c.plan}}" hint-placeholder-val="{{ false }}">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" role="img" aria-label="Rega prevista"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3Z" stroke="#B1BD86" stroke-width="1.8"></path></svg>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1720}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { watered: {} };
+  }
+  renderVals() {
+    var TODAY = new Date(2026, 9, 21);
+    var DOW = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+    var MES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+    var self = this;
+    function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+    function diff(a, b) { return Math.round((a - b) / 86400000); }
+    function fmt(d) { return DOW[d.getDay()] + ', ' + d.getDate() + ' ' + MES[d.getMonth()]; }
+
+    var base = [
+      { id: 'aglaonema', name: 'Aglaonema', sci: 'Aglaonema commutatum', interval: 7, last: 14, photo: '/_blob/5041801e0cf6ee203fb4c771924f0161', bg: '#2F3A22' },
+      { id: 'palmeira', name: 'Palmeira-majestosa', sci: 'Ravenea rivularis', interval: 5, last: 16, photo: '/_blob/04f38f66d9550881ba45c4d6aa742c1f', bg: '#56633D' },
+      { id: 'lirio', name: 'Lírio-da-paz', sci: 'Spathiphyllum wallisii', interval: 3, last: 19, photo: '/_blob/21be78b751dba3ea08cca9e7a29d8590', bg: '#2F3A22' },
+      { id: 'comigo', name: 'Comigo-ninguém-pode', sci: 'Dieffenbachia seguine', interval: 6, last: 17, photo: '/_blob/c5949a585d5668b5ee6dc09e76ec3b11', bg: '#56633D' },
+      { id: 'bambu', name: 'Bambu-da-sorte', sci: 'Dracaena sanderiana', interval: 7, last: 13, photo: '/_blob/1347cf4f1bf466cd3738926eb801b4f6', bg: '#2F3A22' },
+      { id: 'dracena', name: 'Dracena', sci: 'Dracaena fragrans', interval: 10, last: 12, photo: '/_blob/96cc72c479bcb04071ff5e5deed49a88', bg: '#56633D' }
+    ];
+
+    var plants = base.map(function (b) {
+      var wateredNow = !!self.state.watered[b.id];
+      var lastD = wateredNow ? TODAY : new Date(2026, 9, b.last);
+      var nextD = add(lastD, b.interval);
+      var left = diff(nextD, TODAY);
+      var since = diff(TODAY, lastD);
+      var due = left <= 0;
+      var pct = Math.max(6, Math.min(100, Math.round((b.interval - left) / b.interval * 100)));
+      var occ = {};
+      var step = left < 0 ? 0 : left;
+      while (step < 7) { occ[step] = true; step += b.interval; }
+      var cells = [];
+      for (var k = 0; k < 7; k++) {
+        var isDone = k === 0 && wateredNow;
+        var isDue = k === 0 && occ[0] && !wateredNow;
+        var isPlan = !!occ[k] && k > 0;
+        cells.push({
+          done: isDone, due: isDue, plan: isPlan, none: !isDone && !isDue && !isPlan,
+          cellStyle: 'height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 14px; ' + (k === 0 ? 'background: #4A5634' : 'background: #36402A')
+        });
+      }
+      return {
+        id: b.id, name: b.name, sci: b.sci, interval: b.interval,
+        artStyle: 'height: 170px; border-radius: 18px; background: ' + b.bg + '; border: 1px dashed #7C8A55; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; text-align: center; padding: 0 12px',
+        photo: b.photo,
+        cells: cells,
+        lastLabel: since === 0 ? 'hoje' : (since === 1 ? 'ontem' : 'há ' + since + ' dias'),
+        nextLabel: due ? 'Regar hoje' : (left === 1 ? 'Amanhã' : 'em ' + left + ' dias'),
+        nextStyle: due ? 'color: #E9B9B8; font-weight: 600' : 'color: #F4F1E8; font-weight: 500',
+        nextDate: fmt(nextD),
+        nextKey: nextD.getTime(),
+        due: due, wateredNow: wateredNow, left: left,
+        pct: pct,
+        barColor: due ? '#E9B9B8' : '#B1BD86',
+        btnLabel: wateredNow ? 'Regada hoje' : (due ? 'Reguei agora' : 'Registrar rega'),
+        btnStyle: 'min-height: 44px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; ' +
+          (wateredNow ? 'border: 1px solid #E9B9B8; background: transparent; color: #E9B9B8'
+            : (due ? 'border: none; background: #E9B9B8; color: #3A1C22' : 'border: 1px solid #7C8A55; background: transparent; color: #F4F1E8')),
+        water: function () {
+          var w = Object.assign({}, self.state.watered);
+          w[b.id] = !w[b.id];
+          self.setState({ watered: w });
+        }
+      };
+    });
+
+    var today = plants.filter(function (p) { return p.due || p.wateredNow; }).map(function (p) {
+      return {
+        name: p.name,
+        photo: p.photo,
+        sub: p.wateredNow ? 'Próxima rega ' + p.nextDate : 'A cada ' + p.interval + ' dias',
+        watered: p.wateredNow, pending: !p.wateredNow, water: p.water
+      };
+    });
+    var todayDone = today.filter(function (t) { return t.watered; }).length;
+    var pendingCount = today.length - todayDone;
+
+    var tomorrowNames = plants.filter(function (p) { return p.left === 1; }).map(function (p) { return p.name; });
+
+    var week = [];
+    for (var i = 0; i < 7; i++) {
+      var d = add(TODAY, i);
+      var count = plants.filter(function (p) {
+        return i === 0 ? p.left <= 0 : p.nextKey === d.getTime();
+      }).length;
+      var isToday = i === 0;
+      week.push({
+        dow: isToday ? 'Hoje' : DOW[d.getDay()],
+        num: d.getDate(),
+        label: count ? (count + (count === 1 ? ' planta' : ' plantas')) : '—',
+        headStyle: 'display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border-radius: 12px; ' + (isToday ? 'background: #E9B9B8; color: #3A1C22' : 'color: #CFD5B8'),
+        boxStyle: 'display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 6px; border-radius: 20px; ' +
+          (isToday ? 'background: #E9B9B8; color: #3A1C22'
+            : (count ? 'background: #4A5634; color: #F4F1E8; border: 1px solid #7C8A55' : 'background: transparent; color: #CFD5B8; border: 1px solid #56633D'))
+      });
+    }
+
+    return {
+      plants: plants,
+      plantCount: plants.length,
+      today: today,
+      todayDone: todayDone,
+      todayTotal: today.length,
+      allDone: today.length > 0 && pendingCount === 0,
+      dueText: pendingCount === 0 ? 'Tudo em dia.' : (pendingCount === 1 ? '1 planta com sede.' : pendingCount + ' plantas com sede.'),
+      tomorrowText: tomorrowNames.length ? tomorrowNames.join(' e ') : 'Nenhuma rega prevista',
+      week: week
+    };
+  }
+}
+</script>
+</body>
+</html>
