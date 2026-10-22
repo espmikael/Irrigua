@@ -263,9 +263,11 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
 .gear{width:44px;height:44px;border-radius:50%;border:none;background:var(--rosa);color:var(--rosa-tinta);display:flex;align-items:center;justify-content:center}
 .wint{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:rgba(169,185,138,.16);color:#D3DDB4;font-size:12px;font-weight:600;margin-left:6px;vertical-align:middle}
 .topacts{display:flex;align-items:center;gap:8px}
-.themebtn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 14px 0 12px;border-radius:999px;border:1px solid rgba(38,51,31,.25);background:transparent;color:#26331F;font-weight:600;font-size:14px}
-.themebtn:hover{background:rgba(38,51,31,.08)}
-.themebtn svg{width:18px;height:18px}
+.themeseg{display:inline-flex;padding:3px;border-radius:999px;border:1px solid rgba(38,51,31,.22);gap:2px}
+.themeseg button{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 12px;border-radius:999px;border:none;background:transparent;color:#26331F;font-weight:600;font-size:13px}
+.themeseg button:hover{background:rgba(38,51,31,.07)}
+.themeseg button[aria-pressed=true]{background:#333A22;color:#F5F1E3}
+.themeseg svg{width:17px;height:17px;flex:none}
 .roombar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:20px;background:rgba(229,171,164,.10);border:1px solid rgba(229,171,164,.28)}
 .roombar.done{background:rgba(169,185,138,.12);border-color:rgba(169,185,138,.35)}
 .roombar b{font-family:var(--serif);font-size:22px;font-weight:500;display:block;line-height:1.2}
@@ -294,8 +296,10 @@ html[data-theme=claro] header :focus-visible{outline-color:#F5F1E3}
 html[data-theme=claro] .brand .lf{fill:#A9B98A}
 html[data-theme=claro] .brand .vn{stroke:#333A22}
 html[data-theme=claro] .brand .dp{fill:#E5ABA4}
-html[data-theme=claro] .themebtn{color:#F5F1E3;border-color:rgba(245,241,227,.35)}
-html[data-theme=claro] .themebtn:hover{background:rgba(255,255,255,.08)}
+html[data-theme=claro] .themeseg{border-color:rgba(245,241,227,.3)}
+html[data-theme=claro] .themeseg button{color:#F5F1E3}
+html[data-theme=claro] .themeseg button:hover{background:rgba(255,255,255,.08)}
+html[data-theme=claro] .themeseg button[aria-pressed=true]{background:#F5F1E3;color:#2A2F1B}
 html[data-theme=claro] h1 em,html[data-theme=claro] .st-due,html[data-theme=claro] .st-late,html[data-theme=claro] .fact .lbl,html[data-theme=claro] .room,html[data-theme=claro] .cares .due,html[data-theme=claro] .err{color:#A5524A}
 html[data-theme=claro] #hoje-data,html[data-theme=claro] #today-count{color:#A5524A!important}
 html[data-theme=claro] .st-ok,html[data-theme=claro] .thanks,html[data-theme=claro] .sugg b,html[data-theme=claro] .tip .serif{color:#4F6B2E!important}
@@ -343,8 +347,8 @@ html[data-theme=claro] .pick::-webkit-scrollbar-thumb,html[data-theme=claro] .sh
 html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
 
 @media (max-width:640px){
-  .themebtn span{display:none}
-  .themebtn{padding:0;width:44px;justify-content:center}
+  .themeseg span{display:none}
+  .themeseg button{padding:0;width:40px;justify-content:center}
   .tbox{display:none}
   .wlist{display:flex}
   .legend{display:none}
@@ -378,7 +382,7 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
       <a href="conceito.html">Conceito</a>
     </nav>
     <span class="topacts">
-    <button class="themebtn" type="button" data-theme-toggle id="theme-btn"></button>
+    <span class="themeseg" role="group" aria-label="Tema" id="theme-btn"><button type="button" data-set-theme="claro" aria-label="Modo claro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3 7 7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></svg><span>Claro</span></button><button type="button" data-set-theme="verde" aria-label="Modo escuro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span>Escuro</span></button></span>
     <button class="gear" type="button" data-settings aria-label="Ajustes"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
     </span>
   </div>
@@ -559,11 +563,8 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
   var I_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3 7 7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></svg>';
   function theme(){ return document.documentElement.getAttribute('data-theme') === 'verde' ? 'verde' : 'claro'; }
   function paintThemeBtn(){
-    var b = document.getElementById('theme-btn'); if (!b) return;
-    var verde = theme() === 'verde';
-    b.innerHTML = verde ? I_SUN + '<span>Claro</span>' : I_LEAFT.replace('stroke="#333A22"', 'stroke="#333A22" class="vn2"') + '<span>Verde</span>';
-    b.setAttribute('aria-label', verde ? 'Mudar para o modo claro' : 'Mudar para o modo verde');
-    b.title = verde ? 'Modo claro' : 'Modo verde';
+    var t = theme();
+    Array.prototype.forEach.call(document.querySelectorAll('[data-set-theme]'), function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-set-theme') === t)); });
   }
   function setTheme(v){
     document.documentElement.setAttribute('data-theme', v);
@@ -1452,7 +1453,7 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
     var el;
     if ((el = e.target.closest('[data-water]'))) { toggleWater(el.getAttribute('data-water')); return; }
     if ((el = e.target.closest('[data-water-room]'))) { waterRoom(el.getAttribute('data-water-room')); return; }
-    if (e.target.closest('[data-theme-toggle]')) { setTheme(theme() === 'verde' ? 'claro' : 'verde'); return; }
+    if ((el = e.target.closest('[data-set-theme]'))) { setTheme(el.getAttribute('data-set-theme')); return; }
     if ((el = e.target.closest('[data-snooze]'))) { snoozePlant(el.getAttribute('data-snooze')); return; }
     if ((el = e.target.closest('[data-soil]'))) { var sv = el.getAttribute('data-soil').split('|'); setSoil(sv[0], sv[1]); return; }
     if ((el = e.target.closest('[data-task]'))) { var tv = el.getAttribute('data-task').split('|'); toggleTask(tv[0], tv[1]); return; }

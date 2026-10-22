@@ -1,6 +1,6 @@
 # Irrigua
 
-Site/app pessoal para controlar a rega das plantas. Abre no **modo claro** (creme, com o topo em oliva) e tem o **modo verde** (oliva escuro) a um toque, no botão do topo. Paleta oliva com rosa e sálvia, tipografia Fraunces + Plus Jakarta Sans, símbolo da gota que é folha.
+Site/app pessoal para controlar a rega das plantas. Abre no **modo claro** (creme, com o topo em oliva) e tem o **modo escuro** (oliva) a um toque, no seletor ☀ Claro | ☾ Escuro do topo. Paleta oliva com rosa e sálvia, tipografia Fraunces + Plus Jakarta Sans, símbolo da gota que é folha.
 
 ## O que já faz
 
