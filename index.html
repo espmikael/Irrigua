@@ -1347,10 +1347,12 @@ html[data-theme=claro] .btn.all{background:#333A22;color:#F5F1E3}
     ctx.fillStyle = '#333A22'; rr(ctx, M, 236, 270, 270, 64); ctx.fill();
     photoTile(ctx, imgs[0], M + 12, 248, 246, 246, 54);
     ctx.fillStyle = '#26331F'; ctx.font = 'italic 400 58px ' + SERIF; ctx.fillText('Como eu cuido', M + 310, 320);
+    var title = s && s.name ? s.name : c.name;
     var size = 108; ctx.font = '700 ' + size + 'px ' + SERIF;
-    var nm = wrap(ctx, c.name, W - M - (M + 310), 2);
-    while (nm.length > 1 && size > 72) { size -= 8; ctx.font = '700 ' + size + 'px ' + SERIF; nm = wrap(ctx, c.name, W - M - (M + 310), 2); }
+    var nm = wrap(ctx, title, W - M - (M + 310), 2);
+    while (nm.length > 1 && size > 72) { size -= 8; ctx.font = '700 ' + size + 'px ' + SERIF; nm = wrap(ctx, title, W - M - (M + 310), 2); }
     setSpacing(ctx, -3); nm.forEach(function(l, i){ ctx.fillText(l, M + 310, 420 + i * size * 0.95); }); setSpacing(ctx, 0);
+    if (s && s.sci) { ctx.font = 'italic 400 40px ' + SERIF; ctx.fillStyle = '#5E2A2A'; ctx.fillText(s.sci, M + 310, 420 + (nm.length - 1) * size * 0.95 + 62); ctx.fillStyle = '#26331F'; }
     // blocos
     var gx = M - 6, gy = 600, gw = (W - 2 * (M - 6) - 30) / 2, gh = 360;
     function block(ix, iy, dark, label, value, valueSize, hint){
@@ -1427,7 +1429,7 @@ html[data-theme=claro] .btn.all{background:#333A22;color:#F5F1E3}
       return '<button type="button" data-story-tpl="' + t[0] + '" aria-pressed="' + on + '"' + (av ? '' : ' disabled title="' + (t[0] === 'top' ? 'Aparece depois das primeiras regas registradas' : 'Precisa de uma planta com espécie') + '"') + '>' + t[1] + '</button>';
     }).join('');
     var picker = story.tpl === 'cuido' ? '<div class="field"><label for="story-plant" class="lbl">Qual planta?</label><select id="story-plant" class="sel">' +
-      carePlants().map(function(p){ return '<option value="' + p.id + '"' + (p.id === story.pid ? ' selected' : '') + '>' + esc(nameOf(p)) + '</option>'; }).join('') + '</select></div>' : '';
+      carePlants().map(function(p){ return '<option value="' + p.id + '"' + (p.id === story.pid ? ' selected' : '') + '>' + esc(nameOf(p)) + (sp(p.sp) && sp(p.sp).name !== nameOf(p) ? ' · ' + esc(sp(p.sp).name) : '') + '</option>'; }).join('') + '</select></div>' : '';
     sheetEl.innerHTML = '<div class="body">' +
       '<div class="fhead"><h2>Compartilhar</h2><button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' +
       '<div class="rooms" role="group" aria-label="Modelo do card" style="flex-wrap:wrap">' + tabs + '</div>' + picker +
