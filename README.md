@@ -5,7 +5,7 @@ Site/app pessoal para controlar a rega das plantas. Abre no **modo claro** (crem
 ## O que já faz
 
 - **Seu jardim de verdade:** adicionar, editar e remover plantas.
-- **Base de espécies** (`especies.js`, 27 plantas comuns no Brasil): ao escolher a espécie, a Irrigua sugere de quanto em quanto tempo regar, ajustando pela luz do lugar (pouca, indireta ou muita), e mostra a ficha de cuidados no botão "i".
+- **Base de espécies** (`especies.js`, 29 plantas comuns no Brasil): ao escolher a espécie, a Irrigua sugere de quanto em quanto tempo regar, ajustando pela luz do lugar (pouca, indireta ou muita), e mostra a ficha de cuidados no botão "i".
 - **Fotos das espécies:** 6 vêm da pasta `fotos/`; as outras são buscadas no [iNaturalist](https://www.inaturalist.org) (foto principal de cada espécie, com autor e licença Creative Commons na ficha) e ficam guardadas no aparelho.
 - **Fotos suas:** tire ou escolha uma foto sua. Se a espécie tiver foto padrão, você escolhe qual vai na capa. Sem foto sua, fica a da espécie.
 - **Etiquetas no card:** luz que a espécie precisa (meia-sombra, luz indireta, sol) e se é pet friendly ou tóxica para cães e gatos.

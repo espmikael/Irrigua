@@ -366,6 +366,39 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
   .facts{grid-template-columns:1fr 1fr}
   .seg button small{display:none}
 }
+
+.panel.today{flex:none}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));gap:14px}
+.tgrid .thanks{grid-column:1/-1}
+.ttile{display:flex;flex-direction:column;gap:10px;padding:10px;border-radius:20px;background:var(--sup);border:1px solid transparent;transition:background .2s;min-width:0}
+.ttile.ok{background:rgba(169,185,138,.14)}
+.ttile.late{border-color:rgba(244,165,155,.45)}
+.ttile .pw{position:relative}
+.ttile .tphoto{width:100%;aspect-ratio:4/3;height:auto;border-radius:14px;object-fit:cover;display:block;background:var(--texto)}
+.ttile .tphoto.ph svg{width:34px;height:34px}
+.ttile .chip2{position:absolute;left:8px;top:8px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:var(--rosa);color:var(--rosa-tinta)}
+.ttile.late .chip2{background:var(--atraso)}
+.ttile.ok .chip2{background:var(--salvia);color:var(--salvia-tinta)}
+.ttile .n{font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.ttile .s{font-size:12px;color:var(--sutil)}
+.ttile .tacts{display:flex;gap:6px;margin-top:auto}
+.ttile .tacts .btn{flex:1;min-width:0;padding:0 10px;font-size:14px}
+.ttile .soil{margin-top:0}
+.ttile.just{animation:flash .6s ease-out}
+.btn.all{border:none;background:var(--salvia);color:var(--salvia-tinta)}
+#care-list:empty{display:none}
+#care-list{display:flex;flex-direction:column;gap:10px}
+html[data-theme=claro] .ttile{background:#F6F2E8}
+html[data-theme=claro] .ttile.ok{background:#E3EAD2}
+html[data-theme=claro] .ttile.late{border-color:#E8B8B2}
+html[data-theme=claro] .ttile.late .chip2{background:#A5524A;color:#FBF9F2}
+html[data-theme=claro] .btn.all{background:#333A22;color:#F5F1E3}
+@media (max-width:640px){
+  .tgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .panel.today{padding:20px 16px}
+  .ttile .tacts .snz-ic{width:36px;height:36px}
+  .ttile .tacts .btn{font-size:13px;padding:0 6px}
+}
 </style>
 </head>
 <body>
@@ -412,27 +445,28 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
 
   <section class="week" aria-label="Semana" id="week"></section>
 
-  <div class="cols">
-    <section class="panel" aria-labelledby="hoje-t">
-      <div class="between">
+  <section class="panel today" aria-labelledby="hoje-t">
+    <div class="between">
+      <div class="row" style="align-items:baseline;gap:14px">
         <h2 id="hoje-t">Para hoje</h2>
         <span class="lbl" style="color:var(--rosa)" id="today-count"></span>
       </div>
-      <div id="today-list" style="display:flex;flex-direction:column;gap:12px"></div>
-      <div class="tomorrow"><span class="lbl muted">Amanhã</span><span id="tomorrow"></span></div>
-    </section>
+      <div class="row" style="gap:10px;align-items:center"><span class="muted" style="font-size:13px" id="today-late"></span><span id="water-all"></span></div>
+    </div>
+    <div id="today-list" class="tgrid"></div>
+    <div id="care-list"></div>
+    <div class="tomorrow"><span class="lbl muted">Amanhã</span><span id="tomorrow"></span></div>
+  </section>
 
-    <section class="garden" aria-labelledby="jardim-t">
-      <div class="between">
-        <h2 id="jardim-t">Meu jardim</h2>
-        <span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-share id="share-btn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15 V4 M7.5 8.5 L12 4 L16.5 8.5"/><path d="M5 13 V19 H19 V13"/></svg>Compartilhar</button><button class="add" type="button" data-add>+ Adicionar planta</button></span>
-      </div>
-      <div class="rooms" id="rooms" role="group" aria-label="Filtrar por cômodo"></div>
-      <div id="roombar"></div>
-      <div class="grid" id="cards"></div>
-    </section>
-  </div>
-
+  <section class="garden" aria-labelledby="jardim-t">
+    <div class="between">
+      <h2 id="jardim-t">Meu jardim</h2>
+      <span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-share id="share-btn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15 V4 M7.5 8.5 L12 4 L16.5 8.5"/><path d="M5 13 V19 H19 V13"/></svg>Compartilhar</button><button class="add" type="button" data-add>+ Adicionar planta</button></span>
+    </div>
+    <div class="rooms" id="rooms" role="group" aria-label="Filtrar por cômodo"></div>
+    <div id="roombar"></div>
+    <div class="grid" id="cards"></div>
+  </section>
   <section aria-labelledby="semana-t" style="display:flex;flex-direction:column;gap:18px" id="semana">
     <div class="between">
       <h2 id="semana-t">Semana do jardim</h2>
@@ -694,8 +728,13 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
   }
   var justIds = {}, justTimer = null;
   function markJust(ids){ justIds = {}; ids.forEach(function(i){ justIds[i] = true; }); clearTimeout(justTimer); justTimer = setTimeout(function(){ justIds = {}; }, 900); }
+  function waterAll(){
+    waterList(db.plants.filter(function(p){ return compute(p).due; }), '');
+  }
   function waterRoom(room){
-    var list = db.plants.filter(function(p){ var c = compute(p); return (p.room || '').trim() === room && c.due; });
+    waterList(db.plants.filter(function(p){ var c = compute(p); return (p.room || '').trim() === room && c.due; }), room);
+  }
+  function waterList(list, room){
     if (!list.length) return;
     var saved = list.map(function(p){ return { p:p, last:p.last, snooze:p.snooze, hist:(p.history || []).slice() }; });
     list.forEach(function(p){
@@ -706,7 +745,7 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
     });
     markJust(list.map(function(p){ return p.id; }));
     persist(); render();
-    toast(list.length + (list.length === 1 ? ' planta' : ' plantas') + ' de ' + room + (list.length === 1 ? ' regada' : ' regadas'), function(){
+    toast(list.length + (list.length === 1 ? ' planta' : ' plantas') + (room ? ' de ' + room : '') + (list.length === 1 ? ' regada' : ' regadas'), function(){
       saved.forEach(function(x){ x.p.last = x.last; if (x.snooze) x.p.snooze = x.snooze; else delete x.p.snooze; x.p.history = x.hist; delete x.p.prevLast; delete x.p.prevSnooze; });
       persist(); render();
     });
@@ -793,23 +832,30 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
       var soil = c.soilAsk ? '<div class="soil"><span>Como estava a terra antes de regar?</span>' +
         Object.keys(SOIL).map(function(k){ return '<button type="button" data-soil="' + c.p.id + '|' + k + '">' + SOIL[k] + '</button>'; }).join('') +
         '<button type="button" data-soil="' + c.p.id + '|skip" aria-label="Não responder" style="border-color:transparent;color:var(--sutil)">Pular</button></div>' : '';
-      return '<div class="task' + (c.ok ? ' ok' : '') + (justIds[c.p.id] ? ' just' : '') + '" style="flex-wrap:wrap">' + pic(c.cover, 'thumb', '') + '<div class="t"><div class="n">' + esc(c.name) +
-        '</div><div class="s">' + (c.ok ? 'Próxima rega ' + fmt(c.next) : (c.late ? '<span class="st-late">' + lateText(c.lateDays) + '</span>' : everyText(c))) +
-        '</div></div><div class="acts">' + (c.due ? '<button class="snz-ic" type="button" data-snooze="' + c.p.id + '" aria-label="Adiar a rega de ' + esc(c.name) + ' para amanhã" title="Adiar 1 dia">' + I_SNOOZE + '</button>' : '') +
-        btnFor(c, true) + '</div>' + (soil ? '<div style="flex-basis:100%">' + soil + '</div>' : '') + '</div>';
+      var late = !c.ok && c.late;
+      return '<div class="ttile' + (c.ok ? ' ok' : '') + (late ? ' late' : '') + (justIds[c.p.id] ? ' just' : '') + '"><div class="pw">' + pic(c.cover, 'tphoto', '') +
+        '<span class="chip2">' + (c.ok ? 'Regada' : (late ? 'Atrasada' : 'Hoje')) + '</span></div>' +
+        '<div style="min-width:0"><div class="n" title="' + esc(c.name) + '">' + esc(c.name) + '</div><div class="s">' + (c.ok ? 'Próxima rega ' + fmt(c.next) : (late ? '<span class="st-late">' + lateText(c.lateDays) + '</span>' : everyText(c))) + '</div></div>' +
+        (soil || '<div class="tacts">' + (c.due ? '<button class="snz-ic" type="button" data-snooze="' + c.p.id + '" aria-label="Adiar a rega de ' + esc(c.name) + ' para amanhã" title="Adiar 1 dia">' + I_SNOOZE + '</button>' : '') +
+        btnFor(c, true) + '</div>') + '</div>';
     }).join('');
     var careToday = [];
     all.forEach(function(c){ c.tasks.forEach(function(k){ if (k.due || k.ok) careToday.push({ c:c, k:k }); }); });
     if (today.length && pending === 0) t += '<p class="thanks">Tudo regado por hoje. Seu jardim agradece.</p>';
     if (!today.length) t = '<p class="thanks">' + (empty ? 'Adicione uma planta e as regas aparecem aqui.' : 'Nenhuma rega para hoje.') + '</p>';
+    var ct = '';
     if (careToday.length) {
-      t += '<div class="lbl muted" style="margin-top:6px">Outros cuidados</div>' + careToday.map(function(x){
+      ct = '<div class="lbl muted" style="margin-top:6px">Outros cuidados</div>' + careToday.map(function(x){
         var c = x.c, k = x.k;
         return '<div class="task' + (k.ok ? ' ok' : '') + '"><span class="thumb ph" style="color:var(--salvia)">' + k.def.icon.replace('<svg ', '<svg width="24" height="24" ') + '</span>' +
           '<div class="t"><div class="n">' + esc(k.def.label) + '</div><div class="s">' + esc(c.name) + (k.left < 0 && !k.ok ? ' · <span class="st-late">atrasado</span>' : '') + '</div></div>' +
           '<button class="btn ' + (k.ok ? 'done' : 'go') + '" type="button" data-task="' + c.p.id + '|' + k.k + '">' + (k.ok ? I_CHECK + 'Feito' : k.def.verb) + '</button></div>';
       }).join('');
     }
+    document.getElementById('care-list').innerHTML = ct;
+    var lateN = today.filter(function(c){ return !c.ok && c.late; }).length;
+    document.getElementById('today-late').textContent = lateN ? lateN + (lateN === 1 ? ' atrasada' : ' atrasadas') : '';
+    document.getElementById('water-all').innerHTML = pending >= 2 ? '<button class="btn all" type="button" data-water-all>Reguei todas (' + pending + ')</button>' : '';
     document.getElementById('today-list').innerHTML = t;
     var tm = all.filter(function(c){ return c.left === 1 && !c.ok; }).map(function(c){ return c.name; });
     document.getElementById('tomorrow').textContent = tm.length ? tm.join(' e ') : 'Nenhuma rega prevista';
@@ -1523,6 +1569,7 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
     var el;
     if ((el = e.target.closest('[data-water]'))) { toggleWater(el.getAttribute('data-water')); return; }
     if ((el = e.target.closest('[data-water-room]'))) { waterRoom(el.getAttribute('data-water-room')); return; }
+    if (e.target.closest('[data-water-all]')) { waterAll(); return; }
     if ((el = e.target.closest('[data-set-theme]'))) { setTheme(el.getAttribute('data-set-theme')); return; }
     if ((el = e.target.closest('[data-snooze]'))) { snoozePlant(el.getAttribute('data-snooze')); return; }
     if ((el = e.target.closest('[data-soil]'))) { var sv = el.getAttribute('data-soil').split('|'); setSoil(sv[0], sv[1]); return; }
