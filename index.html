@@ -146,6 +146,7 @@ h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spaci
 .overlay.open{display:flex}
 .sheet{width:100%;max-width:780px;max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);overflow-y:auto;background:var(--oliva-esc);border:1px solid var(--linha);border-radius:28px;display:flex;flex-wrap:wrap}
 .sheet>.cover{flex:1 1 260px;min-width:0;min-height:280px;align-self:stretch;object-fit:cover;background:var(--texto);border-radius:27px 0 0 27px}
+.sheet>.cover.ph{background:var(--oliva-med)}
 .sheet>.cover.ph svg{width:90px;height:90px}
 .sheet .body{flex:999 1 340px;min-width:0;padding:28px;display:flex;flex-direction:column;gap:18px}
 .sheet.form{max-width:620px;flex-direction:column;flex-wrap:nowrap}
@@ -203,11 +204,63 @@ header{color-scheme:light}
 /* aviso */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,160%);z-index:60;display:flex;align-items:center;gap:14px;padding:10px 10px 10px 18px;min-height:56px;border-radius:999px;background:var(--texto);color:var(--oliva-esc);box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .25s ease;max-width:calc(100vw - 32px)}
 .toast.show{transform:translate(-50%,0)}
-.toast span{font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.toast{width:max-content}
+.toast span{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .toast button{min-height:40px;padding:0 16px;border-radius:999px;border:none;background:var(--oliva);color:var(--texto);font-weight:700;flex:none}
 .toast button[hidden]{display:none}
 footer{border-top:1px solid var(--linha);padding-top:22px;padding-bottom:calc(32px + env(safe-area-inset-bottom));font-size:13px;color:var(--sutil)}
 footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.banners{display:flex;flex-direction:column;gap:10px}
+.banners:empty{display:none}
+.banner{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding:14px 16px 14px 18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.banner .t{flex:1 1 260px;min-width:0;font-size:14px}
+.banner .t b{display:block;font-size:15px}
+.banner.warn{background:rgba(229,171,164,.10);border-color:rgba(229,171,164,.28)}
+.banner .row{justify-content:flex-end}
+.rooms{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.rooms::-webkit-scrollbar{display:none}
+.rooms button{flex:none;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;font-size:13px;font-weight:600}
+.rooms button[aria-pressed=true]{background:var(--texto);color:var(--oliva-esc);border-color:var(--texto)}
+.room{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--rosa);margin-bottom:4px;display:block}
+.cares{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--sutil)}
+.cares b{color:var(--texto);font-weight:600}
+.cares .due{color:var(--rosa);font-weight:700}
+.cardrow{display:flex;gap:8px;align-items:stretch}
+.cardrow .btn{flex:1}
+.snz{min-height:44px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:transparent;font-weight:600;font-size:13px;flex:none;display:inline-flex;align-items:center;gap:6px}
+.snz:hover{background:rgba(255,255,255,.06)}
+.snz-ic{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:transparent;display:flex;align-items:center;justify-content:center;flex:none}
+.snz-ic:hover{background:rgba(255,255,255,.06)}
+.task{flex-wrap:wrap}
+.task .t{flex:1 1 120px}
+.task .acts{display:flex;align-items:center;gap:6px;flex:none;margin-left:auto}
+.soil{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}
+.soil span{font-size:12px;color:var(--sutil);width:100%}
+.soil button{min-height:32px;padding:0 11px;border-radius:999px;border:1px solid rgba(169,185,138,.45);background:transparent;font-size:12px;font-weight:600}
+.soil button:hover{background:rgba(169,185,138,.14)}
+.sugg{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:16px;background:rgba(169,185,138,.12);font-size:13px}
+.sugg b{color:var(--salvia)}
+.sugg .row{justify-content:flex-start}
+.hist{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.hist li{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:12px;background:var(--sup);font-size:14px}
+.hist li span:last-child{color:var(--sutil);font-size:13px;text-align:right}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border-radius:18px;background:var(--sup)}
+.switch .t{flex:1;min-width:0}
+.switch .t b{display:block}
+.switch .t span{font-size:13px;color:var(--sutil)}
+.tg{position:relative;width:56px;height:32px;border-radius:999px;border:none;background:rgba(255,255,255,.18);flex:none;transition:background .2s}
+.tg::after{content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:var(--texto);transition:transform .2s}
+.tg[aria-pressed=true]{background:var(--salvia)}
+.tg[aria-pressed=true]::after{transform:translateX(24px);background:var(--salvia-tinta)}
+.carerow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:14px;background:var(--sup)}
+.carerow .tg{width:48px;height:28px}
+.carerow .tg::after{width:20px;height:20px}
+.carerow .tg[aria-pressed=true]::after{transform:translateX(20px)}
+.carerow b{flex:1;min-width:110px;font-weight:600}
+.carerow input[type=number]{width:72px;height:40px;padding:0 10px}
+.carerow .off{opacity:.45}
+.gear{width:44px;height:44px;border-radius:50%;border:none;background:var(--rosa);color:var(--rosa-tinta);display:flex;align-items:center;justify-content:center}
+.wint{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:rgba(169,185,138,.16);color:#D3DDB4;font-size:12px;font-weight:600;margin-left:6px;vertical-align:middle}
 @media (max-width:640px){
   .tbox{display:none}
   .wlist{display:flex}
@@ -241,7 +294,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       <button type="button" data-add>Explorar plantas</button>
       <a href="conceito.html">Conceito</a>
     </nav>
-    <button class="avatar" type="button" aria-label="Perfil">M</button>
+    <button class="gear" type="button" data-settings aria-label="Ajustes"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
   </div>
 </header>
 
@@ -262,6 +315,8 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     </form>
   </section>
 
+  <div class="banners" id="banners"></div>
+
   <section class="week" aria-label="Semana" id="week"></section>
 
   <div class="cols">
@@ -279,6 +334,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
         <h2 id="jardim-t">Meu jardim</h2>
         <span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-share id="share-btn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15 V4 M7.5 8.5 L12 4 L16.5 8.5"/><path d="M5 13 V19 H19 V13"/></svg>Compartilhar</button><button class="add" type="button" data-add>+ Adicionar planta</button></span>
       </div>
+      <div class="rooms" id="rooms" role="group" aria-label="Filtrar por cômodo"></div>
       <div class="grid" id="cards"></div>
     </section>
   </div>
@@ -409,6 +465,42 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     try { localStorage.setItem(KEY, JSON.stringify(db)); return true; }
     catch (e) { toast('Não deu para salvar: o espaço do navegador acabou. Tente uma foto menor.'); return false; }
   }
+  function cfg(){ if (!db.settings || typeof db.settings !== 'object') db.settings = {}; return db.settings; }
+
+  // modo inverno: regas 30% mais espaçadas
+  var WINTER = 1.3;
+  function effInterval(p){ return cfg().winter ? Math.max(1, Math.round(p.interval * WINTER)) : p.interval; }
+  function everyText(c){ return 'A cada ' + c.iv + (c.iv === 1 ? ' dia' : ' dias'); }
+
+  // outros cuidados
+  var TASKS = {
+    adubar:   { label:'Adubar', verb:'Adubei', done:'Adubada', def:30, icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 21h10l1-9H6z"/><path d="M12 12V7"/><path d="M12 9c-2.5 0-4-1.6-4-4 2.5 0 4 1.6 4 4zM12 8c0-2.4 1.5-4 4-4 0 2.4-1.5 4-4 4z"/></svg>' },
+    girar:    { label:'Girar o vaso', verb:'Girei', done:'Girado', def:7, icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg>' },
+    borrifar: { label:'Borrifar', verb:'Borrifei', done:'Borrifada', def:3, icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 10h6v10a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/><path d="M10 10V7h4v3M14 7h3"/><path d="M19.5 5.5h.01M21 8h.01M19.5 10.5h.01"/></svg>' }
+  };
+  function taskList(p){
+    var out = [];
+    if (!p.tasks) return out;
+    Object.keys(TASKS).forEach(function(k){
+      var t = p.tasks[k]; if (!t || !t.on) return;
+      var last = parse(t.last) || TODAY, next = add(last, t.interval), left = diff(next, TODAY), ok = diff(TODAY, last) === 0;
+      out.push({ k:k, def:TASKS[k], t:t, next:next, left:left, ok:ok, due:!ok && left <= 0 });
+    });
+    return out;
+  }
+
+  // "como estava a terra?" -> sugestão de intervalo
+  var SOIL = { seca:'Muito seca', ponto:'No ponto', umida:'Ainda úmida' };
+  function adjustSuggestion(p){
+    var h = (p.history || []).filter(function(x){ return x.soil && (!p.adjustedAt || x.d > p.adjustedAt); }).slice(-2);
+    if (h.length < 2) return null;
+    var step = Math.max(1, Math.round(p.interval * 0.2)), to = null, why = '';
+    if (h[0].soil === 'umida' && h[1].soil === 'umida') { to = Math.min(90, p.interval + step); why = 'a terra ainda estava úmida nas duas últimas regas'; }
+    else if (h[0].soil === 'seca' && h[1].soil === 'seca') { to = Math.max(1, p.interval - step); why = 'a terra estava muito seca nas duas últimas regas'; }
+    if (!to || to === p.interval || p.sugDismiss === to) return null;
+    return { to:to, why:why };
+  }
+  function lastWaterings(p, n){ return (p.history || []).slice(-n).reverse(); }
 
   // ---------- etiquetas de luz e pet ----------
   var LUZ = {
@@ -441,17 +533,20 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   function compute(p){
     var s = sp(p.sp);
     var last = parse(p.last) || TODAY;
-    var next = add(last, p.interval);
+    var iv = effInterval(p);
+    var next = add(last, iv), snoozed = false;
+    if (p.snooze) { var sz = parse(p.snooze); if (sz && sz > next && diff(sz, TODAY) >= 0) { next = sz; snoozed = true; } }
     var left = diff(next, TODAY);
     var since = diff(TODAY, last);
     var ok = since === 0;
     var due = !ok && left <= 0;
     var lateDays = (!ok && left < 0) ? -left : 0;
     var occ = {}, step = left < 0 ? 0 : left;
-    while (step < 7) { occ[step] = true; step += p.interval; }
+    while (step < 7) { occ[step] = true; step += iv; }
+    var soilAsk = ok && p.history && p.history.length && p.history[p.history.length - 1].d === iso(TODAY) && !p.history[p.history.length - 1].soil && !p.history[p.history.length - 1].skip;
     return { p:p, s:s, name:nameOf(p), sci:s ? s.sci : '', cover:coverOf(p), next:next, left:left, since:since, ok:ok, due:due,
-      late:lateDays > 0, lateDays:lateDays, occ:occ,
-      pct: ok ? 100 : Math.max(6, Math.min(100, Math.round((p.interval-left)/p.interval*100))) };
+      late:lateDays > 0, lateDays:lateDays, occ:occ, iv:iv, snoozed:snoozed, soilAsk:!!soilAsk, tasks:taskList(p), sugg:adjustSuggestion(p),
+      pct: ok ? 100 : Math.max(6, Math.min(100, Math.round((iv-left)/iv*100))) };
   }
   function lateText(n){ return 'Atrasada há ' + n + (n === 1 ? ' dia' : ' dias'); }
 
@@ -469,22 +564,51 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
 
   function find(id){ for (var i = 0; i < db.plants.length; i++) if (db.plants[i].id === id) return db.plants[i]; return null; }
 
+  function popToday(p){ if (p.history && p.history.length && p.history[p.history.length - 1].d === iso(TODAY)) p.history.pop(); }
   function toggleWater(id){
     var p = find(id); if (!p) return;
     if (p.last === iso(TODAY)) {
-      if (p.prevLast) { p.last = p.prevLast; delete p.prevLast; persist(); hideToast(); render(); }
+      if (p.prevLast) { p.last = p.prevLast; delete p.prevLast; if (p.prevSnooze) p.snooze = p.prevSnooze; delete p.prevSnooze; popToday(p); persist(); hideToast(); render(); }
       else toast(nameOf(p) + ' já está marcada como regada hoje');
       return;
     }
-    var prev = p.last;
+    var prev = p.last, prevSnooze = p.snooze;
     p.prevLast = prev; p.last = iso(TODAY);
+    if (prevSnooze) { p.prevSnooze = prevSnooze; delete p.snooze; }
+    if (!Array.isArray(p.history)) p.history = [];
+    popToday(p); p.history.push({ d:iso(TODAY) });
+    if (p.history.length > 40) p.history = p.history.slice(-40);
     persist();
-    toast(nameOf(p) + ' regada', function(){ p.last = prev; delete p.prevLast; persist(); render(); });
+    toast(nameOf(p) + ' regada', function(){ p.last = prev; delete p.prevLast; if (prevSnooze) p.snooze = prevSnooze; delete p.prevSnooze; popToday(p); persist(); render(); });
     render();
+  }
+  function snoozePlant(id){
+    var p = find(id); if (!p) return;
+    var prev = p.snooze;
+    p.snooze = iso(add(TODAY, 1));
+    persist(); render();
+    toast(nameOf(p) + ': rega adiada para amanhã', function(){ if (prev) p.snooze = prev; else delete p.snooze; persist(); render(); });
+  }
+  function setSoil(id, val){
+    var p = find(id); if (!p || !p.history || !p.history.length) return;
+    var h = p.history[p.history.length - 1];
+    if (val === 'skip') h.skip = true; else { h.soil = val; delete h.skip; }
+    persist(); render();
+    var sg = adjustSuggestion(p);
+    if (val !== 'skip') toast(sg ? 'Anotado. A Irrigua tem uma sugestão para ' + nameOf(p) : 'Anotado, obrigado!');
+  }
+  function toggleTask(id, k){
+    var p = find(id); if (!p || !p.tasks || !p.tasks[k]) return;
+    var t = p.tasks[k];
+    if (t.last === iso(TODAY) && t.prevLast) { t.last = t.prevLast; delete t.prevLast; persist(); hideToast(); render(); return; }
+    if (t.last === iso(TODAY)) return;
+    var prev = t.last; t.prevLast = prev; t.last = iso(TODAY);
+    persist(); render();
+    toast(TASKS[k].done + ': ' + nameOf(p), function(){ t.last = prev; delete t.prevLast; persist(); render(); });
   }
 
   // ---------- busca no jardim ----------
-  var query = '';
+  var query = '', roomFilter = '';
   function matches(c){
     var q = norm(query).trim(); if (!q) return true;
     return norm(c.name).indexOf(q) >= 0 || norm(c.sci).indexOf(q) >= 0 || (c.s && norm(c.s.name).indexOf(q) >= 0);
@@ -499,6 +623,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   var I_DONE = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#A9B98A"/><path d="M7.5 12.5 l3 3 l6-6.5" stroke="#24301A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var I_X = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>';
   var I_BACK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 L8 12 L15 19"/></svg>';
+  var I_SNOOZE = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M5 3 2.5 5.5M19 3l2.5 2.5"/></svg>';
   var I_CAM = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
 
   function btnFor(c, compact){
@@ -520,7 +645,9 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     var hr = new Date().getHours();
     document.getElementById('saudacao').textContent = hr >= 5 && hr < 12 ? 'Bom dia.' : (hr >= 12 && hr < 18 ? 'Boa tarde.' : 'Boa noite.');
     document.getElementById('due-text').textContent = empty ? 'Vamos começar?' : (pending === 0 ? 'Tudo em dia.' : (pending === 1 ? '1 planta com sede.' : pending + ' plantas com sede.'));
-    document.getElementById('plant-count').textContent = empty ? 'Seu jardim ainda está vazio' : (all.length + (all.length === 1 ? ' planta' : ' plantas') + ' no seu jardim');
+    document.getElementById('plant-count').innerHTML = empty ? 'Seu jardim ainda está vazio' : (all.length + (all.length === 1 ? ' planta' : ' plantas') + ' no seu jardim') +
+      (cfg().winter ? '<span class="wint">' + LUZ.sombra.icon.replace('<svg ', '<svg width="12" height="12" ') + 'modo inverno</span>' : '');
+    renderBanners(all);
     document.getElementById('today-count').textContent = today.length ? done + ' de ' + today.length + ' feitas' : '';
 
     var w = '';
@@ -533,36 +660,74 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     document.getElementById('week').innerHTML = w;
 
     var t = today.map(function(c){
-      return '<div class="task' + (c.ok ? ' ok' : '') + '">' + pic(c.cover, 'thumb', '') + '<div class="t"><div class="n">' + esc(c.name) +
-        '</div><div class="s">' + (c.ok ? 'Próxima rega ' + fmt(c.next) : (c.late ? '<span class="st-late">' + lateText(c.lateDays) + '</span>' : 'A cada ' + c.p.interval + ' dias')) +
-        '</div></div>' + btnFor(c, true) + '</div>';
+      var soil = c.soilAsk ? '<div class="soil"><span>Como estava a terra antes de regar?</span>' +
+        Object.keys(SOIL).map(function(k){ return '<button type="button" data-soil="' + c.p.id + '|' + k + '">' + SOIL[k] + '</button>'; }).join('') +
+        '<button type="button" data-soil="' + c.p.id + '|skip" aria-label="Não responder" style="border-color:transparent;color:var(--sutil)">Pular</button></div>' : '';
+      return '<div class="task' + (c.ok ? ' ok' : '') + '" style="flex-wrap:wrap">' + pic(c.cover, 'thumb', '') + '<div class="t"><div class="n">' + esc(c.name) +
+        '</div><div class="s">' + (c.ok ? 'Próxima rega ' + fmt(c.next) : (c.late ? '<span class="st-late">' + lateText(c.lateDays) + '</span>' : everyText(c))) +
+        '</div></div><div class="acts">' + (c.due ? '<button class="snz-ic" type="button" data-snooze="' + c.p.id + '" aria-label="Adiar a rega de ' + esc(c.name) + ' para amanhã" title="Adiar 1 dia">' + I_SNOOZE + '</button>' : '') +
+        btnFor(c, true) + '</div>' + (soil ? '<div style="flex-basis:100%">' + soil + '</div>' : '') + '</div>';
     }).join('');
+    var careToday = [];
+    all.forEach(function(c){ c.tasks.forEach(function(k){ if (k.due || k.ok) careToday.push({ c:c, k:k }); }); });
     if (today.length && pending === 0) t += '<p class="thanks">Tudo regado por hoje. Seu jardim agradece.</p>';
     if (!today.length) t = '<p class="thanks">' + (empty ? 'Adicione uma planta e as regas aparecem aqui.' : 'Nenhuma rega para hoje.') + '</p>';
+    if (careToday.length) {
+      t += '<div class="lbl muted" style="margin-top:6px">Outros cuidados</div>' + careToday.map(function(x){
+        var c = x.c, k = x.k;
+        return '<div class="task' + (k.ok ? ' ok' : '') + '"><span class="thumb ph" style="color:var(--salvia)">' + k.def.icon.replace('<svg ', '<svg width="24" height="24" ') + '</span>' +
+          '<div class="t"><div class="n">' + esc(k.def.label) + '</div><div class="s">' + esc(c.name) + (k.left < 0 && !k.ok ? ' · <span class="st-late">atrasado</span>' : '') + '</div></div>' +
+          '<button class="btn ' + (k.ok ? 'done' : 'go') + '" type="button" data-task="' + c.p.id + '|' + k.k + '">' + (k.ok ? I_CHECK + 'Feito' : k.def.verb) + '</button></div>';
+      }).join('');
+    }
     document.getElementById('today-list').innerHTML = t;
     var tm = all.filter(function(c){ return c.left === 1 && !c.ok; }).map(function(c){ return c.name; });
     document.getElementById('tomorrow').textContent = tm.length ? tm.join(' e ') : 'Nenhuma rega prevista';
 
-    var shown = all.filter(matches);
+    var rooms = [], noRoom = false;
+    all.forEach(function(c){ var r = (c.p.room || '').trim(); if (r) { if (rooms.indexOf(r) < 0) rooms.push(r); } else noRoom = true; });
+    rooms.sort(function(a, b){ return a.localeCompare(b, 'pt'); });
+    if (roomFilter && roomFilter !== '__none' && rooms.indexOf(roomFilter) < 0) roomFilter = '';
+    var roomsEl = document.getElementById('rooms');
+    if (rooms.length) {
+      var opts = [['', 'Todos']].concat(rooms.map(function(r){ return [r, r]; }));
+      if (noRoom) opts.push(['__none', 'Sem cômodo']);
+      roomsEl.innerHTML = opts.map(function(o){ return '<button type="button" data-room="' + esc(o[0]) + '" aria-pressed="' + (roomFilter === o[0]) + '">' + esc(o[1]) + '</button>'; }).join('');
+      roomsEl.hidden = false;
+    } else { roomsEl.innerHTML = ''; roomsEl.hidden = true; roomFilter = ''; }
+    var shown = all.filter(function(c){
+      if (!matches(c)) return false;
+      if (!roomFilter) return true;
+      var r = (c.p.room || '').trim();
+      return roomFilter === '__none' ? !r : r === roomFilter;
+    });
     document.getElementById('limpar').classList.toggle('show', !!query.trim());
     var html = shown.map(function(c){
       var lastLbl = c.since === 0 ? 'hoje' : (c.since === 1 ? 'ontem' : 'há ' + c.since + ' dias');
       var nextLbl = c.ok ? 'Hidratada' : (c.late ? lateText(c.lateDays) : (c.due ? 'Regar hoje' : (c.left === 1 ? 'Amanhã' : 'em ' + c.left + ' dias')));
       var st = c.ok ? 'st-ok' : (c.late ? 'st-late' : (c.due ? 'st-due' : ''));
+      var cares = c.tasks.length ? '<div class="cares">' + c.tasks.map(function(k){
+        var when = k.ok ? 'feito hoje' : (k.due ? (k.left < 0 ? 'atrasado' : 'hoje') : (k.left === 1 ? 'amanhã' : 'em ' + k.left + ' dias'));
+        return '<span>' + esc(k.def.label) + ': <b class="' + (k.due ? 'due' : '') + '">' + when + '</b></span>';
+      }).join('') + '</div>' : '';
+      var sugg = c.sugg ? '<div class="sugg"><span>Sugestão: regar a cada <b>' + c.sugg.to + ' dias</b>, em vez de ' + c.p.interval + ', porque ' + c.sugg.why + '.</span>' +
+        '<span class="row"><button class="mini" type="button" data-sugg-apply="' + c.p.id + '">Aplicar</button><button class="mini" type="button" data-sugg-skip="' + c.p.id + '">Manter ' + c.p.interval + '</button></span></div>' : '';
+      var actions = c.due ? '<div class="cardrow">' + btnFor(c, false) + '<button class="snz-ic" type="button" data-snooze="' + c.p.id + '" aria-label="Adiar a rega de ' + esc(c.name) + ' para amanhã" title="Adiar 1 dia" style="width:44px;height:44px">' + I_SNOOZE + '</button></div>' : btnFor(c, false);
       return '<article class="card' + (c.late ? ' late' : '') + '"><div class="photo">' + pic(c.cover, '', 'Foto de ' + c.name) +
         '<button class="info" type="button" data-info="' + c.p.id + '" aria-label="Sobre ' + esc(c.name) + '">' + I_INFO + '</button></div>' +
-        '<div><h3>' + esc(c.name) + '</h3>' + (c.s ? '<p class="sci">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== c.s.name ? c.s.name + ' · ' + c.s.sci : c.s.sci) + '</p>' : '<p class="sci">Sem espécie definida</p>') + tagsHtml(c.s) + '</div>' +
+        '<div>' + (c.p.room ? '<span class="room">' + esc(c.p.room) + '</span>' : '') + '<h3>' + esc(c.name) + '</h3>' + (c.s ? '<p class="sci">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== c.s.name ? c.s.name + ' · ' + c.s.sci : c.s.sci) + '</p>' : '<p class="sci">Sem espécie definida</p>') + tagsHtml(c.s) + '</div>' +
         '<div style="display:flex;flex-direction:column;gap:6px"><div class="meta"><span class="muted">Regada ' + lastLbl + '</span><span class="' + st + '">' + nextLbl + '</span></div>' +
         '<div class="bar"><div style="width:' + c.pct + '%;background:' + (c.ok ? '#A9B98A' : (c.late ? '#F4A59B' : (c.due ? '#E5ABA4' : '#C9C99A'))) + '"></div></div>' +
-        '<span class="lbl muted" style="font-weight:500">A cada ' + c.p.interval + ' dias · ' + (c.late ? 'era ' : '') + fmt(c.next) + '</span></div>' +
-        btnFor(c, false) + '</article>';
+        '<span class="lbl muted" style="font-weight:500">' + everyText(c) + ' · ' + (c.late ? 'era ' : (c.snoozed ? 'adiada para ' : '')) + fmt(c.next) + '</span></div>' +
+        cares + sugg + actions + '</article>';
     }).join('');
     if (empty) {
       html = '<div class="welcome">' + '<div class="ph" style="width:72px;height:72px;border-radius:20px;color:var(--salvia)">' + LEAF.replace('<svg ', '<svg width="40" height="40" ') + '</div>' +
         '<h3>Seu jardim começa aqui</h3><p>Adicione suas plantas: a Irrigua sugere de quanto em quanto tempo regar cada uma e avisa quando chegar o dia.</p>' +
         '<div class="row"><button class="add" type="button" data-add>+ Adicionar primeira planta</button><button class="btn plan" type="button" id="demo">Ver com plantas de exemplo</button></div></div>';
     } else if (!shown.length) {
-      html = '<div class="empty">Nenhuma planta do seu jardim combina com <b>“' + esc(query.trim()) + '”</b>.<br><button class="btn plan" type="button" data-add data-q="' + esc(query.trim()) + '" style="margin-top:12px">Adicionar “' + esc(query.trim()) + '” ao jardim</button></div>';
+      if (!query.trim()) html = '<div class="empty">Nenhuma planta neste cômodo.</div>';
+      else html = '<div class="empty">Nenhuma planta do seu jardim combina com <b>“' + esc(query.trim()) + '”</b>.<br><button class="btn plan" type="button" data-add data-q="' + esc(query.trim()) + '" style="margin-top:12px">Adicionar “' + esc(query.trim()) + '” ao jardim</button></div>';
     }
     document.getElementById('cards').innerHTML = html;
     document.getElementById('share-btn').hidden = empty;
@@ -574,7 +739,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     h += '</div>';
     shown.forEach(function(c){
       h += '<div class="trow"><div class="pl">' + pic(c.cover, 'thumb', '') + '<div style="min-width:0"><div class="nm">' + esc(c.name) +
-        '</div><div class="muted" style="font-size:12px">a cada ' + c.p.interval + ' dias</div></div></div>';
+        '</div><div class="muted" style="font-size:12px">' + everyText(c).toLowerCase() + '</div></div></div>';
       for (var k = 0; k < 7; k++) {
         var inner = '';
         if (k === 0 && c.ok) inner = '<button type="button" data-water="' + c.p.id + '" aria-label="Desfazer rega de ' + esc(c.name) + '">' + I_DONE + '</button>';
@@ -626,6 +791,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     if (sheet.mode === 'pick') return renderPick();
     if (sheet.mode === 'form') return renderForm();
     if (sheet.mode === 'share') return renderShare();
+    if (sheet.mode === 'settings') return renderSettings();
   }
 
   function renderInfo(){
@@ -648,9 +814,32 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       (s ? '<p class="sci" style="font-size:15px;margin-top:4px">' + esc(c.p.name && c.p.name.trim() && c.p.name.trim() !== s.name ? s.name + ' · ' + s.sci : s.sci) + '</p>' : '') + '</div>' +
       '<button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' + tagsHtml(s).replace('class="tags"', 'class="tags" style="margin-top:-6px"') + light + facts +
       (s && c.cover && c.cover === spPhoto(s) && spCredit(s) ? '<p class="credit" style="margin:0">' + spCredit(s) + '</p>' : '') +
+      (c.sugg ? '<div class="sugg"><span>Sugestão: regar a cada <b>' + c.sugg.to + ' dias</b>, em vez de ' + p.interval + ', porque ' + c.sugg.why + '.</span>' +
+        '<span class="row"><button class="mini" type="button" data-sugg-apply="' + p.id + '">Aplicar</button><button class="mini" type="button" data-sugg-skip="' + p.id + '">Manter ' + p.interval + '</button></span></div>' : '') +
+      histHtml(p) +
+      (c.tasks.length ? '<div><div class="lbl muted">Outros cuidados</div><div class="cares" style="margin-top:6px;font-size:14px">' + c.tasks.map(function(k){
+        return '<span>' + esc(k.def.label) + ' a cada ' + k.t.interval + ' dias: <b class="' + (k.due ? 'due' : '') + '">' + (k.ok ? 'feito hoje' : (k.due ? 'hoje' : 'próximo ' + fmt(k.next))) + '</b></span>';
+      }).join('') + '</div></div>' : '') +
       '<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--linha);padding-top:16px">' +
-      '<span class="muted" style="font-size:13px">A cada ' + p.interval + ' dias · ' + (c.late ? lateText(c.lateDays).toLowerCase() : 'próxima ' + fmt(c.next)) + '</span>' +
-      '<span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-edit="' + p.id + '">Editar</button>' + btnFor(c, false) + '</span></div></div>';
+      '<span class="muted" style="font-size:13px">' + everyText(c) + (c.iv !== p.interval ? ' (inverno)' : '') + ' · ' + (c.late ? lateText(c.lateDays).toLowerCase() : (c.snoozed ? 'adiada para ' : 'próxima ') + fmt(c.next)) + '</span>' +
+      '<span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-edit="' + p.id + '">Editar</button>' +
+      (c.due ? '<button class="snz" type="button" data-snooze="' + p.id + '">' + I_SNOOZE + 'Adiar 1 dia</button>' : '') + btnFor(c, false) + '</span></div></div>';
+  }
+  function histHtml(p){
+    var h = lastWaterings(p, 6);
+    if (!h.length) return '<div><div class="lbl muted">Histórico de regas</div><p class="hint" style="margin:6px 0 0">As regas que você marcar aparecem aqui.</p></div>';
+    var all = (p.history || []).map(function(x){ return parse(x.d); }).filter(Boolean);
+    var avg = '';
+    if (all.length >= 3) {
+      var gaps = []; for (var i = 1; i < all.length; i++) gaps.push(diff(all[i], all[i - 1]));
+      gaps = gaps.slice(-6);
+      var m = Math.round(gaps.reduce(function(a, b){ return a + b; }, 0) / gaps.length);
+      avg = '<p class="hint" style="margin:8px 0 0">Na prática, você tem regado a cada <b>' + m + (m === 1 ? ' dia' : ' dias') + '</b>.</p>';
+    }
+    return '<div><div class="lbl muted">Histórico de regas</div><ul class="hist" style="margin-top:6px">' + h.map(function(x){
+      var d = parse(x.d), ago = diff(TODAY, d);
+      return '<li><span>' + fmt(d) + ' · ' + (ago === 0 ? 'hoje' : (ago === 1 ? 'ontem' : 'há ' + ago + ' dias')) + '</span><span>' + (x.soil ? 'terra ' + SOIL[x.soil].toLowerCase() : '') + '</span></li>';
+    }).join('') + '</ul>' + avg + '</div>';
   }
 
   function speciesRow(s){
@@ -675,14 +864,20 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       '<button class="btn plan" type="button" data-manual>Não encontrei: cadastrar sem espécie</button></div>';
   }
 
+  function tasksForm(src){
+    var o = {};
+    Object.keys(TASKS).forEach(function(k){ var t = src && src[k]; o[k] = { on:!!(t && t.on), interval:(t && t.interval) || TASKS[k].def }; });
+    return o;
+  }
   function formFromPlant(p){
     return { mode:'form', edit:true, id:p.id, sp:p.sp || null, name:p.name || '', interval:p.interval, touched:true,
-      light:p.light || 'indireta', last:p.last, photo:p.photo || null, cover:p.cover || (p.photo ? 'own' : 'species'), confirmDel:false, error:'' };
+      light:p.light || 'indireta', last:p.last, photo:p.photo || null, cover:p.cover || (p.photo ? 'own' : 'species'), confirmDel:false, error:'',
+      room:p.room || '', tasks:tasksForm(p.tasks) };
   }
   function newForm(spId, q){
     var s = sp(spId);
     return { mode:'form', edit:false, id:null, sp:spId || null, name:spId ? '' : (q || ''), interval:s ? suggest(s, 'indireta') : 7, touched:!s,
-      light:'indireta', last:iso(TODAY), photo:null, cover:'species', confirmDel:false, error:'', q:q || '' };
+      light:'indireta', last:iso(TODAY), photo:null, cover:'species', confirmDel:false, error:'', q:q || '', room:roomFilter && roomFilter !== '__none' ? roomFilter : '', tasks:tasksForm(null) };
   }
 
   function syncForm(){
@@ -690,6 +885,8 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     var n = document.getElementById('f-name'); if (n) sheet.name = n.value;
     var i = document.getElementById('f-int'); if (i) sheet.interval = i.value;
     var l = document.getElementById('f-last'); if (l) sheet.last = l.value;
+    var r = document.getElementById('f-room'); if (r) sheet.room = r.value;
+    if (sheet.tasks) Object.keys(TASKS).forEach(function(k){ var el = document.getElementById('t-' + k); if (el) sheet.tasks[k].interval = el.value; });
   }
 
   function renderForm(){
@@ -715,6 +912,14 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     html += '<div class="field"><label for="f-name" class="lbl">' + (s ? 'Apelido no seu jardim (opcional)' : 'Nome da planta') + '</label>' +
       '<input id="f-name" type="text" maxlength="40" value="' + esc(f.name) + '" placeholder="' + (s ? 'Ex.: ' + esc(s.name) + ' da sala' : 'Ex.: Jiboia da cozinha') + '"' + (!s ? ' data-autofocus' : '') + '></div>';
 
+    var known = [];
+    db.plants.forEach(function(x){ var r = (x.room || '').trim(); if (r && known.indexOf(r) < 0) known.push(r); });
+    ['Sala', 'Quarto', 'Cozinha', 'Varanda', 'Banheiro', 'Escritório'].forEach(function(r){ if (known.indexOf(r) < 0) known.push(r); });
+    html += '<div class="field"><label for="f-room" class="lbl">Cômodo (opcional)</label>' +
+      '<input id="f-room" type="text" maxlength="24" list="rooms-list" value="' + esc(f.room || '') + '" placeholder="Ex.: Sala, Varanda">' +
+      '<datalist id="rooms-list">' + known.map(function(r){ return '<option value="' + esc(r) + '">'; }).join('') + '</datalist>' +
+      '<div class="minis">' + known.slice(0, 6).map(function(r){ return '<button class="mini" type="button" data-setroom="' + esc(r) + '">' + esc(r) + '</button>'; }).join('') + '</div></div>';
+
     html += '<div class="field"><span class="lbl">Foto</span><div class="photobox">' + pic(preview, 'pv', 'Capa') +
       '<div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">' +
       '<span class="btn plan filebtn">' + I_CAM + (ownSrc ? 'Trocar minha foto' : 'Tirar ou escolher foto') + '<input type="file" id="f-photo" accept="image/*" aria-label="Tirar ou escolher foto"></span>' +
@@ -736,6 +941,13 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       '<input id="f-last" type="date" max="' + iso(TODAY) + '" value="' + esc(f.last) + '">' +
       '<div class="minis"><button class="mini" type="button" data-last="0">Hoje</button><button class="mini" type="button" data-last="1">Ontem</button><button class="mini" type="button" data-last="3">Há 3 dias</button><button class="mini" type="button" data-last="7">Há 1 semana</button></div></div>';
 
+    html += '<div class="field"><span class="lbl">Outros cuidados (opcional)</span>' + Object.keys(TASKS).map(function(k){
+      var t = f.tasks[k];
+      return '<div class="carerow"><button class="tg" type="button" data-tasktoggle="' + k + '" aria-pressed="' + t.on + '" aria-label="' + TASKS[k].label + '"></button>' +
+        '<b>' + TASKS[k].label + '</b><span class="inline' + (t.on ? '' : ' off') + '"><label for="t-' + k + '" class="sr">' + TASKS[k].label + ': a cada quantos dias</label>a cada' +
+        '<input id="t-' + k + '" type="number" inputmode="numeric" min="1" max="180" value="' + esc(t.interval) + '"' + (t.on ? '' : ' disabled') + '>dias</span></div>';
+    }).join('') + '</div>';
+
     if (f.error) html += '<p class="err" role="alert" style="margin:0">' + esc(f.error) + '</p>';
 
     html += '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;border-top:1px solid var(--linha);padding-top:16px">' +
@@ -754,17 +966,28 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     if (!s && !name) f.error = 'Dê um nome para a planta.';
     else if (!(interval >= 1 && interval <= 90)) f.error = 'O intervalo de rega precisa ser entre 1 e 90 dias.';
     else if (!last || last > TODAY) f.error = 'Escolha uma data de última rega até hoje.';
+    else Object.keys(TASKS).forEach(function(k){ var t = f.tasks[k]; if (t.on && !(parseInt(t.interval, 10) >= 1 && parseInt(t.interval, 10) <= 180)) f.error = TASKS[k].label + ': o intervalo precisa ser entre 1 e 180 dias.'; });
     if (f.error) return renderForm();
-    var data = { sp:f.sp, name:name, interval:interval, light:f.light, last:iso(last), photo:f.photo || null, cover:(f.photo && f.cover === 'own') || (f.photo && !spPhoto(s)) ? 'own' : 'species' };
+    var old = f.edit ? find(f.id) : null;
+    var tasks = {};
+    Object.keys(TASKS).forEach(function(k){
+      var t = f.tasks[k], prev = old && old.tasks && old.tasks[k];
+      if (t.on) tasks[k] = { on:true, interval:parseInt(t.interval, 10), last:(prev && prev.last) || iso(TODAY) };
+      else if (prev) tasks[k] = { on:false, interval:prev.interval, last:prev.last };
+    });
+    var data = { sp:f.sp, name:name, room:String(f.room || '').trim(), tasks:tasks, interval:interval, light:f.light, last:iso(last), photo:f.photo || null, cover:(f.photo && f.cover === 'own') || (f.photo && !spPhoto(s)) ? 'own' : 'species' };
     var backup = JSON.stringify(db);
     var shownName;
     if (f.edit) {
       var p = find(f.id); if (!p) return closeSheet();
+      var lastChanged = p.last !== data.last;
       Object.keys(data).forEach(function(k){ p[k] = data[k]; });
       delete p.prevLast;
+      if (lastChanged) { delete p.snooze; if (Array.isArray(p.history) && p.history.length) p.history = p.history.filter(function(x){ return x.d <= data.last; }); }
+      if (p.sugDismiss && p.sugDismiss === interval) delete p.sugDismiss;
       shownName = nameOf(p);
     } else {
-      data.id = uid(); data.created = iso(TODAY);
+      data.id = uid(); data.created = iso(TODAY); data.history = [];
       db.plants.push(data);
       shownName = nameOf(data);
     }
@@ -978,22 +1201,99 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
     navigator.share({ files:[file], title:'Meu jardim no Irrigua' }).catch(function(){});
   }
 
+  // ---------- avisos no topo ----------
+  function renderBanners(all){
+    var out = '', st = cfg();
+    var mine = db.plants.filter(function(p){ return !p.demo; });
+    var demos = db.plants.length - mine.length;
+    if (demos) out += '<div class="banner"><div class="t"><b>Você está vendo plantas de exemplo</b>Quando quiser montar o seu jardim, tire os exemplos num toque.</div>' +
+      '<span class="row"><button class="btn plan" type="button" data-rmdemo>Remover exemplos</button></span></div>';
+    if (mine.length) {
+      var ref = st.lastBackup || mine.map(function(p){ return p.created || iso(TODAY); }).sort()[0];
+      var days = diff(TODAY, parse(ref) || TODAY);
+      var snoozed = st.backupSnooze && diff(parse(st.backupSnooze) || TODAY, TODAY) > 0;
+      if (days >= 30 && !snoozed) out += '<div class="banner warn"><div class="t"><b>' + (st.lastBackup ? 'Seu último backup foi há ' + days + ' dias' : 'Você ainda não salvou um backup') + '</b>Seu jardim fica só neste aparelho. Um backup garante que nada se perde se o navegador for limpo.</div>' +
+        '<span class="row"><button class="btn now" type="button" data-backup-now>Salvar backup</button><button class="btn plan" type="button" data-backup-later>Depois</button></span></div>';
+    }
+    var m = TODAY.getMonth();
+    if (mine.length && !st.winter && m >= 5 && m <= 7 && st.winterAsked !== TODAY.getFullYear()) out += '<div class="banner"><div class="t"><b>Está frio por aí?</b>No inverno as plantas bebem menos. O modo inverno espaça as regas em cerca de 30%.</div>' +
+      '<span class="row"><button class="btn now" type="button" data-winter-on>Ligar modo inverno</button><button class="btn plan" type="button" data-winter-no>Agora não</button></span></div>';
+    document.getElementById('banners').innerHTML = out;
+  }
+  function removeDemos(){
+    var before = db.plants.slice();
+    db.plants = db.plants.filter(function(p){ return !p.demo; });
+    persist(); render();
+    toast('Exemplos removidos', function(){ db.plants = before; persist(); render(); });
+  }
+
+  // ---------- ajustes ----------
+  function renderSettings(){
+    var st = cfg();
+    sheetEl.className = 'sheet form';
+    sheetEl.setAttribute('aria-label', 'Ajustes');
+    var demos = db.plants.filter(function(p){ return p.demo; }).length;
+    sheetEl.innerHTML = '<div class="body">' +
+      '<div class="fhead"><h2>Ajustes</h2><button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' +
+      '<div class="switch"><div class="t"><b>Modo inverno</b><span>Espaça as regas em cerca de 30% nos meses frios. Uma planta de 7 dias passa para 9. Desligue quando o calor voltar.</span></div>' +
+      '<button class="tg" type="button" data-winter-toggle aria-pressed="' + !!st.winter + '" aria-label="Modo inverno"></button></div>' +
+      '<div class="field"><span class="lbl">Lembrete diário no calendário</span>' +
+      '<p class="hint" style="margin:0">Cria um evento que se repete todo dia no calendário do seu celular, com notificação, para você lembrar de abrir a Irrigua. Ele não sabe quais plantas estão com sede: só te chama para olhar o jardim.</p>' +
+      '<div class="inline"><label for="s-time" class="sr">Horário do lembrete</label><input id="s-time" type="time" value="' + esc(st.remindTime || '08:00') + '" style="height:48px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--texto);font:inherit;color-scheme:dark">' +
+      '<button class="btn plan" type="button" data-ics>Adicionar ao calendário</button></div></div>' +
+      '<div class="field"><span class="lbl">Backup</span><p class="hint" style="margin:0">' + (st.lastBackup ? 'Último backup: ' + fmt(parse(st.lastBackup)) + '.' : 'Você ainda não salvou nenhum backup.') + ' Os dados ficam só neste aparelho.</p>' +
+      '<div class="row" style="justify-content:flex-start"><button class="btn plan" type="button" data-backup-now>Exportar backup</button>' +
+      '<span class="btn plan filebtn">Importar backup<input type="file" id="importar2" accept="application/json,.json" aria-label="Importar backup"></span></div></div>' +
+      (demos ? '<div class="field"><span class="lbl">Plantas de exemplo</span><div class="row" style="justify-content:flex-start"><button class="btn plan" type="button" data-rmdemo>Remover ' + demos + ' exemplos</button></div></div>' : '') +
+      '</div>';
+  }
+  function downloadIcs(){
+    var st = cfg();
+    var tEl = document.getElementById('s-time');
+    var time = (tEl && /^\d{2}:\d{2}$/.test(tEl.value)) ? tEl.value : '08:00';
+    st.remindTime = time; persist();
+    var hh = +time.slice(0, 2), mm = +time.slice(3, 5);
+    var start = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate(), hh, mm);
+    if (start < new Date()) start = add(start, 1);
+    function pad(n){ return String(n).padStart(2, '0'); }
+    function local(d){ return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00'; }
+    var now = new Date();
+    var stamp = now.getUTCFullYear() + pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + 'T' + pad(now.getUTCHours()) + pad(now.getUTCMinutes()) + pad(now.getUTCSeconds()) + 'Z';
+    var url = location.origin + location.pathname.replace(/index\.html$/, '');
+    var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Irrigua//Lembrete diario//PT-BR', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:irrigua-lembrete-' + Date.now() + '@irrigua', 'DTSTAMP:' + stamp, 'DTSTART:' + local(start), 'DURATION:PT10M', 'RRULE:FREQ=DAILY',
+      'SUMMARY:Ver o jardim na Irrigua', 'DESCRIPTION:Quem está com sede hoje? ' + url, 'URL:' + url, 'TRANSP:TRANSPARENT',
+      'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:Ver o jardim na Irrigua', 'TRIGGER:PT0M', 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'].join('\r\n') + '\r\n';
+    var blob = new Blob([ics], { type:'text/calendar;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'irrigua-lembrete.ics';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    toast('Abra o arquivo baixado para adicionar o lembrete das ' + time);
+  }
+
   // ---------- exemplo ----------
   function loadDemo(){
     var demo = [['aglaonema',7,7],['palmeira',5,5],['lirio',3,2],['comigo',6,4],['bambu',7,8],['dracena',10,9]];
-    db.plants = demo.map(function(d){ return { id:uid(), sp:d[0], name:'', interval:d[1], light:'indireta', last:iso(add(TODAY, -d[2])), photo:null, cover:'species', created:iso(TODAY), demo:true }; });
+    var hist = function(d){ var h = [], last = add(TODAY, -d[2]); for (var i = 2; i >= 0; i--) h.push({ d:iso(add(last, -i * d[1])) }); return h; };
+    db.plants = demo.map(function(d){ return { id:uid(), sp:d[0], name:'', interval:d[1], light:'indireta', last:iso(add(TODAY, -d[2])), photo:null, cover:'species', created:iso(TODAY), demo:true, history:hist(d) }; });
+    db.plants[0].room = 'Sala'; db.plants[1].room = 'Sala'; db.plants[2].room = 'Quarto'; db.plants[3].room = 'Varanda'; db.plants[4].room = 'Quarto'; db.plants[5].room = 'Sala';
+    db.plants[1].tasks = { borrifar:{ on:true, interval:3, last:iso(add(TODAY, -3)) } };
+    db.plants[0].tasks = { adubar:{ on:true, interval:30, last:iso(add(TODAY, -20)) } };
     persist(); render();
     toast('Plantas de exemplo adicionadas', function(){ db.plants = []; persist(); render(); });
   }
 
   // ---------- backup ----------
   function exportBackup(){
-    var blob = new Blob([JSON.stringify({ app:'irrigua', v:1, exported:new Date().toISOString(), plants:db.plants }, null, 2)], { type:'application/json' });
+    cfg().lastBackup = iso(TODAY); delete cfg().backupSnooze; persist();
+    var blob = new Blob([JSON.stringify({ app:'irrigua', v:2, exported:new Date().toISOString(), plants:db.plants, settings:db.settings || {} }, null, 2)], { type:'application/json' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob); a.download = 'irrigua-backup-' + iso(TODAY) + '.json';
     document.body.appendChild(a); a.click();
     setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-    toast('Backup exportado');
+    toast('Backup exportado'); render(); if (sheet.mode === 'settings') renderSettings();
   }
   function importBackup(file){
     var r = new FileReader();
@@ -1006,6 +1306,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
         if (db.plants.length && !window.confirm('Substituir o jardim atual (' + db.plants.length + ' plantas) pelo backup (' + d.plants.length + ' plantas)?')) return;
         var prev = db.plants;
         db.plants = d.plants;
+        if (d.settings && typeof d.settings === 'object') { var keepBk = cfg().lastBackup; db.settings = d.settings; if (keepBk && (!db.settings.lastBackup || keepBk > db.settings.lastBackup)) db.settings.lastBackup = keepBk; }
         if (!persist()) { db.plants = prev; return; }
         render(); toast('Backup importado: ' + d.plants.length + ' plantas');
       } catch (e) { toast('Esse arquivo não é um backup da Irrigua'); }
@@ -1017,6 +1318,21 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   document.addEventListener('click', function(e){
     var el;
     if ((el = e.target.closest('[data-water]'))) { toggleWater(el.getAttribute('data-water')); return; }
+    if ((el = e.target.closest('[data-snooze]'))) { snoozePlant(el.getAttribute('data-snooze')); return; }
+    if ((el = e.target.closest('[data-soil]'))) { var sv = el.getAttribute('data-soil').split('|'); setSoil(sv[0], sv[1]); return; }
+    if ((el = e.target.closest('[data-task]'))) { var tv = el.getAttribute('data-task').split('|'); toggleTask(tv[0], tv[1]); return; }
+    if ((el = e.target.closest('[data-sugg-apply]'))) { var sp1 = find(el.getAttribute('data-sugg-apply')), sg = sp1 && adjustSuggestion(sp1);
+      if (sg) { var was = sp1.interval, wasAdj = sp1.adjustedAt; sp1.interval = sg.to; sp1.adjustedAt = iso(TODAY); persist(); render(); toast(nameOf(sp1) + ': agora a cada ' + sg.to + ' dias', function(){ sp1.interval = was; if (wasAdj) sp1.adjustedAt = wasAdj; else delete sp1.adjustedAt; persist(); render(); }); } return; }
+    if ((el = e.target.closest('[data-sugg-skip]'))) { var sp2 = find(el.getAttribute('data-sugg-skip')), sg2 = sp2 && adjustSuggestion(sp2); if (sg2) { sp2.adjustedAt = iso(TODAY); persist(); render(); toast('Mantido a cada ' + sp2.interval + ' dias'); } return; }
+    if ((el = e.target.closest('[data-room]'))) { roomFilter = el.getAttribute('data-room'); render(); return; }
+    if (e.target.closest('[data-settings]')) { openSheet({ mode:'settings' }); return; }
+    if (e.target.closest('[data-winter-toggle]')) { cfg().winter = !cfg().winter; persist(); render(); renderSettings(); toast(cfg().winter ? 'Modo inverno ligado: regas mais espaçadas' : 'Modo inverno desligado'); return; }
+    if (e.target.closest('[data-winter-on]')) { cfg().winter = true; persist(); render(); toast('Modo inverno ligado: regas mais espaçadas'); return; }
+    if (e.target.closest('[data-winter-no]')) { cfg().winterAsked = TODAY.getFullYear(); persist(); render(); return; }
+    if (e.target.closest('[data-backup-now]')) { exportBackup(); return; }
+    if (e.target.closest('[data-backup-later]')) { cfg().backupSnooze = iso(add(TODAY, 7)); persist(); render(); return; }
+    if (e.target.closest('[data-rmdemo]')) { removeDemos(); if (sheet.mode === 'settings') renderSettings(); return; }
+    if (e.target.closest('[data-ics]')) { downloadIcs(); return; }
     if ((el = e.target.closest('[data-info]'))) { openSheet({ mode:'info', id:el.getAttribute('data-info') }); return; }
     if (e.target.closest('[data-share]')) { openSheet({ mode:'share' }); return; }
     if (e.target.closest('[data-share-go]')) { shareStory(); return; }
@@ -1041,6 +1357,8 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       if ((el = e.target.closest('[data-last]'))) { syncForm(); sheet.last = iso(add(TODAY, -Number(el.getAttribute('data-last')))); return renderForm(); }
       if ((el = e.target.closest('[data-cover]'))) { syncForm(); sheet.cover = el.getAttribute('data-cover'); return renderForm(); }
       if (e.target.closest('[data-rmphoto]')) { syncForm(); sheet.photo = null; sheet.cover = 'species'; return renderForm(); }
+      if ((el = e.target.closest('[data-setroom]'))) { syncForm(); sheet.room = el.getAttribute('data-setroom'); return renderForm(); }
+      if ((el = e.target.closest('[data-tasktoggle]'))) { syncForm(); var tk = sheet.tasks[el.getAttribute('data-tasktoggle')]; tk.on = !tk.on; return renderForm(); }
       if (e.target.closest('[data-save]')) { saveForm(); return; }
       if (e.target.closest('[data-delete]')) { deletePlant(); return; }
     }
@@ -1055,7 +1373,7 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
       syncForm();
       readPhoto(e.target.files[0], function(data){ if (sheet.mode !== 'form') return; sheet.photo = data; sheet.cover = 'own'; renderForm(); });
     }
-    if (e.target.id === 'importar' && e.target.files && e.target.files[0]) { importBackup(e.target.files[0]); e.target.value = ''; }
+    if ((e.target.id === 'importar' || e.target.id === 'importar2') && e.target.files && e.target.files[0]) { importBackup(e.target.files[0]); e.target.value = ''; }
   });
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && sheet.mode) { closeSheet(); }
@@ -1064,6 +1382,9 @@ footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
   document.getElementById('limpar').addEventListener('click', function(){ var b = document.getElementById('busca'); b.value = ''; query = ''; render(); b.focus(); });
   document.getElementById('desfazer').addEventListener('click', function(){ var u = undo; hideToast(); if (u) u(); });
   document.getElementById('exportar').addEventListener('click', exportBackup);
+  var fixed = false;
+  db.plants.forEach(function(p){ if (!Array.isArray(p.history)) { p.history = []; fixed = true; } });
+  if (fixed) persist();
 
   // voltou para a página (ou virou o dia)? atualiza data e saudação
   document.addEventListener('visibilitychange', function(){
