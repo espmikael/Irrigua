@@ -1,6 +1,6 @@
 # Irrigua
 
-Site/app pessoal para controlar a rega das plantas. Paleta oliva escuro com rosa e sálvia, tipografia Fraunces + Plus Jakarta Sans, símbolo da gota que é folha.
+Site/app pessoal para controlar a rega das plantas. Abre no **modo claro** (creme, com o topo em oliva) e tem o **modo verde** (oliva escuro) a um toque, no botão do topo. Paleta oliva com rosa e sálvia, tipografia Fraunces + Plus Jakarta Sans, símbolo da gota que é folha.
 
 ## O que já faz
 
@@ -17,6 +17,8 @@ Site/app pessoal para controlar a rega das plantas. Paleta oliva escuro com rosa
 - **Outros cuidados:** lembretes de adubar, girar o vaso e borrifar.
 - **Lembrete diário no calendário** (Ajustes): baixa um evento que se repete todo dia, para você lembrar de abrir a Irrigua.
 - **Aviso de backup** quando passar um mês sem salvar, e botão para remover as plantas de exemplo.
+- **Regar por cômodo:** ao filtrar um cômodo, o botão "Reguei as N" rega todas as plantas com sede dele de uma vez.
+- **Retorno ao regar:** a barra enche e o botão confirma com uma animação curta (desligada se o celular pede menos movimento).
 - **Rega:** "Reguei" com desfazer, plantas atrasadas em destaque, semana do jardim (em lista no celular), busca.
 - **Dados salvos neste aparelho**, no próprio navegador. Use **Exportar backup** no rodapé de vez em quando e **Importar backup** para levar o jardim para outro aparelho.
 - **Instalável como app** e funciona sem internet: no celular, "Adicionar à tela inicial".
