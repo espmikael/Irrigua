@@ -9,7 +9,7 @@ Site/app pessoal para controlar a rega das plantas. Abre no **modo claro** (crem
 - **Fotos das espécies:** 6 vêm da pasta `fotos/`; as outras são buscadas no [iNaturalist](https://www.inaturalist.org) (foto principal de cada espécie, com autor e licença Creative Commons na ficha) e ficam guardadas no aparelho.
 - **Fotos suas:** tire ou escolha uma foto sua. Se a espécie tiver foto padrão, você escolhe qual vai na capa. Sem foto sua, fica a da espécie.
 - **Etiquetas no card:** luz que a espécie precisa (meia-sombra, luz indireta, sol) e se é pet friendly ou tóxica para cães e gatos.
-- **Compartilhar:** gera um card 1080×1920 do seu jardim para os stories (botão Compartilhar, ao lado de Adicionar planta).
+- **Compartilhar:** três cards de story (1080×1920): *Meu jardim* (quantas plantas em dia, com as fotos), *As mais regadas* (ranking dos últimos 30 dias) e *Como eu cuido* (ficha de cuidados de uma planta, também pelo botão de compartilhar na ficha "i").
 - **Adiar 1 dia:** para dias de chuva ou frio, sem mudar o intervalo.
 - **Histórico e "como estava a terra?":** cada rega fica registrada na ficha. Depois de regar, você pode dizer se a terra estava muito seca, no ponto ou ainda úmida; com duas respostas iguais seguidas, a Irrigua sugere ajustar o intervalo.
 - **Modo inverno** (nos Ajustes, ícone de engrenagem): espaça as regas em cerca de 30%.

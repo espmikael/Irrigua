@@ -135,6 +135,9 @@ h2{margin:0;font-family:var(--serif);font-weight:500;font-size:32px;letter-spaci
 .tag svg{width:14px;height:14px;flex:none}
 .tag.safe{background:rgba(169,185,138,.16);color:#D3DDB4}
 .tag.tox{background:rgba(244,165,155,.14);color:#F6BDB5}
+.sel{height:48px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--texto);font:inherit;width:100%}
+html[data-theme=claro] .sel{background:#F1ECDF;border-color:#D8D0BE}
+.rooms button:disabled{opacity:.4;cursor:not-allowed}
 .storybox{display:flex;justify-content:center;background:rgba(0,0,0,.2);border-radius:20px;padding:16px}
 .storybox img{width:auto;max-width:100%;max-height:58vh;max-height:58dvh;aspect-ratio:9/16;border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
 .storybox .wait{aspect-ratio:9/16;height:min(58vh,520px);border-radius:14px;background:var(--sup);display:flex;align-items:center;justify-content:center;color:var(--sutil);font-size:14px;text-align:center;padding:20px}
@@ -749,6 +752,7 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
   var I_DONE = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#A9B98A"/><path d="M7.5 12.5 l3 3 l6-6.5" stroke="#24301A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var I_X = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>';
   var I_BACK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 L8 12 L15 19"/></svg>';
+  var I_SHARE = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15 V4 M7.5 8.5 L12 4 L16.5 8.5"/><path d="M5 13 V19 H19 V13"/></svg>';
   var I_SNOOZE = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M5 3 2.5 5.5M19 3l2.5 2.5"/></svg>';
   var I_CAM = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
 
@@ -912,7 +916,7 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
     setTimeout(function(){ var f = sheetEl.querySelector('[data-autofocus]') || sheetEl.querySelector('.close'); if (f) f.focus(); }, 30);
   }
   function closeSheet(){
-    if (sheet.mode === 'share') { if (story.url) URL.revokeObjectURL(story.url); story = { blob:null, url:null }; }
+    if (sheet.mode === 'share') { if (story.url) URL.revokeObjectURL(story.url); story.blob = null; story.url = null; story.key = ''; story.loading = false; }
     sheet = { mode:null };
     overlay.classList.remove('open');
     document.body.style.overflow = '';
@@ -956,7 +960,7 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
       }).join('') + '</div></div>' : '') +
       '<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--linha);padding-top:16px">' +
       '<span class="muted" style="font-size:13px">' + everyText(c) + (c.iv !== p.interval ? ' (inverno)' : '') + ' · ' + (c.late ? lateText(c.lateDays).toLowerCase() : (c.snoozed ? 'adiada para ' : 'próxima ') + fmt(c.next)) + '</span>' +
-      '<span class="row" style="justify-content:flex-end"><button class="btn plan" type="button" data-edit="' + p.id + '">Editar</button>' +
+      '<span class="row" style="justify-content:flex-end">' + (s ? '<button class="btn plan" type="button" data-share data-share-plant="' + p.id + '" aria-label="Compartilhar a ficha de ' + esc(c.name) + '">' + I_SHARE + '</button>' : '') + '<button class="btn plan" type="button" data-edit="' + p.id + '">Editar</button>' +
       (c.due ? '<button class="snz" type="button" data-snooze="' + p.id + '">' + I_SNOOZE + 'Adiar 1 dia</button>' : '') + btnFor(c, false) + '</span></div></div>';
   }
   function histHtml(p){
@@ -1157,10 +1161,12 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
     img.src = url;
   }
 
-  // ---------- card para compartilhar (stories 1080x1920) ----------
+  // ---------- cards para compartilhar (stories 1080x1920) ----------
   var LEAF_PATH = 'M60 12 C60 12 28 52 28 76 A32 32 0 0 0 92 76 C92 52 60 12 60 12Z';
   var VEINS_PATH = 'M60 104 C60 84 60 56 60 30 M60 80 L45 67 M60 66 L74 54 M60 92 L75 81';
-  var story = { blob:null, url:null };
+  var DROP_PATH = 'M5 0 C5 0 0 6 0 8.5 A5 5 0 0 0 10 8.5 C10 6 5 0 5 0Z';
+  var story = { tpl:'jardim', pid:null, blob:null, url:null, loading:false, key:'' };
+  var TPLS = [['jardim', 'Meu jardim'], ['top', 'As mais regadas'], ['cuido', 'Como eu cuido']];
 
   function loadImg(src){
     return new Promise(function(res){
@@ -1181,6 +1187,13 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
     while (text.length > 1 && ctx.measureText(text + '…').width > max) text = text.slice(0, -1);
     return text.trim() + '…';
   }
+  function wrap(ctx, text, max, maxLines){
+    var words = String(text || '').split(/\s+/), lines = [], cur = '';
+    words.forEach(function(w){ var t = cur ? cur + ' ' + w : w; if (ctx.measureText(t).width > max && cur) { lines.push(cur); cur = w; } else cur = t; });
+    if (cur) lines.push(cur);
+    if (maxLines && lines.length > maxLines) { lines = lines.slice(0, maxLines); lines[maxLines - 1] = fit(ctx, lines[maxLines - 1] + '…', max); }
+    return lines;
+  }
   function drawLeaf(ctx, x, y, size, fill, vein){
     ctx.save(); ctx.translate(x, y); ctx.scale(size / 120, size / 120);
     ctx.fillStyle = fill; ctx.fill(new Path2D(LEAF_PATH));
@@ -1188,142 +1201,199 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
     ctx.restore();
   }
   function setSpacing(ctx, px){ try { ctx.letterSpacing = px + 'px'; } catch (e) {} }
+  function cover(ctx, im, x, y, w, h){
+    var r = Math.max(w / im.naturalWidth, h / im.naturalHeight), iw = im.naturalWidth * r, ih = im.naturalHeight * r;
+    ctx.drawImage(im, x + (w - iw) / 2, y + (h - ih) / 2, iw, ih);
+  }
+  function photoTile(ctx, im, x, y, w, h, r, phBg){
+    ctx.save(); rr(ctx, x, y, w, h, r); ctx.clip();
+    if (im) cover(ctx, im, x, y, w, h);
+    else { ctx.fillStyle = phBg || '#3E4528'; ctx.fillRect(x, y, w, h); var s = Math.min(w, h) * 0.38; drawLeaf(ctx, x + w / 2 - s / 2, y + h / 2 - s / 2, s, '#A9B98A', phBg || '#3E4528'); }
+    ctx.restore();
+  }
+  var SERIF = 'Fraunces, Georgia, serif', SANS = '"Plus Jakarta Sans", system-ui, sans-serif';
+  var W = 1080, H = 1920, M = 66;
+  function brand(ctx, color, drop, right, rightColor){
+    ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+    ctx.fillStyle = color; ctx.font = '600 60px ' + SERIF;
+    var x0 = M, y0 = 128;
+    ctx.fillText('Irr', x0, y0); var w1 = ctx.measureText('Irr').width;
+    ctx.fillText('ı', x0 + w1, y0); var wi = ctx.measureText('ı').width;
+    ctx.fillText('gua', x0 + w1 + wi, y0);
+    var dw = 60 * 0.2, dh = 60 * 0.27;
+    ctx.save(); ctx.translate(x0 + w1 + wi / 2 - dw / 2, y0 - 60 * 0.8); ctx.scale(dw / 10, dh / 13); ctx.fillStyle = drop; ctx.fill(new Path2D(DROP_PATH)); ctx.restore();
+    if (right) { ctx.font = '700 26px ' + SANS; setSpacing(ctx, 4); ctx.textAlign = 'right'; ctx.fillStyle = rightColor || color; ctx.fillText(right.toUpperCase(), W - M, 122); ctx.textAlign = 'left'; setSpacing(ctx, 0); }
+  }
+  function footer(ctx, color){
+    ctx.fillStyle = color; ctx.font = '600 30px ' + SANS; ctx.textAlign = 'left';
+    ctx.fillText((location.host + location.pathname).replace(/index\.html$/, '').replace(/\/$/, '') || 'Irrigua', M, H - 70);
+  }
+  function dateLabel(){ return DOW[TODAY.getDay()] + ', ' + TODAY.getDate() + ' ' + MES[TODAY.getMonth()]; }
 
-  function drawStory(items, images){
-    var W = 1080, H = 1920, M = 72;
-    var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
-    var ctx = cv.getContext('2d');
-    var SERIF = 'Fraunces, Georgia, serif', SANS = '"Plus Jakarta Sans", system-ui, sans-serif';
-    var all = items.all, pending = items.pending, okToday = items.okToday;
-
-    ctx.fillStyle = '#333A22'; ctx.fillRect(0, 0, W, H);
-
-    // faixa creme com a marca
-    ctx.fillStyle = '#F5F1E3'; ctx.fillRect(0, 0, W, 190);
-    ctx.fillStyle = '#E2DAD0'; ctx.fillRect(0, 189, W, 2);
-    drawLeaf(ctx, M, 58, 76, '#5E6B3A', '#F5F1E3');
-    ctx.fillStyle = '#26331F'; ctx.font = '600 62px ' + SERIF; ctx.textBaseline = 'alphabetic';
-    (function(){ // "Irr" + ı + gota rosa + "gua"
-      var x0 = M + 92, y0 = 120;
-      ctx.fillText('Irr', x0, y0); var w1 = ctx.measureText('Irr').width;
-      ctx.fillText('\u0131', x0 + w1, y0); var wi = ctx.measureText('\u0131').width;
-      ctx.fillText('gua', x0 + w1 + wi, y0);
-      var cx = x0 + w1 + wi / 2, top = y0 - 62 * 0.8, dw = 62 * 0.2, dh = 62 * 0.27;
-      ctx.save(); ctx.translate(cx - dw / 2, top); ctx.scale(dw / 10, dh / 13);
-      ctx.fillStyle = '#C9837B'; ctx.fill(new Path2D('M5 0 C5 0 0 6 0 8.5 A5 5 0 0 0 10 8.5 C10 6 5 0 5 0Z')); ctx.restore();
-      ctx.fillStyle = '#26331F';
-    })();
-    ctx.font = '600 26px ' + SANS; setSpacing(ctx, 3); ctx.textAlign = 'right'; ctx.fillStyle = '#5E6B3A';
-    ctx.fillText('MEU JARDIM', W - M, 116); ctx.textAlign = 'left'; setSpacing(ctx, 0);
-
-    // data + manchete
-    ctx.font = '600 30px ' + SANS; setSpacing(ctx, 4); ctx.fillStyle = '#E5ABA4';
-    ctx.fillText((DOWL[TODAY.getDay()] + ', ' + TODAY.getDate() + ' de ' + MESL[TODAY.getMonth()]).toUpperCase(), M, 300);
-    setSpacing(ctx, 0);
-    ctx.fillStyle = '#F5F1E3'; ctx.font = '500 118px ' + SERIF;
-    ctx.fillText('Meu jardim', M - 4, 430);
-    ctx.fillStyle = '#E5ABA4'; ctx.font = 'italic 400 118px ' + SERIF;
-    ctx.fillText(fit(ctx, pending === 0 ? 'está em dia.' : (pending === 1 ? 'tem 1 com sede.' : 'tem ' + pending + ' com sede.'), W - 2 * M), M - 4, 552);
-
-    // mosaico de plantas (até 6)
-    var cols = 3, gap = 30, tile = Math.floor((W - 2 * M - gap * (cols - 1)) / cols), top = 640;
-    var extra = all.length > 6 ? all.length - 5 : 0;
-    var shown = extra ? all.slice(0, 5) : all.slice(0, 6);
+  // A · Meu jardim (rosa)
+  function drawJardim(ctx, d, imgs){
+    var all = d.all, ok = all.filter(function(c){ return !c.due; }).length, thirsty = all.length - ok, wateredToday = all.filter(function(c){ return c.ok; }).length;
+    ctx.fillStyle = '#E5ABA4'; ctx.fillRect(0, 0, W, H);
+    brand(ctx, '#26331F', '#333A22', dateLabel());
+    ctx.fillStyle = '#26331F'; ctx.font = 'italic 400 76px ' + SERIF; ctx.fillText('Hoje no meu jardim', M, 310);
+    ctx.fillStyle = '#333A22'; ctx.font = '700 520px ' + SERIF; setSpacing(ctx, -18);
+    ctx.fillText(String(ok), M - 16, 790); var nw = ctx.measureText(String(ok)).width; setSpacing(ctx, 0);
+    ctx.fillStyle = 'rgba(51,58,34,.42)'; ctx.font = '700 180px ' + SERIF; ctx.fillText('/' + all.length, M - 16 + nw + 14, 760);
+    ctx.fillStyle = '#26331F'; ctx.font = '600 92px ' + SERIF; setSpacing(ctx, -2);
+    ctx.fillText(thirsty === 0 ? 'plantas em dia' : (ok === 1 ? 'planta em dia' : 'plantas em dia'), M, 900); setSpacing(ctx, 0);
+    // bloco oliva com o mosaico
+    var bx = M - 6, by = 990, bw = W - 2 * (M - 6), pad = 40, gap = 24, cols = 3;
+    var shown = all.length > 6 ? all.slice(0, 5) : all.slice(0, 6), extra = all.length > 6 ? all.length - 5 : 0;
+    var rows = Math.max(1, Math.ceil((shown.length + (extra ? 1 : 0)) / cols));
+    var tile = Math.floor((bw - 2 * pad - gap * (cols - 1)) / cols), bh = pad * 2 + rows * tile + (rows - 1) * gap + 84;
+    ctx.fillStyle = '#333A22'; rr(ctx, bx, by, bw, bh, 54); ctx.fill();
     shown.forEach(function(c, i){
-      var x = M + (i % cols) * (tile + gap), y = top + Math.floor(i / cols) * (tile + 86);
-      ctx.save(); rr(ctx, x, y, tile, tile, 34); ctx.clip();
-      var im = images[i];
-      if (im) {
-        var r = Math.max(tile / im.naturalWidth, tile / im.naturalHeight), iw = im.naturalWidth * r, ih = im.naturalHeight * r;
-        ctx.drawImage(im, x + (tile - iw) / 2, y + (tile - ih) / 2, iw, ih);
-      } else {
-        ctx.fillStyle = '#3E4528'; ctx.fillRect(x, y, tile, tile);
-        drawLeaf(ctx, x + tile / 2 - 50, y + tile / 2 - 52, 100, '#A9B98A', '#3E4528');
-      }
-      ctx.restore();
-      if (c.ok) { // selo de regada
-        ctx.fillStyle = '#A9B98A'; ctx.beginPath(); ctx.arc(x + tile - 34, y + 34, 22, 0, Math.PI * 2); ctx.fill();
-        ctx.strokeStyle = '#24301A'; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-        ctx.beginPath(); ctx.moveTo(x + tile - 44, y + 35); ctx.lineTo(x + tile - 37, y + 42); ctx.lineTo(x + tile - 24, y + 27); ctx.stroke();
-      }
-      ctx.fillStyle = '#F5F1E3'; ctx.font = '600 30px ' + SANS;
-      ctx.fillText(fit(ctx, c.name, tile), x + 2, y + tile + 46);
+      var x = bx + pad + (i % cols) * (tile + gap), y = by + pad + Math.floor(i / cols) * (tile + gap);
+      photoTile(ctx, imgs[i], x, y, tile, tile, 34);
+      var dot = c.ok ? '#A9B98A' : (c.due ? '#E5ABA4' : null);
+      if (dot) { ctx.fillStyle = dot; ctx.strokeStyle = '#333A22'; ctx.lineWidth = 8; ctx.beginPath(); ctx.arc(x + tile - 20, y + tile - 20, 24, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
     });
     if (extra) {
-      var i5 = 5, ex = M + (i5 % cols) * (tile + gap), ey = top + Math.floor(i5 / cols) * (tile + 86);
-      ctx.fillStyle = 'rgba(255,255,255,0.07)'; rr(ctx, ex, ey, tile, tile, 34); ctx.fill();
-      ctx.fillStyle = '#F5F1E3'; ctx.font = '500 104px ' + SERIF; ctx.textAlign = 'center';
-      ctx.fillText('+' + extra, ex + tile / 2, ey + tile / 2 + 36);
-      ctx.font = '600 30px ' + SANS; ctx.fillText('plantas', ex + tile / 2, ey + tile + 46); ctx.textAlign = 'left';
+      var i5 = 5, ex = bx + pad + (i5 % cols) * (tile + gap), ey = by + pad + Math.floor(i5 / cols) * (tile + gap);
+      ctx.fillStyle = 'rgba(255,255,255,.08)'; rr(ctx, ex, ey, tile, tile, 34); ctx.fill();
+      ctx.fillStyle = '#F5F1E3'; ctx.font = '600 110px ' + SERIF; ctx.textAlign = 'center'; ctx.fillText('+' + extra, ex + tile / 2, ey + tile / 2 + 38); ctx.textAlign = 'left';
     }
-
-    // números
-    var rows = Math.ceil(Math.min(all.length, 6) / cols);
-    var sy = top + rows * (tile + 86) + 40;
-    var pets = all.filter(function(c){ return c.s && c.s.petSafe === true; }).length;
-    var pills = [
-      all.length + (all.length === 1 ? ' planta' : ' plantas'),
-      okToday ? okToday + (okToday === 1 ? ' regada hoje' : ' regadas hoje') : (pending ? pending + ' com sede hoje' : 'nenhuma rega hoje'),
-    ];
-    if (pets) pills.push(pets + ' pet friendly');
-    ctx.font = '600 32px ' + SANS;
-    var px = M, py = sy;
-    pills.forEach(function(t){
-      var w = ctx.measureText(t).width + 56;
-      if (px + w > W - M) { px = M; py += 88; }
-      ctx.fillStyle = 'rgba(255,255,255,0.08)'; rr(ctx, px, py, w, 70, 35); ctx.fill();
-      ctx.fillStyle = '#F5F1E3'; ctx.fillText(t, px + 28, py + 46);
-      px += w + 16;
-    });
-
-    // rodapé
-    ctx.fillStyle = 'rgba(245,241,227,0.14)'; ctx.fillRect(M, H - 210, W - 2 * M, 2);
-    ctx.fillStyle = '#E5ABA4'; ctx.font = 'italic 400 46px ' + SERIF;
-    ctx.fillText('cuidado no tempo certo', M, H - 128);
-    ctx.fillStyle = '#D3D3B5'; ctx.font = '500 28px ' + SANS;
-    ctx.fillText((location.host + location.pathname).replace(/index\.html$/, '').replace(/\/$/, '') || 'Irrigua', M, H - 78);
-    return cv;
+    ctx.fillStyle = '#D3D3B5'; ctx.font = '600 34px ' + SANS;
+    var cap = (wateredToday ? wateredToday + (wateredToday === 1 ? ' regada hoje' : ' regadas hoje') : 'nenhuma rega hoje') + ' · ' + (thirsty ? thirsty + ' com sede' : 'tudo hidratado');
+    ctx.fillText(fit(ctx, cap, bw - 2 * pad), bx + pad, by + bh - 42);
+    footer(ctx, 'rgba(38,51,31,.75)');
   }
+
+  // B · As mais regadas (oliva)
+  function drawTop(ctx, d, imgs){
+    var list = d.top;
+    ctx.fillStyle = '#333A22'; ctx.fillRect(0, 0, W, H);
+    brand(ctx, '#F5F1E3', '#E5ABA4', 'Últimos 30 dias', '#A9B98A');
+    ctx.fillStyle = '#F5F1E3'; ctx.font = '500 104px ' + SERIF; setSpacing(ctx, -2); ctx.fillText('As plantas que', M, 330);
+    ctx.fillStyle = '#E5ABA4'; ctx.font = 'italic 400 104px ' + SERIF; ctx.fillText('mais beberam', M, 440); setSpacing(ctx, 0);
+    var hx = M, hy = 520, hw = W - 2 * M, hh = 600;
+    photoTile(ctx, imgs[0], hx, hy, hw, hh, 66);
+    var first = list[0], badge = '#1 ' + first.c.name + ' · ' + first.n + (first.n === 1 ? ' rega' : ' regas');
+    ctx.font = '800 40px ' + SANS; badge = fit(ctx, badge, hw - 120);
+    var bwid = ctx.measureText(badge).width + 64;
+    ctx.fillStyle = '#E5ABA4'; rr(ctx, hx + 36, hy + hh - 36 - 84, bwid, 84, 42); ctx.fill();
+    ctx.fillStyle = '#3A1C22'; ctx.fillText(badge, hx + 68, hy + hh - 36 - 28);
+    list.slice(1, 5).forEach(function(t, i){
+      var y = 1210 + i * 132;
+      ctx.fillStyle = '#A9B98A'; ctx.font = '700 92px ' + SERIF; ctx.fillText(String(i + 2), M, y + 78);
+      photoTile(ctx, imgs[i + 1], M + 90, y, 112, 112, 30, '#3E4528');
+      ctx.fillStyle = '#F5F1E3'; ctx.font = '600 42px ' + SANS; ctx.fillText(fit(ctx, t.c.name, 540), M + 236, y + 70);
+      ctx.fillStyle = '#D3D3B5'; ctx.font = '500 34px ' + SANS; ctx.textAlign = 'right';
+      ctx.fillText(t.n + (t.n === 1 ? ' rega' : ' regas'), W - M, y + 70); ctx.textAlign = 'left';
+    });
+    footer(ctx, '#D3D3B5');
+  }
+
+  // C · Como eu cuido (rosa)
+  function drawCuido(ctx, d, imgs){
+    var c = d.plant, s = c.s;
+    ctx.fillStyle = '#E5ABA4'; ctx.fillRect(0, 0, W, H);
+    brand(ctx, '#26331F', '#333A22', 'Ficha de cuidados');
+    // foto + nome
+    ctx.fillStyle = '#333A22'; rr(ctx, M, 236, 270, 270, 64); ctx.fill();
+    photoTile(ctx, imgs[0], M + 12, 248, 246, 246, 54);
+    ctx.fillStyle = '#26331F'; ctx.font = 'italic 400 58px ' + SERIF; ctx.fillText('Como eu cuido', M + 310, 320);
+    var size = 108; ctx.font = '700 ' + size + 'px ' + SERIF;
+    var nm = wrap(ctx, c.name, W - M - (M + 310), 2);
+    while (nm.length > 1 && size > 72) { size -= 8; ctx.font = '700 ' + size + 'px ' + SERIF; nm = wrap(ctx, c.name, W - M - (M + 310), 2); }
+    setSpacing(ctx, -3); nm.forEach(function(l, i){ ctx.fillText(l, M + 310, 420 + i * size * 0.95); }); setSpacing(ctx, 0);
+    // blocos
+    var gx = M - 6, gy = 600, gw = (W - 2 * (M - 6) - 30) / 2, gh = 360;
+    function block(ix, iy, dark, label, value, valueSize, hint){
+      var x = gx + ix * (gw + 30), y = gy + iy * (gh + 30);
+      ctx.fillStyle = dark ? '#333A22' : '#F5F1E3'; rr(ctx, x, y, gw, gh, 54); ctx.fill();
+      ctx.font = '700 28px ' + SANS; setSpacing(ctx, 4); ctx.fillStyle = dark ? '#E5ABA4' : '#A5524A'; ctx.fillText(label.toUpperCase(), x + 44, y + 74); setSpacing(ctx, 0);
+      ctx.fillStyle = dark ? '#A9B98A' : '#26331F'; ctx.font = '700 ' + valueSize + 'px ' + SERIF;
+      var vl = wrap(ctx, value, gw - 88, 2); vl.forEach(function(l, i){ ctx.fillText(l, x + 44, y + 74 + valueSize * 1.05 + i * valueSize); });
+      ctx.fillStyle = dark ? '#F5F1E3' : '#26331F'; ctx.font = '500 34px ' + SANS;
+      var hl = wrap(ctx, hint, gw - 88, 3); var hy = y + gh - 44 - (hl.length - 1) * 44; hl.forEach(function(l, i){ ctx.fillText(l, x + 44, hy + i * 44); });
+    }
+    var luz = s.luz && LUZ[s.luz] ? LUZ[s.luz].label : s.light;
+    block(0, 0, true, 'Rega', c.iv + (c.iv === 1 ? ' dia' : ' dias'), 116, s.water);
+    block(1, 0, false, 'Luz', luz, 66, s.light);
+    block(0, 1, false, 'Pets', s.petSafe ? 'Pet friendly' : 'Tóxica', 66, s.pets);
+    block(1, 1, true, 'Umidade', s.humidity.split(/[;,]/)[0], 66, s.humidity.indexOf(';') > 0 ? s.humidity.split(';').slice(1).join(';').trim() : '');
+    // dica
+    var ty = gy + 2 * gh + 30 + 40, th = 330;
+    ctx.setLineDash([16, 14]); ctx.strokeStyle = 'rgba(51,58,34,.55)'; ctx.lineWidth = 5; rr(ctx, gx, ty, W - 2 * gx, th, 54); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#26331F'; ctx.font = 'italic 400 48px ' + SERIF;
+    wrap(ctx, '“' + s.tip + '”', W - 2 * gx - 100, 4).forEach(function(l, i){ ctx.fillText(l, gx + 50, ty + 92 + i * 60); });
+    footer(ctx, 'rgba(38,51,31,.75)');
+  }
+
+  function topData(){
+    var since = add(TODAY, -29), list = db.plants.map(function(p){
+      var n = (p.history || []).filter(function(h){ var d = parse(h.d); return d && d >= since && d <= TODAY; }).length;
+      return { c:compute(p), n:n };
+    }).filter(function(t){ return t.n > 0; });
+    list.sort(function(a, b){ return b.n - a.n || a.c.name.localeCompare(b.c.name, 'pt'); });
+    return list;
+  }
+  function carePlants(){ return db.plants.filter(function(p){ return sp(p.sp); }); }
 
   function buildStory(){
     var all = db.plants.map(compute);
-    all.sort(function(a, b){ return (b.cover ? 1 : 0) - (a.cover ? 1 : 0); }); // com foto primeiro
-    var items = { all:all, pending:all.filter(function(c){ return c.due; }).length, okToday:all.filter(function(c){ return c.ok; }).length };
-    var list = all.length > 6 ? all.slice(0, 5) : all.slice(0, 6);
+    all.sort(function(a, b){ return (b.cover ? 1 : 0) - (a.cover ? 1 : 0); });
+    var d = { all:all }, srcs = [], draw;
+    if (story.tpl === 'top') { d.top = topData(); srcs = d.top.slice(0, 5).map(function(t){ return t.c.cover; }); draw = drawTop; }
+    else if (story.tpl === 'cuido') { var p = find(story.pid); d.plant = compute(p); srcs = [d.plant.cover]; draw = drawCuido; }
+    else { srcs = (all.length > 6 ? all.slice(0, 5) : all.slice(0, 6)).map(function(c){ return c.cover; }); draw = drawJardim; }
     var fonts = document.fonts && document.fonts.load ? Promise.all([
-      document.fonts.load('500 118px Fraunces'), document.fonts.load('italic 400 118px Fraunces'), document.fonts.load('600 62px Fraunces'),
-      document.fonts.load('600 30px "Plus Jakarta Sans"'), document.fonts.load('500 28px "Plus Jakarta Sans"')
+      document.fonts.load('700 120px Fraunces'), document.fonts.load('italic 400 100px Fraunces'), document.fonts.load('600 60px Fraunces'), document.fonts.load('500 100px Fraunces'),
+      document.fonts.load('600 34px "Plus Jakarta Sans"'), document.fonts.load('800 40px "Plus Jakarta Sans"'), document.fonts.load('500 34px "Plus Jakarta Sans"')
     ]).catch(function(){}) : Promise.resolve();
-    return fonts.then(function(){ return Promise.all(list.map(function(c){ return loadImg(c.cover); })); }).then(function(imgs){
-      var cv = drawStory(items, imgs);
+    function paint(imgs){ var cv = document.createElement('canvas'); cv.width = W; cv.height = H; draw(cv.getContext('2d'), d, imgs); return cv; }
+    return fonts.then(function(){ return Promise.all(srcs.map(loadImg)); }).then(function(imgs){
       return new Promise(function(res){
-        try { cv.toBlob(function(b){ b ? res(b) : res(null); }, 'image/png'); }
+        try { paint(imgs).toBlob(function(b){ res(b); }, 'image/png'); }
         catch (e) { // alguma foto de fora bloqueou a exportação: refaz sem ela
           var safe = imgs.map(function(im){ return im && (/^data:/.test(im.src) || new URL(im.src).origin === location.origin) ? im : null; });
-          drawStory(items, safe).toBlob(function(b){ res(b); }, 'image/png');
+          paint(safe).toBlob(function(b){ res(b); }, 'image/png');
         }
       });
     });
   }
 
+  function storyAvailable(t){
+    if (t === 'top') return topData().length > 0;
+    if (t === 'cuido') return carePlants().length > 0;
+    return db.plants.length > 0;
+  }
   function renderShare(){
     sheetEl.className = 'sheet form';
-    sheetEl.setAttribute('aria-label', 'Compartilhar meu jardim');
+    sheetEl.setAttribute('aria-label', 'Compartilhar');
+    if (!storyAvailable(story.tpl)) story.tpl = 'jardim';
+    if (story.tpl === 'cuido' && (!story.pid || !sp((find(story.pid) || {}).sp))) story.pid = (carePlants()[0] || {}).id || null;
+    var key = story.tpl + '|' + (story.tpl === 'cuido' ? story.pid : '');
+    if (key !== story.key) { if (story.url) URL.revokeObjectURL(story.url); story.blob = null; story.url = null; story.key = key; story.loading = false; }
     var canShareFiles = false;
     try { canShareFiles = !!(navigator.canShare && navigator.canShare({ files:[new File([''], 'a.png', { type:'image/png' })] })); } catch (e) {}
+    var tabs = TPLS.map(function(t){
+      var on = story.tpl === t[0], av = storyAvailable(t[0]);
+      return '<button type="button" data-story-tpl="' + t[0] + '" aria-pressed="' + on + '"' + (av ? '' : ' disabled title="' + (t[0] === 'top' ? 'Aparece depois das primeiras regas registradas' : 'Precisa de uma planta com espécie') + '"') + '>' + t[1] + '</button>';
+    }).join('');
+    var picker = story.tpl === 'cuido' ? '<div class="field"><label for="story-plant" class="lbl">Qual planta?</label><select id="story-plant" class="sel">' +
+      carePlants().map(function(p){ return '<option value="' + p.id + '"' + (p.id === story.pid ? ' selected' : '') + '>' + esc(nameOf(p)) + '</option>'; }).join('') + '</select></div>' : '';
     sheetEl.innerHTML = '<div class="body">' +
       '<div class="fhead"><h2>Compartilhar</h2><button class="close" type="button" data-close aria-label="Fechar">' + I_X + '</button></div>' +
-      '<div class="storybox" id="storybox">' + (story.url ? '<img src="' + story.url + '" alt="Card do meu jardim para stories">' : '<div class="wait">Montando o card do seu jardim…</div>') + '</div>' +
+      '<div class="rooms" role="group" aria-label="Modelo do card" style="flex-wrap:wrap">' + tabs + '</div>' + picker +
+      '<div class="storybox" id="storybox">' + (story.url ? '<img src="' + story.url + '" alt="Card para stories">' : '<div class="wait">Montando o card…</div>') + '</div>' +
       '<p class="hint" style="margin:0">' + (canShareFiles ? 'Toque em <b>Compartilhar</b> e escolha o Instagram para postar nos stories.' : 'Baixe a imagem e poste nos stories pelo celular.') + '</p>' +
       '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end">' +
-      '<a class="btn plan" id="story-dl" ' + (story.url ? 'href="' + story.url + '" download="irrigua-meu-jardim.png"' : 'aria-disabled="true"') + '>Baixar imagem</a>' +
+      '<a class="btn plan" id="story-dl" ' + (story.url ? 'href="' + story.url + '" download="irrigua-' + story.tpl + '.png"' : 'aria-disabled="true"') + '>Baixar imagem</a>' +
       (canShareFiles ? '<button class="btn now" type="button" data-share-go' + (story.blob ? '' : ' disabled') + '>Compartilhar</button>' : '') + '</div></div>';
     if (!story.blob && !story.loading) {
       story.loading = true;
+      var myKey = key;
       buildStory().then(function(b){
+        if (story.key !== myKey) return;
         story.loading = false;
         if (!b) { toast('Não consegui montar a imagem'); return; }
-        if (story.url) URL.revokeObjectURL(story.url);
         story.blob = b; story.url = URL.createObjectURL(b);
         if (sheet.mode === 'share') renderShare();
       });
@@ -1331,8 +1401,8 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
   }
   function shareStory(){
     if (!story.blob) return;
-    var file = new File([story.blob], 'irrigua-meu-jardim.png', { type:'image/png' });
-    navigator.share({ files:[file], title:'Meu jardim no Irrigua' }).catch(function(){});
+    var file = new File([story.blob], 'irrigua-' + story.tpl + '.png', { type:'image/png' });
+    navigator.share({ files:[file], title:'Meu jardim na Irrigua' }).catch(function(){});
   }
 
   // ---------- avisos no topo ----------
@@ -1470,7 +1540,8 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
     if (e.target.closest('[data-rmdemo]')) { removeDemos(); if (sheet.mode === 'settings') renderSettings(); return; }
     if (e.target.closest('[data-ics]')) { downloadIcs(); return; }
     if ((el = e.target.closest('[data-info]'))) { openSheet({ mode:'info', id:el.getAttribute('data-info') }); return; }
-    if (e.target.closest('[data-share]')) { openSheet({ mode:'share' }); return; }
+    if ((el = e.target.closest('[data-share]'))) { var pidShare = el.getAttribute('data-share-plant'); story.tpl = pidShare ? 'cuido' : 'jardim'; story.pid = pidShare || story.pid; openSheet({ mode:'share' }); return; }
+    if ((el = e.target.closest('[data-story-tpl]'))) { if (!el.disabled) { story.tpl = el.getAttribute('data-story-tpl'); renderShare(); } return; }
     if (e.target.closest('[data-share-go]')) { shareStory(); return; }
     if ((el = e.target.closest('[data-add]'))) { openSheet({ mode:'pick', q:el.getAttribute('data-q') || '' }); return; }
     if (e.target.closest('#demo')) { loadDemo(); return; }
@@ -1509,6 +1580,7 @@ html[data-theme=claro] .overlay{background:rgba(38,51,31,.45)}
       syncForm();
       readPhoto(e.target.files[0], function(data){ if (sheet.mode !== 'form') return; sheet.photo = data; sheet.cover = 'own'; renderForm(); });
     }
+    if (e.target.id === 'story-plant') { story.pid = e.target.value; renderShare(); }
     if ((e.target.id === 'importar' || e.target.id === 'importar2') && e.target.files && e.target.files[0]) { importBackup(e.target.files[0]); e.target.value = ''; }
   });
   document.addEventListener('keydown', function(e){
